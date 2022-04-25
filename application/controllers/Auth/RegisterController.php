@@ -27,9 +27,15 @@ class RegisterController extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->index();
         } else {
-            $encrypted_password = $this->encrypt->encode($this->input->post('password'));
+
+            $email = $this->input->post('email');
+            $password = $this->input->post('password');
+
+            $encrypted_password = $this->encrypt->encode($password);
             echo $encrypted_password;
-            $result = $this->Auth_model->can_login($this->input->post('email'), $this->input->post('password'));
+
+            
+            $result = $this->Auth_model->can_login($email, $password);
             if ($result == '') {
                 redirect('home');
             } else {
