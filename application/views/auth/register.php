@@ -58,8 +58,13 @@
     </div>
     <div class="form-group">
         <label for="designation">Designation</label>
-        <input type="text" name="designation" id="designation" value="" class="form-control" placeholder="Designation">
-    </div>
+        <select class="form-select" name="designation" id="designation">
+        <option value="1">EMPLOYEE</option>
+        <option value="2">HOD</option>
+        <option value="3">PRINCIPLE</option>
+        <option value="4">REGISTRAR</option>
+
+        </select>      </div>
     <div class="form-group">
         <label for="retirement_date">Retirement Date</label>
         <input type="text" name="retirement_date" id="retirement_date" value="" class="form-control" placeholder="Retirement Date">

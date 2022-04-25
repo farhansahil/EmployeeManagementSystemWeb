@@ -7,7 +7,13 @@ class Auth_model extends CI_Model
     }
 
     public function create($formArray){
+
         $this->db->insert('employees_details', $formArray);
+        //if a user created account successfully
+        if($this->db->insert_id() > 0){
+            return true;
+
+        }return false;
     }
 
     function can_login($email, $password)

@@ -10,6 +10,7 @@ class RegisterController extends CI_Controller
         $this->load->library('form_validation');
         $this->load->library('encrypt');
         $this->load->model('Auth_model');
+
     }
     public function index()
     {
@@ -46,8 +47,8 @@ class RegisterController extends CI_Controller
             $formArray['pan_no'] = $this->input->post('pan_no');
             $formArray['blood_grp'] = $this->input->post('blood_grp');
             $formArray['identification_mark'] = $this->input->post('identification_mark');
-            $file_name = $_FILES['photo']['name'];
-            $formArray['user_image'] = $file_name; 
+            $formArray['photo'] = $this->input->post('photo');
+
             $formArray['contact_no'] = $this->input->post('contact_no');
             $formArray['alternative_contact_no'] = $this->input->post('alternative_contact_no');
             $formArray['address'] = $this->input->post('address');
@@ -58,9 +59,12 @@ class RegisterController extends CI_Controller
             $formArray['gender'] = $this->input->post('gender');
 
 
-            $this->Auth_model->create($formArray);
+            if($this->Auth_model->create($formArray) == true){
+
+            }
 
             $this->session->set_flashdata('msg', 'You registered successfully');
+            
             redirect(uri: base_url().'index.php/Auth/RegisterController/register');
 
         }
