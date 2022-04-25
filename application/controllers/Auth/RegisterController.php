@@ -12,6 +12,7 @@ class RegisterController extends CI_Controller
         $this->load->model('Auth_model');
 
     }
+
     public function index()
     {
         $this->load->view('templates/header.php');
@@ -27,10 +28,10 @@ class RegisterController extends CI_Controller
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
         $this->form_validation->set_rules('dob', 'D.O.B', 'required');
 
-        if($this->form_validation->run() == false){
+        if ($this->form_validation->run() == false) {
             $this->load->view('templates/header.php');
             $this->load->view('auth/register.php');
-        }else{
+        } else {
 
             $formArray = array();
             $formArray['first_name'] = $this->input->post('first_name');
@@ -58,20 +59,14 @@ class RegisterController extends CI_Controller
             $formArray['country'] = $this->input->post('country');
             $formArray['gender'] = $this->input->post('gender');
 
-
-            if($this->Auth_model->create($formArray) == true){
-
-            }
+            $this->Auth_model->create($formArray);
 
             $this->session->set_flashdata('msg', 'You registered successfully');
-            
-            redirect(uri: base_url().'index.php/Auth/RegisterController/register');
+            redirect(uri:base_url() . 'index.php/Auth/RegisterController/register');
 
         }
-       
 
     }
-    
 
     public function login()
     {
@@ -79,9 +74,7 @@ class RegisterController extends CI_Controller
         $email = $this->input->post('email');
         $password = $this->input->post('password');
 
-        $this->load->model('Auth_model');
-
-        $this->Auth_model->can_login($email,$password);
+        $this->Auth_model->can_login($email, $password);
 
         // $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|min_length[5]');
         // $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[5]|alpha_numeric');
