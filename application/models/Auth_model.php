@@ -5,6 +5,11 @@ class Auth_model extends CI_Model
     {
         parent::__construct();
     }
+
+    public function create($formArray){
+        $this->db->insert('employees_details', $formArray);
+    }
+
     function can_login($email, $password)
     {
         $this->db->where('email', $email);
@@ -13,7 +18,7 @@ class Auth_model extends CI_Model
             foreach ($query->result() as $row) {
                 $store_password = $this->encrypt->decode($row->password);
                 if ($password == $store_password) {
-                    return '';
+                    return 'Login Successfull!!';
                 } else {
                     return 'Wrong Password';
                 }
