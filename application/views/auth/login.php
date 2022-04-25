@@ -32,7 +32,7 @@
                     ?>
 
                     <!-- Form -->
-                    <form action="<?php echo base_url('login') ?>" method="POST">
+                    <form action="<?php echo base_url().'index.php/Auth/RegisterController/login'?>" method="POST">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
                             <div class="input-group with-icon">
