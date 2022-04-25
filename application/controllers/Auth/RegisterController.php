@@ -64,6 +64,7 @@ class RegisterController extends CI_Controller
             $this->session->set_flashdata('msg', 'You registered successfully');
             redirect(uri:base_url() . 'index.php/Auth/RegisterController/register');
 
+            
         }
 
     }
