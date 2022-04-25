@@ -3,14 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class RegisterController extends CI_Controller
 {
-    public function __construct()
-    {
-        parent::__construct(); //important to call parent constructor
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $this->load->library('encrypt');
-        $this->load->model('Auth_model');
-    }
+
     public function index()
     {
         $this->load->view('templates/header.php');
@@ -26,10 +19,10 @@ class RegisterController extends CI_Controller
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
         $this->form_validation->set_rules('dob', 'D.O.B', 'required');
 
-        if($this->form_validation->run() == false){
+        if ($this->form_validation->run() == false) {
             $this->load->view('templates/header.php');
             $this->load->view('auth/register.php');
-        }else{
+        } else {
 
             $formArray = array();
             $formArray['first_name'] = $this->input->post('first_name');
@@ -47,7 +40,7 @@ class RegisterController extends CI_Controller
             $formArray['blood_grp'] = $this->input->post('blood_grp');
             $formArray['identification_mark'] = $this->input->post('identification_mark');
             $file_name = $_FILES['photo']['name'];
-            $formArray['user_image'] = $file_name; 
+            $formArray['user_image'] = $file_name;
             $formArray['contact_no'] = $this->input->post('contact_no');
             $formArray['alternative_contact_no'] = $this->input->post('alternative_contact_no');
             $formArray['address'] = $this->input->post('address');
@@ -57,17 +50,14 @@ class RegisterController extends CI_Controller
             $formArray['country'] = $this->input->post('country');
             $formArray['gender'] = $this->input->post('gender');
 
-
             $this->Auth_model->create($formArray);
 
             $this->session->set_flashdata('msg', 'You registered successfully');
-            redirect(uri: base_url().'index.php/Auth/RegisterController/register');
+            redirect(uri:base_url() . 'index.php/Auth/RegisterController/register');
 
         }
-       
 
     }
-    
 
     public function login()
     {
@@ -75,9 +65,7 @@ class RegisterController extends CI_Controller
         $email = $this->input->post('email');
         $password = $this->input->post('password');
 
-        $this->load->model('Auth_model');
-
-        $this->Auth_model->can_login($email,$password);
+        $this->Auth_model->can_login($email, $password);
 
         // $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|min_length[5]');
         // $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[5]|alpha_numeric');
