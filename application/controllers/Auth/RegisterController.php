@@ -21,10 +21,8 @@ class RegisterController extends CI_Controller
         // $this->load->view('templates/sidebar.php');
     }
 
-   
 
-   
-    public function register()
+    public function details()
     {
 
       
@@ -36,11 +34,10 @@ class RegisterController extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header.php');
-            $this->load->view('auth/register.php');
+            $this->load->view('auth/details.php');
         } else {
 
             $formArray = array();
-            $loginArray = array();
 
             $formArray['first_name'] = $this->input->post('first_name');
             $formArray['middle_name'] = $this->input->post('middle_name');
@@ -72,19 +69,67 @@ class RegisterController extends CI_Controller
             $formArray['country'] = $this->input->post('country');
             $formArray['gender'] = $this->input->post('gender');
 
-            $loginArray['hint_question'] = $this->input->post('hint_question');
-            $loginArray['hint_answer'] = $this->input->post('hint_answer');
+
+             $this->Auth_model->addDetails($formArray);
+             $this->session->set_flashdata('msg', 'You registered successfully');
+
+            // if($insert_id > 0){
+            //     $this->session->set_flashdata('msg', 'You registered successfully');
+            //     // $this->session->set_userdata('sevarth_id', $designation_id);
+            //     $this->session->set_userdata('user_id', $insert_id);
+
+    
+                //        }else{
+                //     echo "User cannot be created";
+                // // }
+           
+
+            
+        }
+
+    }
+   
+
+   
+    public function register()
+    {
+
+      
+
+        $this->form_validation->set_rules('role_id', 'Role', 'required');
+        $this->form_validation->set_rules('sevarth_id', 'Sevarth ID', 'required');
+        $this->form_validation->set_rules('org_id', 'Organization ID', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('hint_question', 'Hint Question', 'required');
+        $this->form_validation->set_rules('hint_Answer', 'Hint Answer', 'required');
+
+
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header.php');
+            $this->load->view('auth/register.php');
+        } else {
+
+            $loginArray = array();
+
 
 
             $role_id=$this->input->post('role_id');
             $loginArray['role_id'] = $role_id;
+            $loginArray['org_id'] = $this->input->post('org_id');
+            $loginArray['dept_id'] = $this->input->post('dept_id');
+
             $loginArray['email'] = $this->input->post('email');
             $loginArray['password'] = $this->input->post('password');
-            $loginArray['sevarth_id'] = $sevarth_id;
+            $loginArray['sevarth_id'] = $this->input->post('sevarth_id');
+
+            $loginArray['hint_question'] = $this->input->post('hint_question');
+            $loginArray['hint_answer'] = $this->input->post('hint_answer');
 
 
 
-             $this->Auth_model->create($formArray, $loginArray);
+             $this->Auth_model->create($loginArray);
              $this->session->set_flashdata('msg', 'You registered successfully');
 
             // if($insert_id > 0){

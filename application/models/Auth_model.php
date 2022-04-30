@@ -6,13 +6,24 @@ class Auth_model extends CI_Model
         parent::__construct();
     }
 
-    public function create($formArray,$loginArray){
+    public function create($loginArray){
 
-        $this->db->insert('employees_details', $formArray);
         $this->db->insert('employees', $loginArray);
+
+        echo "Inserted";
         // if a user created account successfully
         return $this->db->insert_id();
     }
+
+    public function addDetails($formArray){
+
+        $this->db->insert('employees_details', $formArray);
+
+        echo "Inserted";
+        // if a user created account successfully
+        return $this->db->insert_id();
+    }
+
 
     function check_email($email){
         $query = $this->db->query("select * from employees where email= '$email'");
