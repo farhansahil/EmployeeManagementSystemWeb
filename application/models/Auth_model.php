@@ -6,7 +6,12 @@ class Auth_model extends CI_Model
         parent::__construct();
     }
 
+<<<<<<< HEAD
     public function create($loginArray){
+=======
+    public function create($formArray, $loginArray)
+    {
+>>>>>>> 7a2bba02b69684aa62c3022e006c42ff64391442
 
         $this->db->insert('employees', $loginArray);
 
@@ -24,78 +29,69 @@ class Auth_model extends CI_Model
         return $this->db->insert_id();
     }
 
+<<<<<<< HEAD
 
     function check_email($email){
+=======
+    public function check_email($email)
+    {
+>>>>>>> 7a2bba02b69684aa62c3022e006c42ff64391442
         $query = $this->db->query("select * from employees where email= '$email'");
-       
-       if($email == "")
-       {
-        $this->load->view('auth/changePassword.php');
-    }else{
 
-        echo "<script>alert('Email not matched')</script>";
-    }
-    
-   
+        if ($email == "") {
+            $this->load->view('auth/changePassword.php');
+        } else {
+
+            echo "<script>alert('Email not matched')</script>";
+        }
+
     }
 
-
-
-   
-
-    function can_login($email, $password, $sevarth_id)
+    public function can_login($email, $password, $sevarth_id)
     {
         $query = $this->db->query("select * from employees where email= '$email'
         and password= '$password'");
 
         $nameQuery = $this->db->query("select * from employees_details where
          sevarth_id= '$sevarth_id'");
-        
-                $row = $query->row();   
-                $namerow = $nameQuery->row();   
 
-                $role_id= $row->role_id;
-                $name = $namerow->dob;
-                $sev = $namerow->sevarth_id;
+        $row = $query->row();
+        $namerow = $nameQuery->row();
 
-                
+        $role_id = $row->role_id;
+        $name = $namerow->dob;
+        $sev = $namerow->sevarth_id;
 
-         if($role_id == 1){
-                // echo $name;
-                redirect('home/HomeController/employee');
-            }
-            else if($role_id == 2){
-                // echo $name;
+        if ($role_id == 1) {
+            // echo $name;
+            redirect('home/HomeController/employee');
+        } else if ($role_id == 2) {
+            // echo $name;
 
-                redirect('home/HomeController/hod');
+            redirect('home/HomeController/hod');
 
-            }
-            else if($role_id == 3){
-                // echo $sev;
-                // echo $name;
+        } else if ($role_id == 3) {
+            // echo $sev;
+            // echo $name;
 
-                redirect('home/HomeController/principal');
+            redirect('home/HomeController/principal');
 
-            }
-        
-}
-        
-        
-        
-       
-        // $this->db->where('email', $email);
-        // $query = $this->db->get('employees');
-        // if ($query->num_rows() > 0) {
-        //     foreach ($query->result() as $row) {
-        //         $store_password = $this->encrypt->decode($row->password);
-        //         if ($password == $store_password) {
-        //             return 'Login Successfull!!';
-        //         } else {
-        //             return 'Wrong Password';
-        //         }
-        //     }
-        // } else {
-        //     return 'Wrong Email Address';
-        // }
+        }
+
     }
 
+    // $this->db->where('email', $email);
+    // $query = $this->db->get('employees');
+    // if ($query->num_rows() > 0) {
+    //     foreach ($query->result() as $row) {
+    //         $store_password = $this->encrypt->decode($row->password);
+    //         if ($password == $store_password) {
+    //             return 'Login Successfull!!';
+    //         } else {
+    //             return 'Wrong Password';
+    //         }
+    //     }
+    // } else {
+    //     return 'Wrong Email Address';
+    // }
+}
