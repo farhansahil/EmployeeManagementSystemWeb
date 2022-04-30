@@ -36,7 +36,7 @@
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
                             <div class="input-group with-icon">
-                                <input class="form-control rounded p-2" name="email" type="email" placeholder="Email" autocomplete=off>
+                                <input class="form-control rounded p-2 <?php echo (form_error('email') !=  "") ? 'is-invalid' : '' ?>" name="email" type="email" placeholder="Email" autocomplete=off>
 
                                 <i class="fa fa-envelope" aria-hidden="true" style="font-size: 1.3rem;"></i>
                             </div>
@@ -46,7 +46,7 @@
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
                             <div class="input-group with-icon">
-                                <input class="form-control rounded p-2" name="password" type="password" placeholder="Password" autocomplete=off>
+                                <input class="form-control rounded p-2 <?php echo (form_error('password') !=  "") ? 'is-invalid' : '' ?>" name="password" type="password" placeholder="Password" autocomplete=off>
                                 <i class="fa fa-lock" aria-hidden="true" style="font-size:1.3rem"></i>
                             </div>
                             <small class="text-danger form-text"><?php echo form_error('password') ?></small>

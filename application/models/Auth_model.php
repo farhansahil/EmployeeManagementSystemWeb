@@ -6,36 +6,43 @@ class Auth_model extends CI_Model
         parent::__construct();
     }
 
-<<<<<<< HEAD
     public function create($loginArray){
-=======
-    public function create($formArray, $loginArray)
-    {
->>>>>>> 7a2bba02b69684aa62c3022e006c42ff64391442
+      
+            $this->db->insert('employees', $loginArray);
+           
+            // if a user created account successfully
+            return $this->db->insert_id();
+       
+    }
 
-        $this->db->insert('employees', $loginArray);
+    public function getOrganization(){
+        $query = "SELECT * FROM organization";
+        $events = $this->db->query($query)->result_array( );
+        return $events;
+    }
 
-        echo "Inserted";
-        // if a user created account successfully
-        return $this->db->insert_id();
+    public function getDepartment(){
+        $query = "SELECT * FROM departments";
+        $dept = $this->db->query($query)->result_array( );
+        return $dept;
+    }
+
+    public function getRole(){
+        $query = "SELECT * FROM role";
+        $role = $this->db->query($query)->result_array( );
+        return $role;
     }
 
     public function addDetails($formArray){
 
         $this->db->insert('employees_details', $formArray);
 
-        echo "Inserted";
         // if a user created account successfully
         return $this->db->insert_id();
     }
 
-<<<<<<< HEAD
 
     function check_email($email){
-=======
-    public function check_email($email)
-    {
->>>>>>> 7a2bba02b69684aa62c3022e006c42ff64391442
         $query = $this->db->query("select * from employees where email= '$email'");
 
         if ($email == "") {
@@ -52,31 +59,33 @@ class Auth_model extends CI_Model
         $query = $this->db->query("select * from employees where email= '$email'
         and password= '$password'");
 
-        $nameQuery = $this->db->query("select * from employees_details where
-         sevarth_id= '$sevarth_id'");
+        // $nameQuery = $this->db->query("select * from employees_details where
+        //  sevarth_id= '$sevarth_id'");
 
         $row = $query->row();
-        $namerow = $nameQuery->row();
+        // $namerow = $nameQuery->row();
+if($row > 0){
+    $role_id = $row->role_id;
+    // $name = $namerow->dob;
+    // $sev = $namerow->sevarth_id;
 
-        $role_id = $row->role_id;
-        $name = $namerow->dob;
-        $sev = $namerow->sevarth_id;
+    if ($role_id == 1) {
+        // echo $name;
+        redirect('home/HomeController/employee');
+    } else if ($role_id == 2) {
+        // echo $name;
 
-        if ($role_id == 1) {
-            // echo $name;
-            redirect('home/HomeController/employee');
-        } else if ($role_id == 2) {
-            // echo $name;
+        redirect('home/HomeController/hod');
 
-            redirect('home/HomeController/hod');
+    } else if ($role_id == 3) {
+        // echo $sev;
+        // echo $name;
 
-        } else if ($role_id == 3) {
-            // echo $sev;
-            // echo $name;
+        redirect('home/HomeController/principal');
 
-            redirect('home/HomeController/principal');
-
-        }
+    }
+}
+       
 
     }
 

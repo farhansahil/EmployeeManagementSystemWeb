@@ -17,6 +17,9 @@ class RegisterController extends CI_Controller
     {
         $this->load->view('templates/header.php');
         $this->load->view('auth/login.php');
+
+        
+
         // $this->load->view('templates/navbar.php');
         // $this->load->view('templates/sidebar.php');
     }
@@ -96,21 +99,25 @@ class RegisterController extends CI_Controller
 
       
 
-        $this->form_validation->set_rules('role_id', 'Role', 'required');
-        $this->form_validation->set_rules('sevarth_id', 'Sevarth ID', 'required');
-        $this->form_validation->set_rules('org_id', 'Organization ID', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
-        $this->form_validation->set_rules('hint_question', 'Hint Question', 'required');
-        $this->form_validation->set_rules('hint_Answer', 'Hint Answer', 'required');
+        $this->form_validation->set_rules('sevarth_id', 'Sevarth ID','required|regex_match[/^[0-9]{12}$/]');
+        $this->form_validation->set_rules('email', 'Email','required|valid_email|is_unique[employees.email]');
+        $this->form_validation->set_rules('password', 'Password','required');
+        $this->form_validation->set_rules('hint_question', 'Hint Question','required');
+        $this->form_validation->set_rules('hint_answer', 'Hint Answer','required');
 
-
-
+  
         if ($this->form_validation->run() == false) {
+
+            $events = $this->Auth_model->getOrganization();
+            $dept = $this->Auth_model->getDepartment();
+            $role = $this->Auth_model->getRole();
+            
+
             $this->load->view('templates/header.php');
-            $this->load->view('auth/register.php');
+            $this->load->view("auth/register.php", array('events' => $events, 'dept' => $dept, 'role' => $role));
         } else {
 
+            //from here
             $loginArray = array();
 
 
@@ -120,7 +127,8 @@ class RegisterController extends CI_Controller
             $loginArray['org_id'] = $this->input->post('org_id');
             $loginArray['dept_id'] = $this->input->post('dept_id');
 
-            $loginArray['email'] = $this->input->post('email');
+            $email =$this->input->post('email');
+            $loginArray['email'] = $email;
             $loginArray['password'] = $this->input->post('password');
             $loginArray['sevarth_id'] = $this->input->post('sevarth_id');
 
@@ -129,31 +137,28 @@ class RegisterController extends CI_Controller
 
 
 
-             $this->Auth_model->create($loginArray);
+             $this->Auth_model->create($loginArray,$email);
              $this->session->set_flashdata('msg', 'You registered successfully');
 
-            // if($insert_id > 0){
-            //     $this->session->set_flashdata('msg', 'You registered successfully');
-            //     // $this->session->set_userdata('sevarth_id', $designation_id);
-            //     $this->session->set_userdata('user_id', $insert_id);
+
+             //end
+
+                $this->session->set_flashdata('msg', 'You registered successfully');
+                // $this->session->set_userdata('user_id', $sevarth_id);
 
                 if($role_id == 1){
                     redirect('home/HomeController/employee');
                 }
                 else if($role_id == 2){
-
+    
                     redirect('home/HomeController/hod');
     
                 }
                 else if($role_id == 3){
- 
+    
                     redirect('home/HomeController/principal');
                 }
     
-                //        }else{
-                //     echo "User cannot be created";
-                // // }
-           
 
             
         }
@@ -199,10 +204,22 @@ class RegisterController extends CI_Controller
     public function login()
     {
 
-        $email = $this->input->post('email');
-        $password = $this->input->post('password');
-        $sevarth_id = $this->input->post('sevarth_id');
-        $this->Auth_model->can_login($email, $password, $sevarth_id);
+        $this->form_validation->set_rules('email', 'Email','required|valid_email|is_unique[employees.email]');
+        $this->form_validation->set_rules('password', 'Password','required|valid_email|is_unique[employees.password]');
+
+  
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header.php');
+            $this->load->view('auth/login.php');
+        }else{
+            $email = $this->input->post('email');
+            $password = $this->input->post('password');
+            $sevarth_id = $this->input->post('sevarth_id');
+            $this->Auth_model->can_login($email, $password, $sevarth_id);
+        }
+        
+
+        
 
         // $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|min_length[5]');
         // $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[5]|alpha_numeric');
