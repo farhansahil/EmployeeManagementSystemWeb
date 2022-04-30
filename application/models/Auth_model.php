@@ -12,7 +12,6 @@ class Auth_model extends CI_Model
         //if a user created account successfully
         if($this->db->insert_id() > 0){
             return true;
-
         }return false;
     }
 
