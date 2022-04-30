@@ -21,8 +21,14 @@ class RegisterController extends CI_Controller
         // $this->load->view('templates/sidebar.php');
     }
 
+   
+
+   
     public function register()
     {
+
+      
+
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('middle_name', 'Middle Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
@@ -34,14 +40,21 @@ class RegisterController extends CI_Controller
         } else {
 
             $formArray = array();
+            $loginArray = array();
+
             $formArray['first_name'] = $this->input->post('first_name');
             $formArray['middle_name'] = $this->input->post('middle_name');
             $formArray['last_name'] = $this->input->post('last_name');
             $formArray['dob'] = $this->input->post('dob');
+
+            $sevarth_id = $this->input->post('sevarth_id');
+            $formArray['sevarth_id'] = $sevarth_id;
             $formArray['qualification'] = $this->input->post('qualification');
             $formArray['cast'] = $this->input->post('cast');
             $formArray['subcast'] = $this->input->post('subcast');
-            $formArray['designation'] = $this->input->post('designation');
+
+            $designation_id= $this->input->post('designation');
+            $formArray['designation'] = $designation_id;
             $formArray['retirement_date'] = $this->input->post('retirement_date');
             $formArray['experience'] = $this->input->post('experience');
             $formArray['aadhar_no'] = $this->input->post('aadhar_no');
@@ -59,12 +72,81 @@ class RegisterController extends CI_Controller
             $formArray['country'] = $this->input->post('country');
             $formArray['gender'] = $this->input->post('gender');
 
-            $this->Auth_model->create($formArray);
+            $loginArray['hint_question'] = $this->input->post('hint_question');
+            $loginArray['hint_answer'] = $this->input->post('hint_answer');
 
-            $this->session->set_flashdata('msg', 'You registered successfully');
-            redirect(uri:base_url() . 'index.php/Auth/RegisterController/register');
+
+            $role_id=$this->input->post('role_id');
+            $loginArray['role_id'] = $role_id;
+            $loginArray['email'] = $this->input->post('email');
+            $loginArray['password'] = $this->input->post('password');
+            $loginArray['sevarth_id'] = $sevarth_id;
+
+
+
+             $this->Auth_model->create($formArray, $loginArray);
+             $this->session->set_flashdata('msg', 'You registered successfully');
+
+            // if($insert_id > 0){
+            //     $this->session->set_flashdata('msg', 'You registered successfully');
+            //     // $this->session->set_userdata('sevarth_id', $designation_id);
+            //     $this->session->set_userdata('user_id', $insert_id);
+
+                if($role_id == 1){
+                    redirect('home/HomeController/employee');
+                }
+                else if($role_id == 2){
+
+                    redirect('home/HomeController/hod');
+    
+                }
+                else if($role_id == 3){
+ 
+                    redirect('home/HomeController/principal');
+                }
+    
+                //        }else{
+                //     echo "User cannot be created";
+                // // }
+           
 
             
+        }
+
+    }
+
+    public function forgot(){
+        $email = $this->input->post('email');
+
+        if($email == ""){
+            $this->load->view('auth/forgot.php');
+        }       
+
+        else{
+            
+     
+         
+            $this->Auth_model->check_email($email);
+
+        }
+
+    }
+
+    public function changePassword(){
+        $password = $this->input->post('password');
+        $new_password = $this->input->post('new_password');
+
+        if($password == "" && $new_password == ""){
+            $this->load->view('auth/changePassword.php');
+        }       
+
+        else{
+            if($password == $new_password){
+                
+                $this->Auth_model->change_password($password);
+
+            }
+
         }
 
     }
@@ -74,8 +156,8 @@ class RegisterController extends CI_Controller
 
         $email = $this->input->post('email');
         $password = $this->input->post('password');
-
-        $this->Auth_model->can_login($email, $password);
+        $sevarth_id = $this->input->post('sevarth_id');
+        $this->Auth_model->can_login($email, $password, $sevarth_id);
 
         // $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|min_length[5]');
         // $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[5]|alpha_numeric');

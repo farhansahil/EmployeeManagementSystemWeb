@@ -36,7 +36,7 @@
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
                             <div class="input-group with-icon">
-                                <input class="form-control rounded p-2" name="email" type="text" placeholder="Email" autocomplete=off>
+                                <input class="form-control rounded p-2" name="email" type="email" placeholder="Email" autocomplete=off>
 
                                 <i class="fa fa-envelope" aria-hidden="true" style="font-size: 1.3rem;"></i>
                             </div>

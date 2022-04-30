@@ -6,36 +6,67 @@ class Auth_model extends CI_Model
         parent::__construct();
     }
 
-    public function create($formArray){
+    public function create($formArray,$loginArray){
 
         $this->db->insert('employees_details', $formArray);
-        //if a user created account successfully
-        if($this->db->insert_id() > 0){
-            return true;
-
-        }return false;
+        $this->db->insert('employees', $loginArray);
+        // if a user created account successfully
+        return $this->db->insert_id();
     }
 
-    function can_login($email, $password)
-    {
+    function check_email($email){
+        $query = $this->db->query("select * from employees where email= '$email'");
+       
+       if($email == "")
+       {
+        $this->load->view('auth/changePassword.php');
+    }else{
 
+        echo "<script>alert('Email not matched')</script>";
+    }
+    
+   
+    }
+
+
+
+   
+
+    function can_login($email, $password, $sevarth_id)
+    {
         $query = $this->db->query("select * from employees where email= '$email'
         and password= '$password'");
-        if ($query->num_rows() > 0)
-{
-   $row = $query->row();   
-   $role_id= $row->role_id;
+
+        $nameQuery = $this->db->query("select * from employees_details where
+         sevarth_id= '$sevarth_id'");
+        
+                $row = $query->row();   
+                $namerow = $nameQuery->row();   
+
+                $role_id= $row->role_id;
+                $name = $namerow->dob;
+                $sev = $namerow->sevarth_id;
+
+                
+
          if($role_id == 1){
+                // echo $name;
                 redirect('home/HomeController/employee');
             }
-            if($role_id == 2){
+            else if($role_id == 2){
+                // echo $name;
+
                 redirect('home/HomeController/hod');
 
             }
-            if($role_id == 3){
+            else if($role_id == 3){
+                // echo $sev;
+                // echo $name;
+
                 redirect('home/HomeController/principal');
 
             }
+        
 }
         
         
@@ -56,4 +87,4 @@ class Auth_model extends CI_Model
         //     return 'Wrong Email Address';
         // }
     }
-}
+
