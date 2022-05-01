@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2022 at 02:53 PM
+-- Generation Time: May 01, 2022 at 04:44 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -101,7 +101,7 @@ CREATE TABLE `employees` (
   `name` varchar(200) NOT NULL,
   `hint_question` varchar(200) NOT NULL,
   `hint_answer` varchar(200) NOT NULL,
-  `is_verified` int(1) NOT NULL DEFAULT 0,
+  `is_verified` varchar(3) NOT NULL DEFAULT '0',
   `hod_id` varchar(12) NOT NULL,
   `principle_id` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -111,9 +111,10 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`sevarth_id`, `org_id`, `dept_id`, `role_id`, `email`, `password`, `name`, `hint_question`, `hint_answer`, `is_verified`, `hod_id`, `principle_id`) VALUES
-('123456789012', 1, '1', '3', 'principle@gmail.com', 'principle', 'Principle', 'what is your name?', 'Principle', 1, '-1', '-1'),
-('123456789013', 1, '1', '2', 'hod@gmail.com', 'hodpassword', 'HOD', 'what is your name?', 'hod', 1, '-1', '123456789012'),
-('123456789015', 1, '1', '1', 'employee@gmail.com', 'employee', 'Employee', 'what is your name?', 'employee', 0, '123456789013', '123456789012');
+('-1', -1, '-1', '-1', 'admin@gmail.com', 'adminpassword', 'admin', 'admin question', 'admin answer', '0', '-1', '-1'),
+('123456789012', 1, '1', '3', 'principle@gmail.com', 'principle', 'Principle', 'what is your name?', 'Principle', '1', '-1', '-1'),
+('123456789013', 1, '1', '2', 'hod@gmail.com', 'hodpassword', 'HOD', 'what is your name?', 'hod', '-1', '-1', '123456789012'),
+('123456789015', 1, '1', '1', 'employee@gmail.com', 'employee', 'Employee', 'what is your name?', 'employee', '0', '123456789013', '123456789012');
 
 -- --------------------------------------------------------
 
