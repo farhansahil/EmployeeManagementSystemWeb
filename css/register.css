@@ -1,3 +1,7 @@
+*{
+  margin: 0;
+  padding: 0;
+}
 /* @extend display-flex; */
 display-flex, .form-flex, .form-row, .add-info-link {
     display: flex;
@@ -150,12 +154,12 @@ display-flex, .form-flex, .form-row, .add-info-link {
     font-weight: 600;
     font-family: 'Montserrat';
 
-    padding: 115px 0; }
+   }
   
   a {
     color: #1da0f2; }
   
-  .container {
+  .container_new {
     width: 680px;
     position: relative;
     margin: 0 auto;
@@ -431,7 +435,7 @@ display-flex, .form-flex, .form-row, .add-info-link {
     z-index: 9; }
   
   @media screen and (max-width: 768px) {
-    .container {
+    .container_new {
       width: calc( 100% - 30px);
       max-width: 100%; } }
   
