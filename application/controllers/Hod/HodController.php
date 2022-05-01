@@ -29,7 +29,19 @@ class HodController extends CI_Controller
         $this->load->view('dashboard/hod/hod_sidebar.php');
         $this->load->view("dashboard/hod/show_verifications.php", array('employee_for_verification_from_hod' => $employee_for_verification_from_hod));
 
-        echo "correct function called";
+       
+    }
 
+    public function accept_employee_request($employee_id){
+        $this->Hod_model->accept_employee_request($employee_id);
+
+        redirect("/Hod/HodController/show_verifications");
+        
+    }
+    public function decline_employee_request($employee_id){
+        $this->Hod_model->decline_employee_request($employee_id);
+
+        redirect("/Hod/HodController/show_verifications");
+        
     }
 }

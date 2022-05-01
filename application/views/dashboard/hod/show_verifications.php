@@ -25,8 +25,16 @@
 
                         <th scope="row"><?php echo $employees['sevarth_id'] ?></th>
                         <td><?php echo $employees['name'] ?></td>
-                        <td><?php echo $employees['org_id'] ?></td>
-                        <td><?php echo $employees['dept_id'] ?></td>
+                        <td>
+                            <a href="<?php echo base_url() . 'Hod/HodController/accept_employee_request/' . $employees['sevarth_id'] ?>"
+                                style="font-size: 12px; border-radius: 5px" class="btn btn-primary"> Accept
+                            </a>
+                        </td>
+                        <td>
+                            <a href="<?php echo base_url() . 'Hod/HodController/decline_employee_request/' . $employees['sevarth_id'] ?>"
+                                style="font-size: 12px;  border-radius: 5px"" class=" btn btn-danger">Decline</a>
+                        </td>
+
                         <?php }} ?>
 
                     </tr>
