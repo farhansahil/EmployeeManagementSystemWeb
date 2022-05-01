@@ -18,7 +18,7 @@
             </ul>
         </li>
         <li class="nav-item py-2">
-            <a href="Employee/EmployeeController/show_verifications" class=" px-0 align-middle">
+            <a href="/ems-app/employee/EmployeeController/show_verifications" class=" px-0 align-middle">
                 <span class="ms-1 d-none d-sm-inline">Employee Verifications</span></a>
         </li>
         <li class="nav-item py-2">
