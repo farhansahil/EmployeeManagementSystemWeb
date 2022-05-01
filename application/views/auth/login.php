@@ -100,7 +100,7 @@
                             <small class="text-danger form-text"><?php echo form_error('password') ?></small>
                         </div>
                         <div class="mb-3 form-check">
-                            <a href="/" class="link-fp text-primary">Forgot Password?</a>
+                            <a href="/ems-app/index.php/Auth/RegisterController/forgot" class="link-fp text-primary">Forgot Password?</a>
                         </div>
                         <button type="submit" class="btn login-btn p-2 w-100">Submit</button>
                         <div class="mt-3 text-center form-check">

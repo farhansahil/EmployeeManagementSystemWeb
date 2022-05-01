@@ -14,10 +14,12 @@
 .login-btn:hover{
     color: white;
 }
+.form-check{
+    float: right;
+}
 .link-fp{
     color: black;
     text-decoration: none;
-
 }
 .link-fp:hover{
     color: black;
