@@ -23,7 +23,7 @@
 
                 <tbody>
                     <tr>
-                        
+
                         <?php if (!empty($principle_for_verification_from_admin)) {foreach ($principle_for_verification_from_admin as $employees) {?>
 
                         <th scope="row"><?php echo $employees['sevarth_id'] ?></th>
