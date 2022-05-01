@@ -220,7 +220,9 @@ class RegisterController extends CI_Controller
                     // if user if not verified
                     // 0->not verified 1->verified
                     if ($user->is_verified == 0) {
-                        $this->load->view("auth/wait_until_verify");
+                        // $this->load->view("auth/wait_until_verify");
+                        $this->navigate_to_dashboards($user->role_id);
+
                     } else {
                         $this->navigate_to_dashboards($user->role_id);
                     }
