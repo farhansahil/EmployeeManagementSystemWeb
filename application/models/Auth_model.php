@@ -130,6 +130,8 @@ class Auth_model extends CI_Model
 
     }
 
+    
+
     public function login_user($email, $password)
     {
         //if email id not present in database
@@ -158,6 +160,14 @@ class Auth_model extends CI_Model
             'user' => $user,
         );
 
+    }
+
+    public function get_employee($email){
+        return $this->db->where("email", $email)->get("employees")->result()[0];
+    }
+
+    public function is_email_exist($email){
+        return $this->db->where("email", $email)->get("employees")->num_rows() > 0; 
     }
 
     //return true is user is verified else false

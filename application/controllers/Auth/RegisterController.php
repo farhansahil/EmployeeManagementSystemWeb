@@ -98,9 +98,7 @@ class RegisterController extends CI_Controller
                 $this->navigate_to_dashboards($this->session->userdata('role_id'));
             }
 
-        } 
-        
-        else {
+        } else {
             $this->form_validation->set_rules('sevarth_id', 'Sevarth ID', 'required|regex_match[/^[0-9]{12}$/]|callback_sevarthID_check|min_length[12]|max_length[12]');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[employees.email]');
             $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]|max_length[15]');
@@ -129,8 +127,6 @@ class RegisterController extends CI_Controller
                 $hod_response = $this->Auth_model->get_hod($org_id, $dept_id);
                 $principle_response = $this->Auth_model->get_principle($org_id);
 
-               
-
                 $loginArray = array(
                     'email' => $email,
                     'password' => $password,
@@ -144,9 +140,8 @@ class RegisterController extends CI_Controller
                 );
 
                 //if employee
-                if($role_id == 1 or $role_id == 2)
-                {
-                        
+                if ($role_id == 1 or $role_id == 2) {
+
                     if ($hod_response['result'] == false) {
 
                         $this->session->set_flashdata('msg', $hod_response['error']);
@@ -162,10 +157,10 @@ class RegisterController extends CI_Controller
                     } else {
                         $loginArray['hod_id'] = $hod_response['id'];
 
-                        if($role_id == 2){
+                        if ($role_id == 2) {
                             $loginArray['hod_id'] = -1;
                         }
-                       
+
                         $loginArray['principle_id'] = $principle_response['id'];
 
                         $this->Auth_model->create($loginArray);
@@ -177,8 +172,8 @@ class RegisterController extends CI_Controller
                         $this->navigate_to_dashboards($role_id);
 
                     }
-                }else{
-                
+                } else {
+
                     $loginArray['hod_id'] = -1;
                     $loginArray['principle_id'] = -1;
 
@@ -203,14 +198,12 @@ class RegisterController extends CI_Controller
         //if user is already login
         if ($this->session->userdata('user_id') != null) {
 
-            
-            
             //check if user is not verified
             if ($this->Auth_model->is_verified_user($this->session->userdata('user_id')) == false) {
                 // $this->load->view("auth/wait_until_verify");
                 $this->navigate_to_dashboards($this->session->userdata('role_id'));
 
-            } else {          
+            } else {
                 $this->navigate_to_dashboards($this->session->userdata('role_id'));
             }
 
@@ -265,11 +258,11 @@ class RegisterController extends CI_Controller
             redirect('home/HomeController/hod');
         } else if ($role_id == 3) {
             redirect('home/HomeController/principal');
-        
-        } else if($role_id == -1) {
+
+        } else if ($role_id == -1) {
             redirect('home/HomeController/admin');
 
-        }else if($role_id == 4) {
+        } else if ($role_id == 4) {
             redirect('home/HomeController/registrar');
         }
 
@@ -289,7 +282,6 @@ class RegisterController extends CI_Controller
     public function forgot()
     {
 
-
         $email = $this->input->post('email');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->session->set_flashdata('msg', 'You registered successfully');
@@ -297,17 +289,19 @@ class RegisterController extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->load->view('auth/forgot.php', $msg);
         } else {
-
-
-        if ($email == "") {
-            $this->load->view('auth/forgot.php');
-        } else {
-
-            $this->Auth_model->check_email($email);
-            $email_query = $this->Auth_model->check_email($email);
+            //if email id does not exist in database
+            if($this->Auth_model->is_email_exist($email) == false )
+            {
+                $this->session->set_flashdata('error', "Email Id does not exist");
+                $this->load->view('auth/forgot.php');
+            }else{
+                
+                $employee = $this->Auth_model->get_employee($email);
+                
+                
+            }
             
         }
-    }
     }
 
     public function changePassword()
