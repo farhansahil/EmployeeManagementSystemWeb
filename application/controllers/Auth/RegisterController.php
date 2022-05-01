@@ -296,8 +296,7 @@ class RegisterController extends CI_Controller
 
             $this->Auth_model->check_email($email);
             $email_query = $this->Auth_model->check_email($email);
-            $this->load->view('auth/checkAnswer.php' , $email_query );
-
+            
         }
 
     }

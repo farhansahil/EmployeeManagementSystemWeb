@@ -100,11 +100,13 @@
                             <small class="text-danger form-text"><?php echo form_error('password') ?></small>
                         </div>
                         <div class="mb-3 form-check">
-                            <a href="/ems-app/index.php/Auth/RegisterController/forgot" class="link-fp text-primary">Forgot Password?</a>
+                            <a href="<?php echo base_url() . 'Auth/RegisterController/forgot' ?>"
+                                class="link-fp text-primary">Forgot Password?</a>
                         </div>
                         <button type="submit" class="btn login-btn p-2 w-100">Submit</button>
                         <div class="mt-3 text-center form-check">
-                            <span>Don't have account? <a href="register" class="link-fp text-danger">Create One</a></span>
+                            <span>Don't have account? <a href="register" class="link-fp text-danger">Create
+                                    One</a></span>
                         </div>
                     </form>
                 </div>
