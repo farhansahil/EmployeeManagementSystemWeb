@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class PrincipleController extends CI_Controller
+class AdminController extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct(); //important to call parent constructor
-        $this->load->model('Principle_model');
+        $this->load->model('Admin_model');
 
     }
     public function index()
@@ -14,17 +14,17 @@ class PrincipleController extends CI_Controller
         $this->load->view('templates/header.php');
         $this->load->view('templates/navbar.php');
         $this->load->view('templates/sidebar.php');
-        $this->load->view('dashboard/principle_dashboard.php');
+        $this->load->view('dashboard/amdin_dashboard.php');
         $this->load->view('templates/footer.php');
     }
 
     public function show_verifications()
     {
-        $priciple_for_verification_from_admin = $this->Admin_model->get_principle_for_verification();
+        $principle_for_verification_from_admin = $this->Admin_model->get_principle_for_verification();
 
         $this->load->view('templates/header.php');
         $this->load->view('templates/navbar.php');
-        $this->load->view('dashboard/admion/admin_sidebar.php');
+        $this->load->view('dashboard/admin/admin_sidebar.php');
         $this->load->view("dashboard/admin/show_verifications.php", array('principle_for_verification_from_admin' => $principle_for_verification_from_admin));
 
     }
