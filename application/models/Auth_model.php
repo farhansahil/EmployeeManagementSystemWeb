@@ -6,34 +6,101 @@ class Auth_model extends CI_Model
         parent::__construct();
     }
 
-    public function create($loginArray){
-      
-            $this->db->insert('employees', $loginArray);
-           
-            // if a user created account successfully
-            return $this->db->insert_id();
-       
+    public function create($loginArray)
+    {
+
+        $this->db->insert('employees', $loginArray);
+
+        // if a user created account successfully
+        return $this->db->insert_id();
+
     }
 
-    public function getOrganization(){
+    public function getOrganization()
+    {
         $query = "SELECT * FROM organization";
-        $events = $this->db->query($query)->result_array( );
+        $events = $this->db->query($query)->result_array();
         return $events;
     }
 
-    public function getDepartment(){
+    public function get_hod($org_id, $dept_id)
+    {
+        $cond_hod = array(
+            'org_id' => $org_id,
+            'dept_id' => $dept_id,
+            'is_verified' => 1,
+            'role_id' => 2, // role_id 2 is id for hod
+        );
+
+        $cond_principle = array(
+            'org_id' => $org_id,
+            'is_verified' => 1,
+            'role_id' => 3, // role_id 2 is id for principle
+        );
+
+        //if hod is exists and verified
+        if ($this->db->where($cond_hod)->get('employees')->num_rows() > 0) {
+            $hod = $this->db->where($cond_hod)->get('employees')->result()[0];
+            return array(
+                'result' => true,
+                'id' => $hod->sevarth_id,
+            );
+        } else if ($this->db->where($cond_principle)->get('employees')->num_rows() > 0) {
+            $principle = $this->db->where($cond_principle)->get('employees')->result()[0];
+            return array(
+                'result' => true,
+                'id' => $principle->sevarth_id,
+            );
+        } else {
+            //if hod and principle are not register then show error msg
+            return array(
+                'result' => false,
+                'error' => "Contact your Hod or Principle to Register",
+            );
+        }
+
+    }
+
+    public function get_principle($org_id)
+    {
+        $cond_principle = array(
+            'org_id' => $org_id,
+            'is_verified' => 1,
+            'role_id' => 3, // role_id 2 is id for principle
+        );
+
+        if ($this->db->where($cond_principle)->get('employees')->num_rows() > 0) {
+            $principle = $this->db->where($cond_principle)->get('employees')->result()[0];
+            return array(
+                'result' => true,
+                'id' => $principle->sevarth_id,
+            );
+        } else {
+            //if hod and principle are not register then show error msg
+            return array(
+                'result' => false,
+                'error' => "Contact your Hod or Principle to Register",
+            );
+        }
+
+    }
+
+    public function getDepartment()
+    {
         $query = "SELECT * FROM departments";
-        $dept = $this->db->query($query)->result_array( );
+        $dept = $this->db->query($query)->result_array();
         return $dept;
     }
 
-    public function getRole(){
+    public function getRole()
+    {
         $query = "SELECT * FROM role";
-        $role = $this->db->query($query)->result_array( );
+        $role = $this->db->query($query)->result_array();
         return $role;
     }
 
-    public function addDetails($formArray){
+    public function addDetails($formArray)
+    {
 
         $this->db->insert('employees_details', $formArray);
 
@@ -42,12 +109,13 @@ class Auth_model extends CI_Model
     }
 
     //return true if sevarth id is already present in database employees
-    function is_sevarth_id_exists($sevarth_id)
+    public function is_sevarth_id_exists($sevarth_id)
     {
         return $this->db->where("sevarth_id", $sevarth_id)->get("employees")->num_rows() > 0;
     }
 
-    function check_email($email){
+    public function check_email($email)
+    {
         $query = $this->db->query("select * from employees where email= '$email'");
 
         if ($email == "") {
@@ -59,53 +127,40 @@ class Auth_model extends CI_Model
 
     }
 
-    public function can_login($email, $password, $sevarth_id)
+    public function login_user($email, $password)
     {
-        $query = $this->db->query("select * from employees where email= '$email'
-        and password= '$password'");
+        //if email id not present in database
+        if ($this->db->where('email', $email)->get("employees")->num_rows() == 0) {
+            return array(
+                'result' => false,
+                'error' => "email id does not exist",
+            );
 
-        // $nameQuery = $this->db->query("select * from employees_details where
-        //  sevarth_id= '$sevarth_id'");
+        }
 
-        $row = $query->row();
-        // $namerow = $nameQuery->row();
-if($row > 0){
-    $role_id = $row->role_id;
-    // $name = $namerow->dob;
-    // $sev = $namerow->sevarth_id;
+        //if user with email exists in database
+        //get that use
+        //check user entered password with password already set in db
+        $user = $this->db->where('email', $email)->get("employees")->result()[0];
 
-    if ($role_id == 1) {
-        // echo $name;
-        redirect('home/HomeController/employee');
-    } else if ($role_id == 2) {
-        // echo $name;
+        if ($user->password != $password) {
+            return array(
+                'result' => false,
+                'error' => "Password Does not match",
+            );
+        }
 
-        redirect('home/HomeController/hod');
-
-    } else if ($role_id == 3) {
-        // echo $sev;
-        // echo $name;
-
-        redirect('home/HomeController/principal');
-
-    }
-}
-       
+        return array(
+            'result' => true,
+            'user' => $user,
+        );
 
     }
 
-    // $this->db->where('email', $email);
-    // $query = $this->db->get('employees');
-    // if ($query->num_rows() > 0) {
-    //     foreach ($query->result() as $row) {
-    //         $store_password = $this->encrypt->decode($row->password);
-    //         if ($password == $store_password) {
-    //             return 'Login Successfull!!';
-    //         } else {
-    //             return 'Wrong Password';
-    //         }
-    //     }
-    // } else {
-    //     return 'Wrong Email Address';
-    // }
+    //return true is user is verified else false
+    public function is_verified_user($sevarth_id)
+    {
+        $user = $this->db->where('sevarth_id', $sevarth_id)->get('employees')->result()[0];
+        return $user->is_verified == 1;
+    }
 }

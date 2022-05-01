@@ -3,15 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class RegisterController extends CI_Controller
 {
-    public function __construct()
-    {
-        parent::__construct(); //important to call parent constructor
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $this->load->library('encrypt');
-        $this->load->model('Auth_model');
-
-    }
 
     public function index()
     {
@@ -95,54 +86,159 @@ class RegisterController extends CI_Controller
     public function register()
     {
 
-        //if user is already login then send to its dashboard
+        //if user is already login
         if ($this->session->userdata('user_id') != null) {
-            $this->navigate_to_dashboards($this->session->userdata('role_id'));
-        } else {
+
+            //check if user is not verified
+            if ($this->Auth_model->is_verified_user($this->session->userdata('user_id')) == false) {
+                // $this->load->view("auth/wait_until_verify");
+                $this->navigate_to_dashboards($this->session->userdata('role_id'));
+
+            } else {
+                $this->navigate_to_dashboards($this->session->userdata('role_id'));
+            }
+
+        } 
+        
+        else {
             $this->form_validation->set_rules('sevarth_id', 'Sevarth ID', 'required|regex_match[/^[0-9]{12}$/]|callback_sevarthID_check|min_length[12]|max_length[12]');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[employees.email]');
             $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]|max_length[15]');
+            $this->form_validation->set_rules('name', 'User Name', 'required');
             $this->form_validation->set_rules('hint_question', 'Hint Question', 'required');
             $this->form_validation->set_rules('hint_answer', 'Hint Answer', 'required');
 
+            $events = $this->Auth_model->getOrganization();
+            $dept = $this->Auth_model->getDepartment();
+            $role = $this->Auth_model->getRole();
+
             if ($this->form_validation->run() == false) {
-
-                $events = $this->Auth_model->getOrganization();
-                $dept = $this->Auth_model->getDepartment();
-                $role = $this->Auth_model->getRole();
-
                 $this->load->view('templates/header.php');
                 $this->load->view("auth/register.php", array('events' => $events, 'dept' => $dept, 'role' => $role));
             } else {
 
-                //from here
-                $loginArray = array();
-
-                $role_id = $this->input->post('role_id');
-                $loginArray['role_id'] = $role_id;
-                $loginArray['org_id'] = $this->input->post('org_id');
-                $loginArray['dept_id'] = $this->input->post('dept_id');
-
                 $email = $this->input->post('email');
-                $loginArray['email'] = $email;
-                $loginArray['password'] = $this->input->post('password');
+                $password = $this->input->post('password');
+                $role_id = $this->input->post('role_id');
+                $org_id = $this->input->post('org_id');
+                $dept_id = $this->input->post('dept_id');
+                $name = $this->input->post('name');
                 $sevarth_id = $this->input->post('sevarth_id');
-                $loginArray['sevarth_id'] = $sevarth_id;
-                $loginArray['hint_question'] = $this->input->post('hint_question');
-                $loginArray['hint_answer'] = $this->input->post('hint_answer');
+                $hint_question = $this->input->post('hint_question');
+                $hint_answer = $this->input->post('hint_answer');
+                $hod_response = $this->Auth_model->get_hod($org_id, $dept_id);
+                $principle_response = $this->Auth_model->get_principle($org_id);
 
-                $this->Auth_model->create($loginArray, $email);
-                $this->session->set_flashdata('msg', 'You registered successfully');
+                // print_r($hod_response);
+                // print_r($principle_response);
 
-                //end
+                $loginArray = array(
+                    'email' => $email,
+                    'password' => $password,
+                    'name' => $name,
+                    'sevarth_id' => $sevarth_id,
+                    'role_id' => $role_id,
+                    'org_id' => $org_id,
+                    'dept_id' => $dept_id,
+                    'hint_question' => $hint_question,
+                    'hint_answer' => $hint_answer,
+                );
 
-                $this->session->set_flashdata('msg', 'You registered successfully');
-                $this->session->set_userdata('user_id', $sevarth_id);
-                $this->session->set_userdata('role_id', $role_id);
+                if ($hod_response['result'] == false) {
 
-                $this->navigate_to_dashboards($role_id);
+                    $this->session->set_flashdata('msg', $hod_response['error']);
+                    $this->load->view('templates/header.php');
+                    $this->load->view("auth/register.php", array('events' => $events, 'dept' => $dept, 'role' => $role));
+
+                } else if ($principle_response['result'] == false) {
+                    $this->session->set_flashdata('msg', $principle_response['error']);
+
+                    $this->load->view('templates/header.php');
+                    $this->load->view("auth/register.php", array('events' => $events, 'dept' => $dept, 'role' => $role));
+
+                } else {
+                    $loginArray['hod_id'] = $hod_response['id'];
+                    $loginArray['principle_id'] = $principle_response['id'];
+
+                    $this->Auth_model->create($loginArray);
+                    $this->session->set_flashdata('msg', 'You registered successfully');
+
+                    $this->session->set_userdata('user_id', $sevarth_id);
+                    $this->session->set_userdata('role_id', $role_id);
+
+                    $this->navigate_to_dashboards($role_id);
+
+                }
+
             }
 
+        }
+
+    }
+
+    public function login()
+    {
+        //if user is already login
+        if ($this->session->userdata('user_id') != null) {
+
+            //check if user is not verified
+            if ($this->Auth_model->is_verified_user($this->session->userdata('user_id')) == false) {
+                // $this->load->view("auth/wait_until_verify");
+                $this->navigate_to_dashboards($this->session->userdata('role_id'));
+
+            } else {
+                $this->navigate_to_dashboards($this->session->userdata('role_id'));
+            }
+
+        } else {
+
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('password', 'Password', 'required');
+
+            if ($this->form_validation->run() == false) {
+                $this->load->view('templates/header.php');
+                $this->load->view('auth/login.php');
+            } else {
+                $email = $this->input->post('email');
+                $password = $this->input->post('password');
+
+                $response = $this->Auth_model->login_user($email, $password);
+
+                if ($response['result'] == false) {
+
+                    $this->session->set_flashdata('error', $response['error']);
+                    $this->load->view('templates/header.php');
+                    $this->load->view('auth/login.php');
+
+                } else {
+
+                    $user = $response['user'];
+
+                    $this->session->set_userdata('user_id', $user->sevarth_id);
+                    $this->session->set_userdata('role_id', $user->role_id);
+
+                    // if user if not verified
+                    // 0->not verified 1->verified
+                    if ($user->is_verified == 0) {
+                        $this->load->view("auth/wait_until_verify");
+                    } else {
+                        $this->navigate_to_dashboards($user->role_id);
+                    }
+
+                }
+            }
+        }
+
+    }
+
+    public function navigate_to_dashboards($role_id)
+    {
+        if ($role_id == 1) {
+            redirect('home/HomeController/employee');
+        } else if ($role_id == 2) {
+            redirect('home/HomeController/hod');
+        } else if ($role_id == 3) {
+            redirect('home/HomeController/principal');
         }
 
     }
@@ -190,49 +286,4 @@ class RegisterController extends CI_Controller
 
     }
 
-    public function login()
-    {
-
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[employees.email]');
-        $this->form_validation->set_rules('password', 'Password', 'required|valid_email|is_unique[employees.password]');
-
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header.php');
-            $this->load->view('auth/login.php');
-        } else {
-            $email = $this->input->post('email');
-            $password = $this->input->post('password');
-            $sevarth_id = $this->input->post('sevarth_id');
-            $this->Auth_model->can_login($email, $password, $sevarth_id);
-        }
-
-        // $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|min_length[5]');
-        // $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[5]|alpha_numeric');
-
-        // if ($this->form_validation->run() == FALSE) {
-        //     $this->index();
-        // } else {
-        //     $encrypted_password = $this->encrypt->encode($this->input->post('password'));
-        //     echo $encrypted_password;
-        //     $result = $this->Auth_model->can_login($this->input->post('email'), $this->input->post('password'));
-        //     if ($result == '') {
-        //         redirect('home');
-        //     } else {
-        //         $this->session->set_flashdata('message', $result);
-        //         redirect('login');
-        //     }
-        // }
-    }
-
-    public function navigate_to_dashboards($role_id)
-    {
-        if ($role_id == 1) {
-            redirect('home/HomeController/employee');
-        } else if ($role_id == 2) {
-            redirect('home/HomeController/hod');
-        } else if ($role_id == 3) {
-            redirect('home/HomeController/principal');
-        }
-
-    }
 }

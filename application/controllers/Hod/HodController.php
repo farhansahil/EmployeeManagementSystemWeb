@@ -17,4 +17,8 @@ class HodController extends CI_Controller
         $this->load->view('dashboard/hod_dashboard.php');
         $this->load->view('templates/footer.php');
     }
+
+    public function employee_verification(){
+        
+    }
 }

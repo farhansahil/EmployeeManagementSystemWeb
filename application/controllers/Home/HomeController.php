@@ -23,8 +23,8 @@ class HomeController extends CI_Controller
         // echo "Hello";
         $this->load->view('templates/header.php');
         $this->load->view('templates/navbar.php');
-        $this->load->view('templates/sidebar.php');
-        $this->load->view('dashboard/hod_dashboard.php');
+        $this->load->view('dashboard/hod/hod_sidebar.php');
+        $this->load->view('dashboard/hod/hod_dashboard.php');
         $this->load->view('templates/footer.php');
     }
     public function principal()
