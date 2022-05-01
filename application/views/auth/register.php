@@ -2,15 +2,15 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/register.css">
 
 <body>
-    
- 
 
 
-    <div class="main" >
-   
+
+
+    <div class="main">
+
 
         <section class="signup">
-        <?php
+            <?php
 
 
         if ($this->session->flashdata('msg')) {
@@ -22,7 +22,7 @@
                             </div>
                             ';
         }
-        ?> 
+        ?>
 
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container container_new">
@@ -30,7 +30,7 @@
 
                 <div class="signup-content">
                     <h2 class="text-center">Registraion Form</h2>
-                       <form action="<?php echo base_url().'index.php/Auth/RegisterController/register'?>" name="mainForm"
+                    <form action="<?php echo base_url().'index.php/Auth/RegisterController/register'?>" name="mainForm"
                         id="mainForm signupform" class="signupform" method="post">
                         <div class="form-row">
                             <div class="form-group">
@@ -162,8 +162,13 @@
                     <div class="form-group">
                         <input type="submit" name="submit" id="submit" class="form-submit" value="Submit" />
                     </div>
+
+                </div>
+                <div class="mt-3 text-center form-check">
+                    <span>Already have account? <a href="login" class="link-fp text-danger">Log in</a></span>
                 </div>
                 </form>
+
             </div>
         </section>
 

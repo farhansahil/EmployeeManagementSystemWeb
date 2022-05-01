@@ -20,15 +20,22 @@
                     </tr>
 
                 </thead>
-                
+
                 <tbody>
                     <tr>
                         <?php if (!empty($employee_for_verification_from_hod)) {foreach ($employee_for_verification_from_hod as $employees) {?>
 
                         <th scope="row"><?php echo $employees['sevarth_id'] ?></th>
                         <td><?php echo $employees['name'] ?></td>
-                        <td><button class="btn btn-success">Accept</button></td>
-                        <td><button class="btn btn-success">Decline</button></td>
+                        <td>
+                            <a href="<?php echo base_url() . 'Hod/HodController/accept_employee_request/' . $employees['sevarth_id'] ?>"
+                                style="font-size: 12px; border-radius: 5px" class="btn btn-primary"> Accept
+                            </a>
+                        </td>
+                        <td>
+                            <a href="<?php echo base_url() . 'Hod/HodController/decline_employee_request/' . $employees['sevarth_id'] ?>"
+                                style="font-size: 12px;  border-radius: 5px"" class=" btn btn-danger">Decline</a>
+                        </td>
 
                         <?php }} ?>
 
