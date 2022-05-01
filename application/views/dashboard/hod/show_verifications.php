@@ -18,7 +18,9 @@
                         <th scope="col">Accept</th>
                         <th scope="col">Decline</th>
                     </tr>
+
                 </thead>
+
                 <tbody>
                     <tr>
                         <?php if (!empty($employee_for_verification_from_hod)) {foreach ($employee_for_verification_from_hod as $employees) {?>
