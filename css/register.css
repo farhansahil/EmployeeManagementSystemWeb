@@ -400,6 +400,21 @@ display-flex, .form-flex, .form-row, .add-info-link {
     cursor: pointer; }
     .form-submit:hover {
       background: #0c85d0; }
+
+      .form-edit {
+        width: auto;
+        background: #1df296;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 900;
+        position: absolute;
+        right: 10px;
+        padding: 16px 50px;
+        border: none;
+        margin-top: 37px;
+        cursor: pointer; }
+        .form-edit:hover {
+          background: #16da85; }
   
   label.error {
     display: block;

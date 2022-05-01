@@ -108,6 +108,15 @@ class Auth_model extends CI_Model
         return $this->db->insert_id();
     }
 
+    public function editDetails($formArray,$sevarth_id)
+    {
+
+       
+        $this->db->where("sevarth_id", $sevarth_id)->update('employees', $formArray);
+        // if a user created account successfully
+        return $this->db->insert_id();
+    }
+
     //return true if sevarth id is already present in database employees
     public function is_sevarth_id_exists($sevarth_id)
     {
@@ -167,6 +176,20 @@ class Auth_model extends CI_Model
             "hint_answer" => $answer,
         );
         return $this->db->where($condition)->get("employees")->num_rows() > 0;
+    }
+
+    public function check_password($email, $password)
+    {
+        $condition = array(
+            "password" => $password,
+        );
+        $get_query = array(
+            "email" => $emial,
+            "password" => $password
+        );
+        $this->db->where("email", $email)->update('employees', $condition);
+        redirect('/login');
+        
     }
 
     public function get_employee($email)

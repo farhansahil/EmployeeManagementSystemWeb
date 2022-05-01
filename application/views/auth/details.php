@@ -191,10 +191,10 @@
                         
                      <div class="form-row">
                         <div class="form-group">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Submit"/>
+                            <input type="submit" name="submitDetails" id="submit" class="form-submit" value="Submit"/>
                         </div>
                         <div class="form-group">
-                            <input type="submit" name="submit" id="submit" style="float:'right'" class="form-submit" value="Submit"/>
+                            <input type="submit" name="submitDetails" id="edit"  class="form-edit" value="Edit"/>
                         </div>
                         </div>
                     </form>

@@ -21,13 +21,17 @@
                       <div class="form-group">
                         <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-key color-blue"></i></span>
-                          <input id="password" name="password" placeholder="New Password" class="form-control"  type="password">
+                          <input id="password" name="password" placeholder="New Password" class="form-control <?php echo (form_error('password') !=  "") ? 'is-invalid' : '' ?>"  type="password">
                           </div>
+                          <p class="invalid-feedback "><?php echo strip_tags(form_error('password')); ?></p>
+
                           <div class="input-group pt-3">
 
                           <span class="input-group-addon"><i class="fa fa-key color-blue"></i></span>
-                          <input id="new_password" name="new_password" placeholder="Confirm New Password" class="form-control"  type="password">
+                          <input id="new_password" name="new_password" placeholder="Confirm New Password" class="form-control <?php echo (form_error('new_password') !=  "") ? 'is-invalid' : '' ?>"  type="password">
                         </div>  
+                        <p class="invalid-feedback "><?php echo strip_tags(form_error('new_password')); ?></p>
+
                       </div>
                       <div class="form-group">
                         <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Submit" type="submit">

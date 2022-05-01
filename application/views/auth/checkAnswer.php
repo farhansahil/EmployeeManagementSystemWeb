@@ -11,6 +11,21 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="text-center">
+
+                    <?php
+
+
+if ($this->session->flashdata('error')) {
+    echo '
+                    <div class="containegit r">
+                    <div class="alert alert-danger">
+                        ' . $this->session->flashdata("error") . '
+                    </div>
+                    </div>
+                    ';
+}
+?>
+
                         <h3><i class="fa fa-lock fa-4x"></i></h3>
                         <h2 class="text-center">Checking Answer</h2>
                         <p>You can reset your password here.</p>
@@ -29,9 +44,11 @@
                                     <div class="input-group pt-3">
 
                                         <span class="input-group-addon"><i class="fa fa-key color-blue"></i></span>
-                                        <input id="answer" name="answer" placeholder="Enter your answer"
-                                            class="form-control" type="text">
+                                        <input id="hint_answer" name="hint_answer" placeholder="Enter your answer"
+                                            class="form-control <?php echo (form_error('hint_question') !=  "") ? 'is-invalid' : '' ?>" type="text">
                                     </div>
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('hint_question')); ?></p>
+
                                 </div>
                                 <div class="form-group">
                                     <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Submit"
