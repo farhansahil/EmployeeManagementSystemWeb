@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2022 at 11:43 AM
+-- Generation Time: May 01, 2022 at 02:53 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -41,20 +41,6 @@ CREATE TABLE `applications` (
   `status_id` varchar(11) NOT NULL,
   `application_type` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `applications`
---
-
-INSERT INTO `applications` (`id`, `sevarth_id`, `date`, `description`, `remark`, `application`, `title`, `hod_id`, `registrar_id`, `principal_id`, `status_id`, `application_type`) VALUES
-(8, 'ABC1', '12-1-1900', '', 'decs', '52.pdf', 'application', '123', 'ABCRegistr', '234', '3', '1'),
-(9, 'ABC1', '28-1-1900', '', 'desc', '107.pdf', ' new applicatikn', '123', 'ABCRegistr', '234', '5', '1'),
-(10, 'ABC1', '27-1-1900', '', 'dhdjdd', '98.pdf', 'new', '123', 'ABCRegistr', '234', '1', '1'),
-(11, 'ABC1', '20-1-1900', '', 'hello', '72.pdf', 'abc', '123', 'ABCRegistr', '234', '5', '1'),
-(12, 'ABC1', '10-1-1900', '', 'ddddx', '127.pdf', 'dd', '123', 'ABCRegistr', '234', '3', '1'),
-(13, 'ABC1', '31-1-1900', '', 'pratik ', '75.pdf', 'pratik', '123', 'ABCRegistr', '234', '4', '1'),
-(14, 'ABC1', '29-4-2022', 'description', 'remark of hod approval', '173449.pdf', 'name', '123', 'ABCRegistr', '234', '2', '1'),
-(15, 'ABC1', '29-4-2022', 'jdkdkf', 'Applied Application', '222923.pdf', 'nam', '123', 'ABCRegistr', '234', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -125,11 +111,9 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`sevarth_id`, `org_id`, `dept_id`, `role_id`, `email`, `password`, `name`, `hint_question`, `hint_answer`, `is_verified`, `hod_id`, `principle_id`) VALUES
-('123', 1, '1', '2', 'hod@gmail.com', 'hod', '', '', '', 0, '0', ''),
-('124346789010', 1, '1', '1', 'ashish080973@gmail.com', '1233456789', 'afd', 'what is your name?', 'Parth', 0, '', ''),
-('124346789012', 1, '1', '1', 'techwithpt11@gamil.com', 'password', '', 'what is your name?', 'Parth', 0, '0', ''),
-('124346789013', 1, '1', '1', 'parthtagalpallewar123@gmail.com', 'password', '', 'what is your name?', 'Parth', 0, '0', ''),
-('ABC1', 1, '1', '1', 'employee@gmail.com', 'employee', '', '', '', 0, '0', '');
+('123456789012', 1, '1', '3', 'principle@gmail.com', 'principle', 'Principle', 'what is your name?', 'Principle', 1, '-1', '-1'),
+('123456789013', 1, '1', '2', 'hod@gmail.com', 'hodpassword', 'HOD', 'what is your name?', 'hod', 1, '-1', '123456789012'),
+('123456789015', 1, '1', '1', 'employee@gmail.com', 'employee', 'Employee', 'what is your name?', 'employee', 0, '123456789013', '123456789012');
 
 -- --------------------------------------------------------
 
@@ -306,19 +290,6 @@ CREATE TABLE `training` (
   `principal_id` int(11) NOT NULL,
   `training_type` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `training`
---
-
-INSERT INTO `training` (`id`, `sevarth_id`, `name`, `duration`, `start_date`, `end_date`, `org_name`, `organized_by`, `apply_letter`, `comp_certificate`, `training_status_id`, `hod_id`, `principal_id`, `training_type`) VALUES
-(40, 'ABC1', 'apply to hod', '69', '19-1-1900', '28-1-1900', 'apply to hod', 'apply to hod', '69.pdf', '', 5, 123, 234, '2'),
-(41, 'ABC1', 'apply to hod 2', '36', '28-1-1900', '28-1-1900', 'apply to hod 2', 'apply to hod 2', '78.pdf', '', 4, 123, 234, '1'),
-(42, 'ABC1', 'apply to principle', '58', '26-1-1900', '27-1-1900', 'apply to principle', 'principle', '101.pdf', '', 5, 123, 234, '2'),
-(43, 'ABC1', 'aplly to principle 2', '58', '27-1-1900', '28-1-1900', 'appky to principle 2', 'appky to principle 2', '81.pdf', '', 6, 123, 234, '2'),
-(44, 'ABC1', 'app', '8', '13-1-1900', '28-1-1900', 'dd', 'dx', '59.pdf', '', 1, 123, 234, '2'),
-(45, 'ABC1', 'trainging', '15', '29-4-2022', '19-5-2022', 'name', 'by', '172453.pdf', '', 1, 123, 234, '2'),
-(46, 'ABC1', 'new t', '39', '29-4-2022', '12-5-2022', 'name', 'bnsks', '222834.pdf', '', 1, 123, 234, '2');
 
 -- --------------------------------------------------------
 
