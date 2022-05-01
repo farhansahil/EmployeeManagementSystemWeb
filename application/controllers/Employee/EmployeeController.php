@@ -10,7 +10,7 @@ class EmployeeController extends CI_Controller
     }
     public function index($page= 'employee')
     {
-        // echo "Hello";
+        
         $this->load->view('templates/header.php');
         $this->load->view('templates/navbar.php');
         $this->load->view('templates/sidebar.php');

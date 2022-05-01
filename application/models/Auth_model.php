@@ -41,6 +41,11 @@ class Auth_model extends CI_Model
         return $this->db->insert_id();
     }
 
+    //return true if sevarth id is already present in database employees
+    function is_sevarth_id_exists($sevarth_id)
+    {
+        return $this->db->where("sevarth_id", $sevarth_id)->get("employees")->num_rows() > 0;
+    }
 
     function check_email($email){
         $query = $this->db->query("select * from employees where email= '$email'");
