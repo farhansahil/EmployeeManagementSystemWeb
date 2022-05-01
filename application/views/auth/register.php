@@ -2,27 +2,35 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/register.css">
 
 <body>
+    
+ 
 
-    <div class="main">
+
+    <div class="main" >
+   
+
         <section class="signup">
-            <!-- <img src="images/signup-bg.jpg" alt=""> -->
-            <div class="container">
-
-
-
-                <div class="signup-content">
-                    <h2 class="text-center">Registraion Form</h2>
-                    <?php
+        <?php
 
 
         if ($this->session->flashdata('msg')) {
             echo '
-                            <p class="text-danger mb-3">
+                            <div class="container">
+                            <div class="alert alert-danger">
                                 ' . $this->session->flashdata("msg") . '
-                            </p>
+                            </div>
+                            </div>
                             ';
         }
-        ?>                    <form action="<?php echo base_url().'index.php/Auth/RegisterController/register'?>" name="mainForm"
+        ?> 
+
+            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+            <div class="container container_new">
+
+
+                <div class="signup-content">
+                    <h2 class="text-center">Registraion Form</h2>
+                       <form action="<?php echo base_url().'index.php/Auth/RegisterController/register'?>" name="mainForm"
                         id="mainForm signupform" class="signupform" method="post">
                         <div class="form-row">
                             <div class="form-group">
