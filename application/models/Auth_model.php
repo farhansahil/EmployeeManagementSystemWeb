@@ -121,6 +121,7 @@ class Auth_model extends CI_Model
         $email_query = $query->result_array();
 
         if ($row > 0) {
+            
             return $email_query;
         } else {
 

@@ -11,6 +11,19 @@
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="text-center">
+                <?php
+
+
+if ($this->session->flashdata('error')) {
+    echo '
+                    <div class="containegit r">
+                    <div class="alert alert-danger">
+                        ' . $this->session->flashdata("error") . '
+                    </div>
+                    </div>
+                    ';
+}
+?>
                   <h3><i class="fa fa-lock fa-4x"></i></h3>
                   <h2 class="text-center">Forgot Password?</h2>
                   <p>You can reset your password here.</p>
@@ -24,7 +37,7 @@
                           <input id="email" name="email" placeholder="email address" class="form-control <?php echo (form_error('email') !=  "") ? 'is-invalid' : '' ?>"  type="email">
 
                         </div>
-                        <p class="invalid-feedback "><?php echo strip_tags(form_error('email')); ?></p>
+                        <p class="invalid-feedback text-danger mt-5"><?php echo strip_tags(form_error('email')); ?></p>
 
                       </div>
                       <div class="form-group">

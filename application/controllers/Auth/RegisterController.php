@@ -283,7 +283,7 @@ class RegisterController extends CI_Controller
     {
 
         $email = $this->input->post('email');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[employees.email]');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('auth/forgot.php');
@@ -322,6 +322,8 @@ class RegisterController extends CI_Controller
 
                 $employee = $this->Auth_model->get_employee($email);
 
+                $this->load->view('auth/checkAnswer.php', array('employee' => $employee));
+                
             }
 
         }
