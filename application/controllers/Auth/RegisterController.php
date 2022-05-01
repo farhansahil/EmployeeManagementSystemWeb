@@ -129,8 +129,7 @@ class RegisterController extends CI_Controller
                 $hod_response = $this->Auth_model->get_hod($org_id, $dept_id);
                 $principle_response = $this->Auth_model->get_principle($org_id);
 
-                // print_r($hod_response);
-                // print_r($principle_response);
+               
 
                 $loginArray = array(
                     'email' => $email,
@@ -144,21 +143,44 @@ class RegisterController extends CI_Controller
                     'hint_answer' => $hint_answer,
                 );
 
-                if ($hod_response['result'] == false) {
+                //if employee
+                if($role_id == 1 or $role_id == 2)
+                {
+                        
+                    if ($hod_response['result'] == false) {
 
-                    $this->session->set_flashdata('msg', $hod_response['error']);
-                    $this->load->view('templates/header.php');
-                    $this->load->view("auth/register.php", array('events' => $events, 'dept' => $dept, 'role' => $role));
+                        $this->session->set_flashdata('msg', $hod_response['error']);
+                        $this->load->view('templates/header.php');
+                        $this->load->view("auth/register.php", array('events' => $events, 'dept' => $dept, 'role' => $role));
 
-                } else if ($principle_response['result'] == false) {
-                    $this->session->set_flashdata('msg', $principle_response['error']);
+                    } else if ($principle_response['result'] == false) {
+                        $this->session->set_flashdata('msg', $principle_response['error']);
 
-                    $this->load->view('templates/header.php');
-                    $this->load->view("auth/register.php", array('events' => $events, 'dept' => $dept, 'role' => $role));
+                        $this->load->view('templates/header.php');
+                        $this->load->view("auth/register.php", array('events' => $events, 'dept' => $dept, 'role' => $role));
 
-                } else {
-                    $loginArray['hod_id'] = $hod_response['id'];
-                    $loginArray['principle_id'] = $principle_response['id'];
+                    } else {
+                        $loginArray['hod_id'] = $hod_response['id'];
+
+                        if($role_id == 2){
+                            $loginArray['hod_id'] = -1;
+                        }
+                       
+                        $loginArray['principle_id'] = $principle_response['id'];
+
+                        $this->Auth_model->create($loginArray);
+                        $this->session->set_flashdata('msg', 'You registered successfully');
+
+                        $this->session->set_userdata('user_id', $sevarth_id);
+                        $this->session->set_userdata('role_id', $role_id);
+
+                        $this->navigate_to_dashboards($role_id);
+
+                    }
+                }else{
+                
+                    $loginArray['hod_id'] = -1;
+                    $loginArray['principle_id'] = -1;
 
                     $this->Auth_model->create($loginArray);
                     $this->session->set_flashdata('msg', 'You registered successfully');

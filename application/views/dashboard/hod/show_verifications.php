@@ -15,22 +15,22 @@
 
                         <th scope="col">Sevarth ID</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Organization ID</th>
-                        <th scope="col">Department ID</th>
+                        <th scope="col">Accept</th>
+                        <th scope="col">Decline</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                    <?php if (!empty($employee_for_verification_from_hod)) {foreach ($employee_for_verification_from_hod as $employees) {?>
+                        <?php if (!empty($employee_for_verification_from_hod)) {foreach ($employee_for_verification_from_hod as $employees) {?>
 
-                        <th scope="row"><?php echo $employee_for_verification_from_hod['sevarth_id'] ?></th>
-                        <td><?php echo $employee_for_verification_from_hod['name'] ?></td>
-                        <td><?php echo $employee_for_verification_from_hod['org_id'] ?></td>
-                        <td><?php echo $employee_for_verification_from_hod['dept_id'] ?></td>
+                        <th scope="row"><?php echo $employees['sevarth_id'] ?></th>
+                        <td><?php echo $employees['name'] ?></td>
+                        <td><?php echo $employees['org_id'] ?></td>
+                        <td><?php echo $employees['dept_id'] ?></td>
                         <?php }} ?>
 
                     </tr>
-                  
+
                 </tbody>
             </table>
         </div>
@@ -38,5 +38,5 @@
 
     </div>
 
-  
+
 </section>

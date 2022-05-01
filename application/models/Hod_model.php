@@ -13,6 +13,8 @@ class Hod_model extends CI_Model
             'role_id' => 1 //role id for employee
         );
 
+        echo $this->session->userdata('user_id');
+
         return $this->db->where($condition)->get('employees')->result_array();
     }
 
