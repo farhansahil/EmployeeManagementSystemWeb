@@ -265,6 +265,9 @@ class RegisterController extends CI_Controller
             redirect('home/HomeController/hod');
         } else if ($role_id == 3) {
             redirect('home/HomeController/principal');
+        }else if($role_id == -1){
+            redirect('home/HomeController/admin');
+
         }
 
     }
