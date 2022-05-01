@@ -18,15 +18,18 @@
                         <th scope="col">Accept</th>
                         <th scope="col">Decline</th>
                     </tr>
+
                 </thead>
+                
                 <tbody>
                     <tr>
                         <?php if (!empty($employee_for_verification_from_hod)) {foreach ($employee_for_verification_from_hod as $employees) {?>
 
                         <th scope="row"><?php echo $employees['sevarth_id'] ?></th>
                         <td><?php echo $employees['name'] ?></td>
-                        <td><?php echo $employees['org_id'] ?></td>
-                        <td><?php echo $employees['dept_id'] ?></td>
+                        <td><button class="btn btn-success">Accept</button></td>
+                        <td><button class="btn btn-success">Decline</button></td>
+
                         <?php }} ?>
 
                     </tr>
