@@ -18,12 +18,12 @@ class Admin_model extends CI_Model
 
     public function accept_principle_request($principle_id){
         $condition = array('is_verified' => "1");
-        $this->db->where("sevarth_id", $hod_id)->update('employees', $condition);
+        $this->db->where("sevarth_id", $principle_id)->update('employees', $condition);
     }
     
     public function decline_principle_request($principle_id){
         $condition = array('is_verified' => "-1");
-        $this->db->where("sevarth_id", $hod_id)->update('employees', $condition);
+        $this->db->where("sevarth_id", $principle_id)->update('employees', $condition);
     }
     
 }
