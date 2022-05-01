@@ -101,7 +101,7 @@ class Auth_model extends CI_Model
 
     public function addDetails($formArray)
     {
-        
+
         $this->db->insert('employees_details', $formArray);
 
         // if a user created account successfully
@@ -128,8 +128,6 @@ class Auth_model extends CI_Model
         }
 
     }
-
-    
 
     public function login_user($email, $password)
     {
@@ -161,12 +159,23 @@ class Auth_model extends CI_Model
 
     }
 
-    public function get_employee($email){
+    public function check_answer($email, $answer)
+    {
+        $condition = array(
+            "email" => $email,
+            "hint_answer" => $answer,
+        );
+        return $this->db->where($condition)->get("employees")->num_rows() > 0;
+    }
+
+    public function get_employee($email)
+    {
         return $this->db->where("email", $email)->get("employees")->result()[0];
     }
 
-    public function is_email_exist($email){
-        return $this->db->where("email", $email)->get("employees")->num_rows() > 0; 
+    public function is_email_exist($email)
+    {
+        return $this->db->where("email", $email)->get("employees")->num_rows() > 0;
     }
 
     //return true is user is verified else false

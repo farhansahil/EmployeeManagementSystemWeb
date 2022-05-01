@@ -289,18 +289,43 @@ class RegisterController extends CI_Controller
             $this->load->view('auth/forgot.php');
         } else {
             //if email id does not exist in database
-            if($this->Auth_model->is_email_exist($email) == false )
-            {
+            if ($this->Auth_model->is_email_exist($email) == false) {
                 $this->session->set_flashdata('error', "Email Id does not exist");
                 $this->load->view('auth/forgot.php');
-            }else{
+            } else {
+
                 
                 $employee = $this->Auth_model->get_employee($email);
-                
-                
+                $this->session->set_userdata('email', $email);
+
             }
-            
+
         }
+    }
+
+    public function verify_answer()
+    {
+       
+        $this->form_validation->set_rules('answer', 'Answer', 'required');
+
+        if ($this->form_validation->run() == false) {
+        
+            //load view here
+        } else {
+            //if answer is same as entered answer
+            $email = $this->session->userdata('email');
+            $answer = $this->input->post('answer');
+            if ($this->Auth_model->check_answer($email, $answer) == false) {
+                $this->session->set_flashdata('error', "Wrong Answer");
+                // load your view here
+            } else {
+
+                $employee = $this->Auth_model->get_employee($email);
+
+            }
+
+        }
+
     }
 
     public function changePassword()
