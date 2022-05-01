@@ -291,10 +291,11 @@ class RegisterController extends CI_Controller
 
 
         $email = $this->input->post('email');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[employees.email]');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->session->set_flashdata('msg', 'You registered successfully');
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('auth/forgot.php');
+            $this->load->view('auth/forgot.php', $msg);
         } else {
 
 

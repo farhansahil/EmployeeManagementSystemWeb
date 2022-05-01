@@ -24,7 +24,7 @@
                           <input id="email" name="email" placeholder="email address" class="form-control <?php echo (form_error('email') !=  "") ? 'is-invalid' : '' ?>"  type="email">
 
                         </div>
-                        <p class="invalid-feedback "><?php echo strip_tags(form_error('email')); ?></p>
+                        <p class="invalid-feedback text-danger mt-5"><?php echo strip_tags(form_error('email')); ?></p>
 
                       </div>
                       <div class="form-group">

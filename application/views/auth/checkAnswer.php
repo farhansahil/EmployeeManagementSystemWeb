@@ -20,7 +20,6 @@
     
                       <div class="form-group">
                         <div class="input-group">
-                          <span class="input-group-addon"><i class="fa fa-key color-blue"></i></span>
                           <?php if (!empty($email_query)) {foreach ($email_query as $employees) {?>
 
                           <input id="hint_question" name="hint_question" value="<?php echo $employees['hint_question'] ?>" class="form-control"  type="password">
