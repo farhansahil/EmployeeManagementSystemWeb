@@ -3,45 +3,48 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
- <div class="form-gap"></div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<div class="form-gap"></div>
 <div class="container" style="margin-top: 70px">
-	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="text-center">
-                  <h3><i class="fa fa-lock fa-4x"></i></h3>
-                  <h2 class="text-center">Checking Answer</h2>
-                  <p>You can reset your password here.</p>
-                  <div class="panel-body">
-    
-                  <form action="<?php echo base_url().'index.php/Auth/RegisterController/changeAnswer'?>" name="forgotForm" id="forgotForm" method="post">
-    
-                      <div class="form-group">
-                        <div class="input-group">
-                          <?php if (!empty($employee)) {foreach ($employee as $employees) {?>
+                <div class="panel-body">
+                    <div class="text-center">
+                        <h3><i class="fa fa-lock fa-4x"></i></h3>
+                        <h2 class="text-center">Checking Answer</h2>
+                        <p>You can reset your password here.</p>
+                        <div class="panel-body">
 
-                          <input id="hint_question" name="hint_question" value="<?php echo $employees['hint_question'] ?>" class="form-control"  type="text" disabled>
-                          <?php }} ?>
-                          </div>
-                          <div class="input-group pt-3">
+                            <form action="<?php echo base_url().'index.php/Auth/RegisterController/verify_answer'?>"
+                                name="forgotForm" id="forgotForm" method="post">
 
-                          <span class="input-group-addon"><i class="fa fa-key color-blue"></i></span>
-                          <input id="hint_answer" name="hint_answer" placeholder="Enter your answer" class="form-control"  type="text">
-                        </div>  
-                      </div>
-                      <div class="form-group">
-                        <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Submit" type="submit">
-                      </div>
-                      
-                      <input type="hidden" class="hide" name="token" id="token" value=""> 
-                    </form>
-    
-                  </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+
+                                        <input id="hint_question" name="hint_question" value="<?php echo $question ?>"
+                                            class="form-control" type="text" disabled>
+
+                                    </div>
+                                    <div class="input-group pt-3">
+
+                                        <span class="input-group-addon"><i class="fa fa-key color-blue"></i></span>
+                                        <input id="answer" name="answer" placeholder="Enter your answer"
+                                            class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Submit"
+                                        type="submit">
+                                </div>
+
+                                <input type="hidden" class="hide" name="token" id="token" value="">
+                            </form>
+
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-	</div>
+        </div>
+    </div>
 </div>

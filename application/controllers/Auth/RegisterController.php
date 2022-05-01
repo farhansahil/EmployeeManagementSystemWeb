@@ -294,9 +294,9 @@ class RegisterController extends CI_Controller
                 $this->load->view('auth/forgot.php');
             } else {
 
-                
                 $employee = $this->Auth_model->get_employee($email);
                 $this->session->set_userdata('email', $email);
+                $this->load->view('auth/checkAnswer.php', array('question' => $employee -> hint_question));
 
             }
 
@@ -305,11 +305,11 @@ class RegisterController extends CI_Controller
 
     public function verify_answer()
     {
-       
+
         $this->form_validation->set_rules('answer', 'Answer', 'required');
 
         if ($this->form_validation->run() == false) {
-        
+
             //load view here
         } else {
             //if answer is same as entered answer
@@ -322,8 +322,6 @@ class RegisterController extends CI_Controller
 
                 $employee = $this->Auth_model->get_employee($email);
 
-                $this->load->view('auth/checkAnswer.php', array('employee' => $employee));
-                
             }
 
         }
