@@ -36,6 +36,7 @@ class HomeController extends CI_Controller
         $this->load->view('dashboard/principle/principal_dashboard.php');
         $this->load->view('templates/footer.php');
     }
+
     public function admin()
     {
         // echo "Hello";
@@ -45,6 +46,7 @@ class HomeController extends CI_Controller
         $this->load->view('dashboard/admin/admin_dashboard.php');
         $this->load->view('templates/footer.php');
     }
+    
     
 
 

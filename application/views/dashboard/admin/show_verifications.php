@@ -24,17 +24,17 @@
                 <tbody>
                     <tr>
                         
-                        <?php if (!empty($employee_for_verification_from_hod)) {foreach ($employee_for_verification_from_hod as $employees) {?>
+                        <?php if (!empty($principle_for_verification_from_admin)) {foreach ($principle_for_verification_from_admin as $employees) {?>
 
                         <th scope="row"><?php echo $employees['sevarth_id'] ?></th>
                         <td><?php echo $employees['name'] ?></td>
                         <td>
-                            <a href="<?php echo base_url() . 'Hod/HodController/accept_employee_request/' . $employees['sevarth_id'] ?>"
+                            <a href="<?php echo base_url() . 'Admin/AdminController/accept_principle_request/' . $employees['sevarth_id'] ?>"
                                 style="font-size: 12px; border-radius: 5px" class="btn btn-primary"> Accept
                             </a>
                         </td>
                         <td>
-                            <a href="<?php echo base_url() . 'Hod/HodController/decline_employee_request/' . $employees['sevarth_id'] ?>"
+                            <a href="<?php echo base_url() . 'Admin/AdminController/accept_principle_request/' . $employees['sevarth_id'] ?>"
                                 style="font-size: 12px;  border-radius: 5px"" class=" btn btn-danger">Decline</a>
                         </td>
 
