@@ -101,7 +101,7 @@ class Auth_model extends CI_Model
 
     public function addDetails($formArray)
     {
-
+        
         $this->db->insert('employees_details', $formArray);
 
         // if a user created account successfully
@@ -117,9 +117,11 @@ class Auth_model extends CI_Model
     public function check_email($email)
     {
         $query = $this->db->query("select * from employees where email= '$email'");
+        $row = $query->num_rows();
+        $email_query = $query->result_array();
 
-        if ($email == "") {
-            $this->load->view('auth/changePassword.php');
+        if ($row > 0) {
+            return $email_query;
         } else {
 
             echo "<script>alert('Email not matched')</script>";

@@ -269,6 +269,8 @@ class RegisterController extends CI_Controller
         } else if($role_id == -1) {
             redirect('home/HomeController/admin');
 
+        }else if($role_id == 4) {
+            redirect('home/HomeController/registrar');
         }
 
     }
@@ -293,6 +295,8 @@ class RegisterController extends CI_Controller
         } else {
 
             $this->Auth_model->check_email($email);
+            $email_query = $this->Auth_model->check_email($email);
+            $this->load->view('auth/checkAnswer.php' , $email_query );
 
         }
 

@@ -4,8 +4,12 @@
 
     <div class="container py-4">
         <div class="top-box py-3">
-            <h5>Employee Dashboard</h5>
-     
+            <h5>Home</h5>
+            <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb px-3">
+                    <li class="breadcrumb-item"><a href="index.php" style="color:#6c757d">Dashboard/</a></li>
+                </ol>
+            </nav>
         </div>
         <!-- Welcome Card -->
         <div class="card my-3 mx-lg-5 px-lg-4 shadow py-2" style="">
@@ -15,14 +19,10 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h2 class="card-title">
-                          Welcome Employee 
-                        
-                        </h2>
+                        <h2 class="card-title">Welcome Registrar</h2>
                         <p class="card-text">Use menu to navigate towards various modules using the nav icon in top
                             navbar.</p>
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        <a href="/ems-app/index.php/Auth/RegisterController/details" class="btn btn-success">Add Details!!</a>
                     </div>
                 </div>
             </div>

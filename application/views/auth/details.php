@@ -5,19 +5,10 @@
 
     <div class="main">
 
-    <nav class="navbar navbar-expand-md navbar-light fixed-top text-center bg-light border-bottom">
-  <div class="container-fluid d-flex align-items-center text-center justify-center">
 
-    <a href="" class="d-flex align-items-center text-center mb-4 mt-4">
-      <h5 class="logo-title ms-lg-4 text-center">Employee Management System</h5>
-    </a>
-
-  </div>
-</nav>
-
-        <section class="signup">
+        <section class="signup mt-5">
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
-            <div class="container">
+            <div class="container container_new">
                 <div class="signup-content">
                     <h2 class="text-center">Add Your Details!!</h2>
                     <form action="<?php echo base_url().'index.php/Auth/RegisterController/details'?>" name="registerForm" id="registerForm signupform" class="signupform" method="post">
@@ -65,7 +56,7 @@
 
                             <div class="form-group">
                                 <label for="qualification">Qualification</label>
-                                <input type="text" name="qualification" id="qualification" value="" class="form-input form-control" placeholder="Qualification">
+                                <input type="file" name="qualification" id="qualification" value="" class="form-input form-control" placeholder="Qualification">
                             </div>
 
                           
@@ -110,7 +101,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="experience">Experience</label>
-                                <input type="text" name="experience" id="experience" value="" class="form-control" placeholder="Experience">
+                                <input type="file" name="experience" id="experience" value="" class="form-control" placeholder="Experience">
                             </div>
 
                           
@@ -201,6 +192,9 @@
                      <div class="form-row">
                         <div class="form-group">
                             <input type="submit" name="submit" id="submit" class="form-submit" value="Submit"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" style="float:'right'" class="form-submit" value="Submit"/>
                         </div>
                         </div>
                     </form>
