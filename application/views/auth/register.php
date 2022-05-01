@@ -12,7 +12,17 @@
 
                 <div class="signup-content">
                     <h2 class="text-center">Registraion Form</h2>
-                    <form action="<?php echo base_url().'index.php/Auth/RegisterController/register'?>" name="mainForm"
+                    <?php
+
+
+        if ($this->session->flashdata('msg')) {
+            echo '
+                            <p class="text-danger mb-3">
+                                ' . $this->session->flashdata("msg") . '
+                            </p>
+                            ';
+        }
+        ?>                    <form action="<?php echo base_url().'index.php/Auth/RegisterController/register'?>" name="mainForm"
                         id="mainForm signupform" class="signupform" method="post">
                         <div class="form-row">
                             <div class="form-group">
