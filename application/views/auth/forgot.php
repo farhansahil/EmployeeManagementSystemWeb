@@ -11,6 +11,19 @@
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="text-center">
+                <?php
+
+
+if ($this->session->flashdata('error')) {
+    echo '
+                    <div class="containegit r">
+                    <div class="alert alert-danger">
+                        ' . $this->session->flashdata("error") . '
+                    </div>
+                    </div>
+                    ';
+}
+?>
                   <h3><i class="fa fa-lock fa-4x"></i></h3>
                   <h2 class="text-center">Forgot Password?</h2>
                   <p>You can reset your password here.</p>

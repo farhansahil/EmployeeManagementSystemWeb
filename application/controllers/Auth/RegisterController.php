@@ -284,10 +284,9 @@ class RegisterController extends CI_Controller
 
         $email = $this->input->post('email');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-        $this->session->set_flashdata('msg', 'You registered successfully');
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('auth/forgot.php', $msg);
+            $this->load->view('auth/forgot.php');
         } else {
             //if email id does not exist in database
             if($this->Auth_model->is_email_exist($email) == false )
@@ -297,7 +296,7 @@ class RegisterController extends CI_Controller
             }else{
                 
                 $employee = $this->Auth_model->get_employee($email);
-                
+                $this->load->view('auth/checkAnswer.php', array('employee' => $employee));
                 
             }
             

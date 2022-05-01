@@ -12,23 +12,23 @@
               <div class="panel-body">
                 <div class="text-center">
                   <h3><i class="fa fa-lock fa-4x"></i></h3>
-                  <h2 class="text-center">Change Password?</h2>
+                  <h2 class="text-center">Checking Answer</h2>
                   <p>You can reset your password here.</p>
                   <div class="panel-body">
     
-                  <form action="<?php echo base_url().'index.php/Auth/RegisterController/changePassword'?>" name="forgotForm" id="forgotForm" method="post">
+                  <form action="<?php echo base_url().'index.php/Auth/RegisterController/changeAnswer'?>" name="forgotForm" id="forgotForm" method="post">
     
                       <div class="form-group">
                         <div class="input-group">
-                          <?php if (!empty($email_query)) {foreach ($email_query as $employees) {?>
+                          <?php if (!empty($employee)) {foreach ($employee as $employees) {?>
 
-                          <input id="hint_question" name="hint_question" value="<?php echo $employees['hint_question'] ?>" class="form-control"  type="password">
+                          <input id="hint_question" name="hint_question" value="<?php echo $employees['hint_question'] ?>" class="form-control"  type="text" disabled>
                           <?php }} ?>
                           </div>
                           <div class="input-group pt-3">
 
                           <span class="input-group-addon"><i class="fa fa-key color-blue"></i></span>
-                          <input id="new_password" name="new_password" placeholder="Confirm New Password" class="form-control"  type="password">
+                          <input id="hint_answer" name="hint_answer" placeholder="Enter your answer" class="form-control"  type="text">
                         </div>  
                       </div>
                       <div class="form-group">
