@@ -288,7 +288,15 @@ class RegisterController extends CI_Controller
 
     public function forgot()
     {
+
+
         $email = $this->input->post('email');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[employees.email]');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('auth/forgot.php');
+        } else {
+
 
         if ($email == "") {
             $this->load->view('auth/forgot.php');
@@ -298,7 +306,7 @@ class RegisterController extends CI_Controller
             $email_query = $this->Auth_model->check_email($email);
             
         }
-
+    }
     }
 
     public function changePassword()

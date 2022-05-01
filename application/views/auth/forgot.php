@@ -21,8 +21,11 @@
                       <div class="form-group">
                         <div class="input-group">
                           <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
-                          <input id="email" name="email" placeholder="email address" class="form-control"  type="email">
+                          <input id="email" name="email" placeholder="email address" class="form-control <?php echo (form_error('email') !=  "") ? 'is-invalid' : '' ?>"  type="email">
+
                         </div>
+                        <p class="invalid-feedback "><?php echo strip_tags(form_error('email')); ?></p>
+
                       </div>
                       <div class="form-group">
                         <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Submit" type="submit">
