@@ -23,6 +23,7 @@
 
                 <tbody>
                     <tr>
+                        
                         <?php if (!empty($employee_for_verification_from_hod)) {foreach ($employee_for_verification_from_hod as $employees) {?>
 
                         <th scope="row"><?php echo $employees['sevarth_id'] ?></th>
