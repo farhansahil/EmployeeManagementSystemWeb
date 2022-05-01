@@ -26,7 +26,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 // farhan
 // $config['base_url'] = 'http://localhost/ems-app/';
 // parth
-$config['base_url'] = 'http://localhost/ems-app/';
+$config['base_url'] = 'http://localhost/projects/farhan_freelancing/EmployeeManagementSystemWeb/';
 
 /*
 |--------------------------------------------------------------------------
