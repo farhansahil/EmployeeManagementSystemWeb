@@ -15,7 +15,7 @@
 
         if ($this->session->flashdata('msg')) {
             echo '
-                            <div class="containegit r">
+                            <div class="container">
                             <div class="alert alert-danger">
                                 ' . $this->session->flashdata("msg") . '
                             </div>

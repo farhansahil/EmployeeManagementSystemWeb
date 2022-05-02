@@ -119,12 +119,13 @@ class Auth_model extends CI_Model
     }
 
     public function get_employee_details($sevarth_id){
+        
         return $this->db->where('sevarth_id', $sevarth_id)->get('employees_details')->result()[0];
     }
     
     public function editDetails($formArray,$sevarth_id)
     {
-        
+
         $this->db->where("sevarth_id", $sevarth_id)->update('employees_details', $formArray);
         // if a user created account successfully
         redirect('/login');

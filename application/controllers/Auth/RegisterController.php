@@ -311,8 +311,9 @@ class RegisterController extends CI_Controller
 
     public function navigate_to_dashboards($role_id)
     {
+    $is_enable = $this->Auth_model->is_details_filled($sevarth_id);
         if ($role_id == 1) {
-            redirect('home/HomeController/employee');
+            redirect('home/HomeController/employee',  $is_enable);
         } else if ($role_id == 2) {
             redirect('home/HomeController/hod');
         } else if ($role_id == 3) {
