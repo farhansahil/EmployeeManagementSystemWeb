@@ -101,8 +101,9 @@ class Auth_model extends CI_Model
 
     public function addDetails($formArray)
     {
-
+        
         $this->db->insert('employees_details', $formArray);
+
         redirect('/login');
 
         // if a user created account successfully
@@ -115,6 +116,7 @@ class Auth_model extends CI_Model
     
     public function editDetails($formArray,$sevarth_id)
     {
+        
         $this->db->where("sevarth_id", $sevarth_id)->update('employees_details', $formArray);
         // if a user created account successfully
         redirect('/login');
@@ -166,10 +168,21 @@ class Auth_model extends CI_Model
 
         }
 
+
+
         //if user with email exists in database
         //get that use
         //check user entered password with password already set in db
         $user = $this->db->where('email', $email)->get("employees")->result()[0];
+        $sevarth_id = $user->sevarth_id;
+
+        // if ($this->db->where('sevarth_id', $sevarth_id)->get("employees_sevarth_id")->num_rows() > 0) {
+        //     return array(
+        //         'result' => false,
+        //         'error' => "email id does not exist",
+        //     );
+
+        // }
 
         if ($user->password != $password) {
             return array(

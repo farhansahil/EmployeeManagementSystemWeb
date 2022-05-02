@@ -18,6 +18,8 @@ class RegisterController extends CI_Controller
 
         $isUserExist = $this->Auth_model->is_sevarth_id_exists($this->session->userdata('sevarth_id'));
 
+
+
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('middle_name', 'Middle Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
