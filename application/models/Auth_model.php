@@ -113,6 +113,14 @@ class Auth_model extends CI_Model
     public function check_auth_key($auth_key){
         return $this->db->where('value', $auth_key)->get('auth_key')->num_rows() > 0;
     }
+
+    public function is_details_filled($sevarth_id){
+        return $this->db->where('sevarth_id', $sevarth_id)->get('employees_details')->num_rows() > 0;
+    }
+
+    public function get_employee_details($sevarth_id){
+        return $this->db->where('sevarth_id', $sevarth_id)->get('employees_details')->result()[0];
+    }
     
     public function editDetails($formArray,$sevarth_id)
     {

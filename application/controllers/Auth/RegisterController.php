@@ -15,10 +15,7 @@ class RegisterController extends CI_Controller
 
     public function editDetails()
     {
-
-        $isUserExist = $this->Auth_model->is_sevarth_id_exists($this->session->userdata('sevarth_id'));
-
-
+        $employee_details = $this->Auth_model->get_employee_details($this->session->userdata('sevarth_id'));
 
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('middle_name', 'Middle Name', 'required');
@@ -27,7 +24,7 @@ class RegisterController extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header.php');
-            $this->load->view('auth/editDetails.php');
+            $this->load->view('auth/editDetails.php', array('employee_details' => $employee_details));
         } else {
 
             $formArray = array();
@@ -79,9 +76,6 @@ class RegisterController extends CI_Controller
 
     public function details()
     {
-
-        $isUserExist = $this->Auth_model->is_sevarth_id_exists($this->session->userdata('sevarth_id'));
-
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('middle_name', 'Middle Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
@@ -323,10 +317,8 @@ class RegisterController extends CI_Controller
             redirect('home/HomeController/hod');
         } else if ($role_id == 3) {
             redirect('home/HomeController/principal');
-
         } else if ($role_id == -1) {
             redirect('home/HomeController/admin');
-
         } else if ($role_id == 4) {
             redirect('home/HomeController/registrar');
         }
