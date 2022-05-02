@@ -61,15 +61,28 @@
 
 
                         </div>
+                        <div class="form-row">
+                            <!-- key -->
+                            <div class="form-group">
+                                <label for="key">Auth Key</label>
+                                <input type="text" name="key" id="key" value="<?php echo set_value('key'); ?>"
+                                    class="form-input form-control <?php echo (form_error('key') !=  "") ? 'is-invalid' : '' ?>"
+                                    placeholder="key">
+                                <p class="invalid-feedback "><?php echo strip_tags(form_error('key')); ?></p>
 
-                        <div class="form-group">
-                            <label for="name">Employee Name</label>
-                            <input type="text" name="name" id="name" value="<?php echo set_value('name'); ?>"
-                                class="form-input form-control <?php echo (form_error('name') !=  "") ? 'is-invalid' : '' ?>"
-                                placeholder="Name">
-                            <p class="invalid-feedback "><?php echo strip_tags(form_error('name')); ?></p>
+                            </div>
 
+                            <!-- Name -->
+                            <div class="form-group">
+                                <label for="name">Employee Name</label>
+                                <input type="text" name="name" id="name" value="<?php echo set_value('name'); ?>"
+                                    class="form-input form-control <?php echo (form_error('name') !=  "") ? 'is-invalid' : '' ?>"
+                                    placeholder="Name">
+                                <p class="invalid-feedback "><?php echo strip_tags(form_error('name')); ?></p>
+
+                            </div>
                         </div>
+
 
 
                 </div>

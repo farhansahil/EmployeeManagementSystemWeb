@@ -8,5 +8,6 @@
 <div class="container" style="margin-top: 70px">
     <h1>Please wait until you get verified</h1>
 
+    <a href="Auth/RegisterController/logout">Logout</a>
 </div>
 </div>

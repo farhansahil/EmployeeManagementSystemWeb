@@ -5,24 +5,26 @@
     <div class="container py-4">
         <div class="top-box py-3">
             <h5>Employee Dashboard</h5>
-     
+
         </div>
         <!-- Welcome Card -->
         <div class="card my-3 mx-lg-5 px-lg-4 shadow py-2" style="">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="<?php echo base_url(); ?>/public/banner-img.png" class="img-fluid rounded-start" alt="...">
+                    <img src="<?php echo base_url(); ?>/public/banner-img.png" class="img-fluid rounded-start"
+                        alt="...">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
                         <h2 class="card-title">
-                          Welcome Employee 
-                        
+                            Welcome Employee
+
                         </h2>
                         <p class="card-text">Use menu to navigate towards various modules using the nav icon in top
                             navbar.</p>
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        <a href="/ems-app/index.php/Auth/RegisterController/details" class="btn btn-success">Add Details!!</a>
+                        <a href="<?php echo base_url(). 'Auth/RegisterController/details'?>" class="btn btn-success">Add
+                            Details!!</a>
                     </div>
                 </div>
             </div>
@@ -121,9 +123,11 @@
         <div class="col-lg-7 col-sm-12 p-4 ">
             <p class="fs-5 pe-4">
                 Employee Management System is a web based application which is developed to manage the
-                employees of the college. It is developed by the students of the Computer Engineering Department,
+                employees of the college. It is developed by the students of the Computer Engineering
+                Department,
                 Government Polytechnic,Amravati.
-                This system is able to manage different types of employees like principal, hod, faculty and other
+                This system is able to manage different types of employees like principal, hod, faculty and
+                other
                 college employees.
             </p>
         </div>

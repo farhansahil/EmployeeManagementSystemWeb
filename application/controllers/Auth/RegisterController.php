@@ -16,127 +16,126 @@ class RegisterController extends CI_Controller
     public function details()
     {
 
-        
         $formSubmit = $this->input->post('submitDetails');
 
-        if($formSubmit == 'Submit')
-        {
-        $this->form_validation->set_rules('first_name', 'First Name', 'required');
-        $this->form_validation->set_rules('middle_name', 'Middle Name', 'required');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
-        $this->form_validation->set_rules('dob', 'D.O.B', 'required');
+        $isUserExist = $this->Auth_model->is_user_details_exists($this->session->userdata('sevarth_id'));
 
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header.php');
-            $this->load->view('auth/details.php');
-        } else {
+        if ($formSubmit == 'Submit') {
+            $this->form_validation->set_rules('first_name', 'First Name', 'required');
+            $this->form_validation->set_rules('middle_name', 'Middle Name', 'required');
+            $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+            $this->form_validation->set_rules('dob', 'D.O.B', 'required');
 
-            $formArray = array();
+            if ($this->form_validation->run() == false) {
+                $this->load->view('templates/header.php');
+                $this->load->view('auth/details.php');
+            } else {
 
-            $formArray['first_name'] = $this->input->post('first_name');
-            $formArray['middle_name'] = $this->input->post('middle_name');
-            $formArray['last_name'] = $this->input->post('last_name');
-            $formArray['dob'] = $this->input->post('dob');
+                $formArray = array();
 
-            $sevarth_id = $this->input->post('sevarth_id');
-            $formArray['sevarth_id'] = $sevarth_id;
-            $formArray['qualification'] = $this->input->post('qualification');
-            $formArray['cast'] = $this->input->post('cast');
-            $formArray['subcast'] = $this->input->post('subcast');
+                $formArray['first_name'] = $this->input->post('first_name');
+                $formArray['middle_name'] = $this->input->post('middle_name');
+                $formArray['last_name'] = $this->input->post('last_name');
+                $formArray['dob'] = $this->input->post('dob');
 
-            $designation_id = $this->input->post('designation');
-            $formArray['designation'] = $designation_id;
-            $formArray['retirement_date'] = $this->input->post('retirement_date');
-            $formArray['experience'] = $this->input->post('experience');
-            $formArray['aadhar_no'] = $this->input->post('aadhar_no');
-            $formArray['pan_no'] = $this->input->post('pan_no');
-            $formArray['blood_grp'] = $this->input->post('blood_grp');
-            $formArray['identification_mark'] = $this->input->post('identification_mark');
-            $formArray['photo'] = $this->input->post('photo');
+                $sevarth_id = $this->input->post('sevarth_id');
+                $formArray['sevarth_id'] = $sevarth_id;
+                $formArray['qualification'] = $this->input->post('qualification');
+                $formArray['cast'] = $this->input->post('cast');
+                $formArray['subcast'] = $this->input->post('subcast');
 
-            $formArray['contact_no'] = $this->input->post('contact_no');
-            $formArray['alternative_contact_no'] = $this->input->post('alternative_contact_no');
-            $formArray['address'] = $this->input->post('address');
-            $formArray['city'] = $this->input->post('city');
-            $formArray['pin_code'] = $this->input->post('pin_code');
-            $formArray['state'] = $this->input->post('state');
-            $formArray['country'] = $this->input->post('country');
-            $formArray['gender'] = $this->input->post('gender');
+                $designation_id = $this->input->post('designation');
+                $formArray['designation'] = $designation_id;
+                $formArray['retirement_date'] = $this->input->post('retirement_date');
+                $formArray['experience'] = $this->input->post('experience');
+                $formArray['aadhar_no'] = $this->input->post('aadhar_no');
+                $formArray['pan_no'] = $this->input->post('pan_no');
+                $formArray['blood_grp'] = $this->input->post('blood_grp');
+                $formArray['identification_mark'] = $this->input->post('identification_mark');
+                $formArray['photo'] = $this->input->post('photo');
 
-            $this->Auth_model->addDetails($formArray);
-            $this->session->set_flashdata('msg', 'You registered successfully');
+                $formArray['contact_no'] = $this->input->post('contact_no');
+                $formArray['alternative_contact_no'] = $this->input->post('alternative_contact_no');
+                $formArray['address'] = $this->input->post('address');
+                $formArray['city'] = $this->input->post('city');
+                $formArray['pin_code'] = $this->input->post('pin_code');
+                $formArray['state'] = $this->input->post('state');
+                $formArray['country'] = $this->input->post('country');
+                $formArray['gender'] = $this->input->post('gender');
 
-            // if($insert_id > 0){
-            //     $this->session->set_flashdata('msg', 'You registered successfully');
-            //     // $this->session->set_userdata('sevarth_id', $designation_id);
-            //     $this->session->set_userdata('user_id', $insert_id);
+                $this->Auth_model->addDetails($formArray);
+                $this->session->set_flashdata('msg', 'You registered successfully');
 
-            //        }else{
-            //     echo "User cannot be created";
-            // // }
+                // if($insert_id > 0){
+                //     $this->session->set_flashdata('msg', 'You registered successfully');
+                //     // $this->session->set_userdata('sevarth_id', $designation_id);
+                //     $this->session->set_userdata('user_id', $insert_id);
 
+                //        }else{
+                //     echo "User cannot be created";
+                // // }
+
+            }
         }
-    }
-            //if button render to the edit
+        //if button render to the edit
 
-    else{
-        $this->form_validation->set_rules('first_name', 'First Name', 'required');
-        $this->form_validation->set_rules('middle_name', 'Middle Name', 'required');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
-        $this->form_validation->set_rules('dob', 'D.O.B', 'required');
-
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header.php');
-            $this->load->view('auth/details.php');
-        }
         else {
+            $this->form_validation->set_rules('first_name', 'First Name', 'required');
+            $this->form_validation->set_rules('middle_name', 'Middle Name', 'required');
+            $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+            $this->form_validation->set_rules('dob', 'D.O.B', 'required');
 
-            $formArray = array();
+            if ($this->form_validation->run() == false) {
+                $this->load->view('templates/header.php');
+                $this->load->view('auth/details.php');
+            } else {
 
-            $formArray['first_name'] = $this->input->post('first_name');
-            $formArray['middle_name'] = $this->input->post('middle_name');
-            $formArray['last_name'] = $this->input->post('last_name');
-            $formArray['dob'] = $this->input->post('dob');
+                $formArray = array();
 
-            $sevarth_id = $this->input->post('sevarth_id');
-            $formArray['sevarth_id'] = $sevarth_id;
-            $formArray['qualification'] = $this->input->post('qualification');
-            $formArray['cast'] = $this->input->post('cast');
-            $formArray['subcast'] = $this->input->post('subcast');
+                $formArray['first_name'] = $this->input->post('first_name');
+                $formArray['middle_name'] = $this->input->post('middle_name');
+                $formArray['last_name'] = $this->input->post('last_name');
+                $formArray['dob'] = $this->input->post('dob');
 
-            $designation_id = $this->input->post('designation');
-            $formArray['designation'] = $designation_id;
-            $formArray['retirement_date'] = $this->input->post('retirement_date');
-            $formArray['experience'] = $this->input->post('experience');
-            $formArray['aadhar_no'] = $this->input->post('aadhar_no');
-            $formArray['pan_no'] = $this->input->post('pan_no');
-            $formArray['blood_grp'] = $this->input->post('blood_grp');
-            $formArray['identification_mark'] = $this->input->post('identification_mark');
-            $formArray['photo'] = $this->input->post('photo');
+                $sevarth_id = $this->input->post('sevarth_id');
+                $formArray['sevarth_id'] = $sevarth_id;
+                $formArray['qualification'] = $this->input->post('qualification');
+                $formArray['cast'] = $this->input->post('cast');
+                $formArray['subcast'] = $this->input->post('subcast');
 
-            $formArray['contact_no'] = $this->input->post('contact_no');
-            $formArray['alternative_contact_no'] = $this->input->post('alternative_contact_no');
-            $formArray['address'] = $this->input->post('address');
-            $formArray['city'] = $this->input->post('city');
-            $formArray['pin_code'] = $this->input->post('pin_code');
-            $formArray['state'] = $this->input->post('state');
-            $formArray['country'] = $this->input->post('country');
-            $formArray['gender'] = $this->input->post('gender');
+                $designation_id = $this->input->post('designation');
+                $formArray['designation'] = $designation_id;
+                $formArray['retirement_date'] = $this->input->post('retirement_date');
+                $formArray['experience'] = $this->input->post('experience');
+                $formArray['aadhar_no'] = $this->input->post('aadhar_no');
+                $formArray['pan_no'] = $this->input->post('pan_no');
+                $formArray['blood_grp'] = $this->input->post('blood_grp');
+                $formArray['identification_mark'] = $this->input->post('identification_mark');
+                $formArray['photo'] = $this->input->post('photo');
 
-            $this->Auth_model->editDetails($formArray,$sevarth_id);
-            $this->session->set_flashdata('msg', 'You registered successfully');
+                $formArray['contact_no'] = $this->input->post('contact_no');
+                $formArray['alternative_contact_no'] = $this->input->post('alternative_contact_no');
+                $formArray['address'] = $this->input->post('address');
+                $formArray['city'] = $this->input->post('city');
+                $formArray['pin_code'] = $this->input->post('pin_code');
+                $formArray['state'] = $this->input->post('state');
+                $formArray['country'] = $this->input->post('country');
+                $formArray['gender'] = $this->input->post('gender');
 
-            // if($insert_id > 0){
-            //     $this->session->set_flashdata('msg', 'You registered successfully');
-            //     // $this->session->set_userdata('sevarth_id', $designation_id);
-            //     $this->session->set_userdata('user_id', $insert_id);
+                $this->Auth_model->editDetails($formArray, $sevarth_id);
+                $this->session->set_flashdata('msg', 'You registered successfully');
 
-            //        }else{
-            //     echo "User cannot be created";
-            // // }
+                // if($insert_id > 0){
+                //     $this->session->set_flashdata('msg', 'You registered successfully');
+                //     // $this->session->set_userdata('sevarth_id', $designation_id);
+                //     $this->session->set_userdata('user_id', $insert_id);
 
+                //        }else{
+                //     echo "User cannot be created";
+                // // }
+
+            }
         }
-    }
 
     }
 
@@ -152,15 +151,13 @@ class RegisterController extends CI_Controller
     public function register()
     {
 
-
         //if user is already login
         if ($this->session->userdata('user_id') != null) {
-
             //check if user is not verified
             if ($this->Auth_model->is_verified_user($this->session->userdata('user_id')) == false) {
-                // $this->load->view("auth/wait_until_verify");
-                $this->navigate_to_dashboards($this->session->userdata('role_id'));
-
+                $this->load->view('templates/header.php');
+                $this->load->view('templates/navbar.php');
+                $this->load->view("auth/wait_until_verify");
             } else {
                 $this->navigate_to_dashboards($this->session->userdata('role_id'));
             }
@@ -172,7 +169,9 @@ class RegisterController extends CI_Controller
             $this->form_validation->set_rules('name', 'User Name', 'required');
             $this->form_validation->set_rules('hint_question', 'Hint Question', 'required');
             $this->form_validation->set_rules('hint_answer', 'Hint Answer', 'required');
+            $this->form_validation->set_rules('key', 'KEY', 'required|callback_key_check');
 
+            
             $events = $this->Auth_model->getOrganization();
             $dept = $this->Auth_model->getDepartment();
             $role = $this->Auth_model->getRole();
@@ -236,8 +235,7 @@ class RegisterController extends CI_Controller
                         $this->session->set_userdata('user_id', $sevarth_id);
                         $this->session->set_userdata('role_id', $role_id);
 
-                        $this->navigate_to_dashboards($role_id);
-
+                        $this->load->view("auth/wait_until_verify");
                     }
                 } else {
 
@@ -250,7 +248,7 @@ class RegisterController extends CI_Controller
                     $this->session->set_userdata('user_id', $sevarth_id);
                     $this->session->set_userdata('role_id', $role_id);
 
-                    $this->navigate_to_dashboards($role_id);
+                    $this->load->view("auth/wait_until_verify");
 
                 }
 
@@ -267,9 +265,7 @@ class RegisterController extends CI_Controller
 
             //check if user is not verified
             if ($this->Auth_model->is_verified_user($this->session->userdata('user_id')) == false) {
-                // $this->load->view("auth/wait_until_verify");
-                $this->navigate_to_dashboards($this->session->userdata('role_id'));
-
+                $this->load->view("auth/wait_until_verify");
             } else {
                 $this->navigate_to_dashboards($this->session->userdata('role_id'));
             }
@@ -346,6 +342,17 @@ class RegisterController extends CI_Controller
         }
     }
 
+    public function key_check($key)
+    {
+
+        if ($this->Auth_model->check_auth_key($key) == false) {
+            $this->form_validation->set_message('key_check', 'Key is wrong');
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public function forgot()
     {
 
@@ -363,7 +370,7 @@ class RegisterController extends CI_Controller
 
                 $employee = $this->Auth_model->get_employee($email);
                 $this->session->set_userdata('email', $email);
-                $this->load->view('auth/checkAnswer.php', array('question' => $employee -> hint_question));
+                $this->load->view('auth/checkAnswer.php', array('question' => $employee->hint_question));
 
             }
 
@@ -376,7 +383,9 @@ class RegisterController extends CI_Controller
         $this->form_validation->set_rules('hint_answer', 'Answer', 'required');
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('auth/checkAnswer.php');
+            $email = $this->session->userdata('email');
+            $employee = $this->Auth_model->get_employee($email);
+            $this->load->view('auth/checkAnswer.php', array('question' => $employee->hint_question));
 
             //load view here
         } else {
@@ -384,11 +393,11 @@ class RegisterController extends CI_Controller
             $email = $this->session->userdata('email');
             $answer = $this->input->post('hint_answer');
             if ($this->Auth_model->check_answer
-            ($email, $answer) == false) {
+                ($email, $answer) == false) {
                 $this->session->set_flashdata('error', "Wrong Answer");
                 // load your view here
-                $this->load->view('auth/checkAnswer.php');
-
+                $employee = $this->Auth_model->get_employee($email);
+                $this->load->view('auth/checkAnswer.php', array('question' => $employee->hint_question));
             } else {
 
                 $this->Auth_model->check_answer($email, $answer);
@@ -400,44 +409,45 @@ class RegisterController extends CI_Controller
 
     }
 
+    public function verify_email_id($sevarth_id)
+    {
+        $user = $this->Auth_model->verify_email_id($sevarth_id);
+
+        $this->session->set_userdata('user_id', $user->sevarth_id);
+        $this->session->set_userdata('role_id', $user->role_id);
+
+        //navigate user to dashboard
+        $this->navigate_to_dashboards($user->role_id);
+
+    }
+
     public function changePassword()
     {
         $this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('new_password', 'Confirm Password', 'required|matches[password]');
 
-  
         if ($this->form_validation->run() == false) {
             $this->load->view('auth/changePassword.php');
 
             //load view here
         } else {
-    
-        $email = $this->session->userdata('email');        
-        $password = $this->input->post('password');
-        $new_password = $this->input->post('new_password');
 
+            $email = $this->session->userdata('email');
+            $password = $this->input->post('password');
+            $new_password = $this->input->post('new_password');
 
-          
-
-                if ($this->Auth_model->check_password
+            if ($this->Auth_model->check_password
                 ($email, $password) == false) {
-                    $this->session->set_flashdata('error', "Wrong Answer");
-                    // load your view here
-                    $this->load->view('auth/changePassword.php');
-        
-                } else {
-                    $this->Auth_model->check_password($email, $password);
-        
-                    
-        
-        
-                }
-            
+                $this->session->set_flashdata('error', "Wrong Answer");
+                // load your view here
+                $this->load->view('auth/changePassword.php');
 
-        
-      
+            } else {
+                $this->Auth_model->check_password($email, $password);
 
+            }
+
+        }
     }
-}
 
 }

@@ -108,13 +108,23 @@ class Auth_model extends CI_Model
         return $this->db->insert_id();
     }
 
+    public function check_auth_key($auth_key){
+        return $this->db->where('value', $auth_key)->get('auth_key')->num_rows() > 0;
+    }
+    
     public function editDetails($formArray,$sevarth_id)
     {
-
-       
-        $this->db->where("sevarth_id", $sevarth_id)->update('employees', $formArray);
+        $this->db->where("sevarth_id", $sevarth_id)->update('employees_details', $formArray);
         // if a user created account successfully
         return $this->db->insert_id();
+    }
+
+    public function verify_email_id($sevarth_id){
+        $condition = array('is_verified' => "1");
+        $this->db->where("sevarth_id", $sevarth_id)->update('employees', $condition);
+
+        $user = $this->db->where("sevarth_id", $sevarth_id)->get('employees')->result()[0];
+        return $user;
     }
 
     //return true if sevarth id is already present in database employees
@@ -123,6 +133,10 @@ class Auth_model extends CI_Model
         return $this->db->where("sevarth_id", $sevarth_id)->get("employees")->num_rows() > 0;
     }
 
+    public function get_user_by_id($sevarth_id)
+    {
+        return $this->db->where("sevarth_id", $sevarth_id)->get("employees")->result_array()[0];
+    }
     public function check_email($email)
     {
         $query = $this->db->query("select * from employees where email= '$email'");
