@@ -94,9 +94,10 @@ class RegisterController extends CI_Controller
             $formArray['last_name'] = $this->input->post('last_name');
             $formArray['dob'] = $this->input->post('dob');
 
-            $sevarth_id = $this->input->post('sevarth_id');
-            $formArray['sevarth_id'] = $sevarth_id;
+            $sevarth_id = $this->session->userdata('sevarth_id');
+            
             $formArray['qualification'] = $this->input->post('qualification');
+            $formArray['sevarth_id'] = $sevarth_id;
             $formArray['cast'] = $this->input->post('cast');
             $formArray['subcast'] = $this->input->post('subcast');
 
@@ -120,20 +121,10 @@ class RegisterController extends CI_Controller
             $formArray['gender'] = $this->input->post('gender');
 
             $this->Auth_model->addDetails($formArray);
-            $this->session->set_flashdata('msg', 'You registered successfully');
-
-            // if($insert_id > 0){
-            //     $this->session->set_flashdata('msg', 'You registered successfully');
-            //     // $this->session->set_userdata('sevarth_id', $designation_id);
-            //     $this->session->set_userdata('user_id', $insert_id);
-
-            //        }else{
-            //     echo "User cannot be created";
-            // // }
+            $this->navigate_to_dashboards($this->session->userdata("role_id"));
+            
 
         }
-
-        //if button render to the edit
 
     }
 
@@ -311,7 +302,7 @@ class RegisterController extends CI_Controller
 
     public function navigate_to_dashboards($role_id)
     {
-    $is_enable = $this->Auth_model->is_details_filled($sevarth_id);
+        $is_enable = $this->Auth_model->is_details_filled($this->session->userdata('user_id'));
         if ($role_id == 1) {
             redirect('home/HomeController/employee',  $is_enable);
         } else if ($role_id == 2) {

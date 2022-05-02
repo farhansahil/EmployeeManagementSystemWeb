@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2022 at 04:44 PM
+-- Generation Time: May 02, 2022 at 05:45 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -69,6 +69,24 @@ INSERT INTO `applications_status` (`id`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `auth_key`
+--
+
+CREATE TABLE `auth_key` (
+  `id` int(200) NOT NULL,
+  `value` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `auth_key`
+--
+
+INSERT INTO `auth_key` (`id`, `value`) VALUES
+(1, 'KEY');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `departments`
 --
 
@@ -111,10 +129,13 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`sevarth_id`, `org_id`, `dept_id`, `role_id`, `email`, `password`, `name`, `hint_question`, `hint_answer`, `is_verified`, `hod_id`, `principle_id`) VALUES
-('-1', -1, '-1', '-1', 'admin@gmail.com', 'adminpassword', 'admin', 'admin question', 'admin answer', '0', '-1', '-1'),
+('-1', -1, '-1', '-1', 'admin@gmail.com', 'adminpassword', 'admin', 'admin question', 'admin answer', '1', '-1', '-1'),
+('123456654321', 1, '1', '1', 'em2@gmail.com', 'emp2@gmailcom', 'emp2', 'uestion', 'quesstion', '0', '123456789013', '123456789012'),
 ('123456789012', 1, '1', '3', 'principle@gmail.com', 'principle', 'Principle', 'what is your name?', 'Principle', '1', '-1', '-1'),
-('123456789013', 1, '1', '2', 'hod@gmail.com', 'hodpassword', 'HOD', 'what is your name?', 'hod', '-1', '-1', '123456789012'),
-('123456789015', 1, '1', '1', 'employee@gmail.com', 'employee', 'Employee', 'what is your name?', 'employee', '0', '123456789013', '123456789012');
+('123456789013', 1, '1', '2', 'hod@gmail.com', 'hodpassword', 'HOD', 'what is your name?', 'hod', '1', '-1', '123456789012'),
+('123456789015', 1, '1', '1', 'employee@gmail.com', 'employee', 'Employee', 'what is your name?', 'employee', '0', '123456789013', '123456789012'),
+('124346789012', 1, '1', '1', 'emp2@gmail.com', 'emppassword', 'em2', 'question', 'Question', '0', '123456789013', '123456789012'),
+('976789789987', 1, '1', '4', 'parthtagalpallewar123@gmail.com', 'registrar', 'Registrar', 'what is your name?', 'Registrar', '0', '-1', '-1');
 
 -- --------------------------------------------------------
 
@@ -123,6 +144,7 @@ INSERT INTO `employees` (`sevarth_id`, `org_id`, `dept_id`, `role_id`, `email`, 
 --
 
 CREATE TABLE `employees_details` (
+  `id` int(200) NOT NULL,
   `sevarth_id` varchar(100) NOT NULL,
   `first_name` varchar(30) NOT NULL,
   `middle_name` varchar(30) NOT NULL,
@@ -133,7 +155,7 @@ CREATE TABLE `employees_details` (
   `cast` varchar(15) NOT NULL,
   `subcast` varchar(15) NOT NULL,
   `designation` varchar(30) NOT NULL,
-  `retriement_date` date NOT NULL,
+  `retirement_date` date NOT NULL,
   `experience` int(15) NOT NULL,
   `aadhar_no` bigint(20) NOT NULL,
   `pan_no` varchar(15) NOT NULL,
@@ -352,6 +374,12 @@ ALTER TABLE `applications_status`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `auth_key`
+--
+ALTER TABLE `auth_key`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `departments`
 --
 ALTER TABLE `departments`
@@ -370,6 +398,7 @@ ALTER TABLE `employees`
 -- Indexes for table `employees_details`
 --
 ALTER TABLE `employees_details`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fr_key_empid` (`sevarth_id`);
 
 --
@@ -450,10 +479,22 @@ ALTER TABLE `applications_status`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `auth_key`
+--
+ALTER TABLE `auth_key`
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
   MODIFY `dept_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `employees_details`
+--
+ALTER TABLE `employees_details`
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `nominee`
