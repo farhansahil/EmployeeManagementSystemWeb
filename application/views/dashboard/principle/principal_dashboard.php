@@ -23,7 +23,8 @@
                         <p class="card-text">Use menu to navigate towards various modules using the nav icon in top
                             navbar.</p>
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        <a href="/ems-app/index.php/Auth/RegisterController/details" class="btn btn-success">Add Details!!</a>
+                        <a href="<?php echo base_url(). 'Auth/RegisterController/details'?>" class="btn btn-success">Add Details!!</a>
+                        <a href="<?php echo base_url(). 'Auth/RegisterController/editDetails'?>" class="btn btn-danger">Edit
 
                     </div>
                 </div>

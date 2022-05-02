@@ -10,8 +10,8 @@
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container container_new">
                 <div class="signup-content">
-                    <h2 class="text-center">Add Your Details!!</h2>
-                    <form action="<?php echo base_url().'index.php/Auth/RegisterController/details'?>" name="registerForm" id="registerForm signupform" class="signupform" method="post">
+                    <h2 class="text-center">Edit Your Details!!</h2>
+                    <form action="<?php echo base_url().'index.php/Auth/RegisterController/editDetails'?>" name="registerForm" id="registerForm signupform" class="signupform" method="post">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="first_name">First Name</label>
@@ -65,9 +65,7 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="sevarth_id">Sevarth ID</label>
-                                    <input type="text" name="sevarth_id" id="sevarth_id" value="" class="form-input form-control <?php echo (form_error('sevarth_id') !=  "") ? 'is-invalid' : '' ?>" placeholder="Sevarth ID">
-                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('sevarth_id')); ?></p>
-
+                                    <input type="text" name="sevarth_id" id="sevarth_id" value="" class="form-input form-control" placeholder="Sevarth ID">
                                 </div>
                                 <div class="form-group">
                                 <label for="cast">Cast</label>

@@ -103,6 +103,7 @@ class Auth_model extends CI_Model
     {
 
         $this->db->insert('employees_details', $formArray);
+        redirect('/login');
 
         // if a user created account successfully
         return $this->db->insert_id();
@@ -116,6 +117,7 @@ class Auth_model extends CI_Model
     {
         $this->db->where("sevarth_id", $sevarth_id)->update('employees_details', $formArray);
         // if a user created account successfully
+        redirect('/login');
         return $this->db->insert_id();
     }
 

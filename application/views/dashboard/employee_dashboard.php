@@ -25,6 +25,9 @@
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                         <a href="<?php echo base_url(). 'Auth/RegisterController/details'?>" class="btn btn-success">Add
                             Details!!</a>
+                        
+                            <a href="<?php echo base_url(). 'Auth/RegisterController/editDetails'?>" class="btn btn-danger">Edit
+                            Details!!</a>
                     </div>
                 </div>
             </div>
