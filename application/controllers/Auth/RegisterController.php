@@ -156,7 +156,6 @@ class RegisterController extends CI_Controller
             //check if user is not verified
             if ($this->Auth_model->is_verified_user($this->session->userdata('user_id')) == false) {
                 $this->load->view('templates/header.php');
-                $this->load->view('templates/navbar.php');
                 $this->load->view("auth/wait_until_verify");
             } else {
                 $this->navigate_to_dashboards($this->session->userdata('role_id'));
