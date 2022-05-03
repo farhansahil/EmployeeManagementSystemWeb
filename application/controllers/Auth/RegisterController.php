@@ -115,7 +115,8 @@ class RegisterController extends CI_Controller
         $this->form_validation->set_rules('country', 'Country', 'required');
 
         if ($this->form_validation->run() == false) {
-            echo "farhan";
+            echo "form validation";
+
             $this->load->view('templates/header.php');
             $this->load->view('auth/details.php');
         } else {
@@ -134,10 +135,7 @@ class RegisterController extends CI_Controller
                 $this->session->set_flashdata('msg', $error);
                 $this->load->view('templates/header.php');
                 $this->load->view('auth/details.php');
-                echo "exp error ". $error; 
-                echo "exp error ". $error; 
-                echo "exp error ". $error; 
-                echo "exp error ". $error; 
+              
             } else {
                 
                 $experience = $this->upload->data('file_name');
