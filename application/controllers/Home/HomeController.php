@@ -56,6 +56,51 @@ class HomeController extends CI_Controller
         $this->load->view('dashboard/admin/admin_dashboard.php');
         $this->load->view('templates/footer.php');
     }
+    public function joint_director()
+    {
+        // echo "Hello";
+        $this->load->view('templates/header.php');
+        $this->load->view('templates/navbar.php');
+        $this->load->view('dashboard/joint_director/joint_director_sidebar.php');
+        $this->load->view('dashboard/joint_director/joint_director_dashboard.php');
+        $this->load->view('templates/footer.php');
+    }
+    public function director()
+    {
+        // echo "Hello";
+        $this->load->view('templates/header.php');
+        $this->load->view('templates/navbar.php');
+        $this->load->view('dashboard/director/director_sidebar.php');
+        $this->load->view('dashboard/director/director_dashboard.php');
+        $this->load->view('templates/footer.php');
+    }
+    public function faculty()
+    {
+        // echo "Hello";
+        $this->load->view('templates/header.php');
+        $this->load->view('templates/navbar.php');
+        $this->load->view('dashboard/faculty/faculty_sidebar.php');
+        $this->load->view('dashboard/faculty/faculty_dashboard.php');
+        $this->load->view('templates/footer.php');
+    }
+    public function non_teaching_faculty()
+    {
+        // echo "Hello";
+        $this->load->view('templates/header.php');
+        $this->load->view('templates/navbar.php');
+        $this->load->view('dashboard/non_teaching_faculty/non_teaching_faculty_sidebar.php');
+        $this->load->view('dashboard/non_teaching_faculty/non_teaching_faculty_dashboard.php');
+        $this->load->view('templates/footer.php');
+    }
+    public function non_teaching_officials()
+    {
+        // echo "Hello";
+        $this->load->view('templates/header.php');
+        $this->load->view('templates/navbar.php');
+        $this->load->view('dashboard/non_teaching_officials/non_teaching_officials_sidebar.php');
+        $this->load->view('dashboard/non_teaching_officials/non_teaching_officails_dashboard.php');
+        $this->load->view('templates/footer.php');
+    }
     
     
 

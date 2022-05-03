@@ -5,6 +5,19 @@
 
     <div class="main">
 
+        <?php
+
+if ($this->session->flashdata('msg')) {
+    echo '
+        <div class="container">
+            <div class="alert alert-danger">
+                ' . $this->session->flashdata("msg") . '
+            </div>
+        </div>
+        ';
+}
+?>
+
 
         <section class="signup mt-5">
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
@@ -24,8 +37,11 @@ if ($this->session->flashdata('msg')) {
 
                 <div class="signup-content">
                     <h2 class="text-center">Add Your Details!!</h2>
-                    <form action="<?php echo base_url().'index.php/Auth/RegisterController/details'?>"
-                        name="registerForm" id="registerForm signupform" class="signupform" method="post">
+                    <?php
+$attributes = array('role' => 'form');
+echo form_open_multipart("Auth/RegisterController/details");
+                    ?>
+                    <form action="" name="registerForm" id="registerForm signupform" class="signupform" method="post">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="first_name">First Name</label>
@@ -198,7 +214,6 @@ if ($this->session->flashdata('msg')) {
 
                                 </div>
 
-
                         </div>
 
 
@@ -219,7 +234,6 @@ if ($this->session->flashdata('msg')) {
                                     <p class="invalid-feedback "><?php echo strip_tags(form_error('address')); ?></p>
 
                                 </div>
-
 
                         </div>
 

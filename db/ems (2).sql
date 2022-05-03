@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2022 at 05:45 PM
+-- Generation Time: May 03, 2022 at 04:41 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -35,12 +35,19 @@ CREATE TABLE `applications` (
   `remark` varchar(255) NOT NULL,
   `application` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `hod_id` varchar(11) NOT NULL,
-  `registrar_id` varchar(11) NOT NULL,
-  `principal_id` varchar(11) NOT NULL,
+  `hod_id` varchar(20) NOT NULL,
+  `registrar_id` varchar(20) NOT NULL,
+  `principal_id` varchar(20) NOT NULL,
   `status_id` varchar(11) NOT NULL,
   `application_type` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `applications`
+--
+
+INSERT INTO `applications` (`id`, `sevarth_id`, `date`, `description`, `remark`, `application`, `title`, `hod_id`, `registrar_id`, `principal_id`, `status_id`, `application_type`) VALUES
+(25, '123456789015', '2023-06-14', 'I am tester, but i want to apply for application.', 'dummy%20remark', 'Practical_2.1.pdf', 'Tester here.', '123456789013', '976789789987', '123456789012', '5', 'on');
 
 -- --------------------------------------------------------
 
@@ -130,12 +137,12 @@ CREATE TABLE `employees` (
 
 INSERT INTO `employees` (`sevarth_id`, `org_id`, `dept_id`, `role_id`, `email`, `password`, `name`, `hint_question`, `hint_answer`, `is_verified`, `hod_id`, `principle_id`) VALUES
 ('-1', -1, '-1', '-1', 'admin@gmail.com', 'adminpassword', 'admin', 'admin question', 'admin answer', '1', '-1', '-1'),
-('123456654321', 1, '1', '1', 'em2@gmail.com', 'emp2@gmailcom', 'emp2', 'uestion', 'quesstion', '0', '123456789013', '123456789012'),
 ('123456789012', 1, '1', '3', 'principle@gmail.com', 'principle', 'Principle', 'what is your name?', 'Principle', '1', '-1', '-1'),
 ('123456789013', 1, '1', '2', 'hod@gmail.com', 'hodpassword', 'HOD', 'what is your name?', 'hod', '1', '-1', '123456789012'),
-('123456789015', 1, '1', '1', 'employee@gmail.com', 'employee', 'Employee', 'what is your name?', 'employee', '0', '123456789013', '123456789012'),
-('124346789012', 1, '1', '1', 'emp2@gmail.com', 'emppassword', 'em2', 'question', 'Question', '0', '123456789013', '123456789012'),
-('976789789987', 1, '1', '4', 'parthtagalpallewar123@gmail.com', 'registrar', 'Registrar', 'what is your name?', 'Registrar', '0', '-1', '-1');
+('123456789015', 1, '1', '1', 'employee@gmail.com', 'emppassword', 'Employee', 'what is your name?', 'employee', '1', '123456789013', '123456789012'),
+('777777777772', 1, '1', '6', 'director@gmail.com', 'directory', 'director', 'what is your name?', 'director', '1', '-1', '-1'),
+('777777777777', 1, '1', '5', 'jointdirector@gmail.com', 'jointdirector', 'joint_director', 'what is your name?', 'jointdirector', '1', '-1', '-1'),
+('976789789987', 1, '1', '4', 'parthtagalpallewar123@gmail.com', 'registrar', 'Registrar', 'what is your name?', 'Registrar', '1', '-1', '-1');
 
 -- --------------------------------------------------------
 
@@ -289,7 +296,12 @@ INSERT INTO `role` (`role_id`, `role_name`) VALUES
 ('1', 'Employee'),
 ('2', 'Head of Department'),
 ('3', 'Principle'),
-('4', 'Registrar');
+('4', 'Registrar'),
+('5', 'Joint Director'),
+('6', 'Director'),
+('7', 'Faculty'),
+('8', 'Non Teaching Officials'),
+('9', 'Non Teaching Faculty');
 
 -- --------------------------------------------------------
 
@@ -470,7 +482,7 @@ ALTER TABLE `training_type`
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `applications_status`

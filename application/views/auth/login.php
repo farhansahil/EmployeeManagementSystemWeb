@@ -18,6 +18,16 @@
         <div class="row">
 
             <div>
+
+                <?php
+
+                $success = $this->session->userdata('msg');
+                if ($success != "") {?>
+
+                <div class="alert alert-success"><?php echo $success ?></div>
+
+                <?php }?>
+
                 <!-- success alert -->
 
                 <?php

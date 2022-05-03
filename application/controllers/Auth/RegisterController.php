@@ -21,10 +21,9 @@ class RegisterController extends CI_Controller
         //if data is are not already filled then redirect to dashboard
         if (!$is_details_fill) {
             $this->session->set_flashdata('msg', 'You Need to Add your Details First');
-            redirect('Home/HomeController/employee');
+            $this->navigate_to_dashboards($this->session->userdata('role_id'));
         }
 
-        
         $employee_details = $this->Auth_model->get_employee_details($this->session->userdata('sevarth_id'));
 
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
@@ -86,64 +85,154 @@ class RegisterController extends CI_Controller
 
     public function details()
     {
-        
+
         $sevarth_id = $this->session->userdata('sevarth_id');
         $is_details_fill = $this->Auth_model->is_details_filled($sevarth_id);
         //if data is already filled then redirect to dashboard
         if ($is_details_fill) {
             $this->session->set_flashdata('msg', 'You already filled your details');
-            redirect('Home/HomeController/employee');
+            $this->navigate_to_dashboards($this->session->userdata('role_id'));
         }
 
-        
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('middle_name', 'Middle Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
         $this->form_validation->set_rules('dob', 'D.O.B', 'required');
-        $this->form_validation->set_rules('sevarth_id', 'sevarth_id', 'required|is_unique[employees.email]');
+        $this->form_validation->set_rules('cast', 'Cast', 'required');
+        $this->form_validation->set_rules('subcast', 'Sub_Cast', 'required');
+        $this->form_validation->set_rules('designation', 'Designation', 'required');
+        $this->form_validation->set_rules('retirement_date', 'Retirement Date', 'required');
+        $this->form_validation->set_rules('experience', 'Experience', 'required');
+        $this->form_validation->set_rules('aadhar_no', 'Aadhar No', 'required|min_length[12]|max_length[12]');
+        $this->form_validation->set_rules('pan_no', 'Pan No', 'required');
+        $this->form_validation->set_rules('blood_grp', 'Blood Group', 'required');
+        $this->form_validation->set_rules('identification_mark', 'Identification Mark', 'required');
+        $this->form_validation->set_rules('contact_no', 'Contact No', 'required|min_length[10]|max_length[10]');
+        $this->form_validation->set_rules('alternative_contact_no', 'Alternate Contact No', 'required|min_length[10]|max_length[10]');
+        $this->form_validation->set_rules('address', 'D.O.B', 'required');
+        $this->form_validation->set_rules('city', 'D.O.B', 'required');
+        $this->form_validation->set_rules('pin_code', 'D.O.B', 'required|min_length[6]|max_length[6]');
+        $this->form_validation->set_rules('state', 'D.O.B', 'required');
+        $this->form_validation->set_rules('country', 'D.O.B', 'required');
 
         if ($this->form_validation->run() == false) {
+            echo "form validation";
             $this->load->view('templates/header.php');
             $this->load->view('auth/details.php');
         } else {
 
-            $formArray = array();
+            $config = array(
+                'upload_path' => "uploads/experience", //path for upload
+                'allowed_types' => "*", //restrict extension
+                'max_size' => '300000',
+                'max_width' => '30000',
+                'max_height' => '30000',
+            );
+            $this->load->library('upload', $config);
+            //experience pdf upload
+            if (!$this->upload->do_upload('experience')) {
+                $error = $this->upload->display_errors();
+                $this->session->set_flashdata('msg', $error);
+                $this->load->view('templates/header.php');
+                $this->load->view('auth/details.php');
+                echo "exp error ". $error; 
+                echo "exp error ". $error; 
+                echo "exp error ". $error; 
+                echo "exp error ". $error; 
+            } else {
+                
+                $experience = $this->upload->data('file_name');
+                
+                $config = array(
+                    'upload_path' => "uploads/qualification", //path for upload
+                    'allowed_types' => "*", //restrict extension
+                    'max_size' => '300000',
+                    'max_width' => '30000',
+                    'max_height' => '30000',
+                );
+                $this->load->library('upload', $config);
+                if (!$this->upload->do_upload('qualification')) {
+                    $error = $this->upload->display_errors();
+                    $this->session->set_flashdata('msg', $error);
+                    $this->load->view('templates/header.php');
+                    $this->load->view('auth/details.php');
 
-            $formArray['first_name'] = $this->input->post('first_name');
-            $formArray['middle_name'] = $this->input->post('middle_name');
-            $formArray['last_name'] = $this->input->post('last_name');
-            $formArray['dob'] = $this->input->post('dob');
+                    echo "quif error ". $error; 
+                    echo "quif error ". $error; 
+                    echo "quif error ". $error; 
+                    echo "quif error ". $error; 
+                }else{
+                     $qualification = $this->upload->data('file_name');
 
-            $sevarth_id = $this->session->userdata('sevarth_id');
-            
-            $formArray['qualification'] = $this->input->post('qualification');
-            $formArray['sevarth_id'] = $sevarth_id;
-            $formArray['cast'] = $this->input->post('cast');
-            $formArray['subcast'] = $this->input->post('subcast');
+                     $config = array(
+                        'upload_path' => "uploads/profile", //path for upload
+                        'allowed_types' => "*", //restrict extension
+                        'max_size' => '300000',
+                        'max_width' => '30000',
+                        'max_height' => '30000',
+                    );
+                    $this->load->library('upload', $config);
+                    if (!$this->upload->do_upload('profile')) {
+                        $error = $this->upload->display_errors();
+                        $this->session->set_flashdata('msg', $error);
+                        $this->load->view('templates/header.php');
+                        $this->load->view('auth/details.php');
+                        echo "profile error " . $error;
+                        echo "profile error " . $error;
+                        echo "profile error " . $error;
+                        echo "profile error " . $error;
+                        echo "profile error " . $error;
 
-            $designation_id = $this->input->post('designation');
-            $formArray['designation'] = $designation_id;
-            $formArray['retirement_date'] = $this->input->post('retirement_date');
-            $formArray['experience'] = $this->input->post('experience');
-            $formArray['aadhar_no'] = $this->input->post('aadhar_no');
-            $formArray['pan_no'] = $this->input->post('pan_no');
-            $formArray['blood_grp'] = $this->input->post('blood_grp');
-            $formArray['identification_mark'] = $this->input->post('identification_mark');
-            $formArray['photo'] = $this->input->post('photo');
+                    } else {
+                        $profile = $this->upload->data('file_name');
 
-            $formArray['contact_no'] = $this->input->post('contact_no');
-            $formArray['alternative_contact_no'] = $this->input->post('alternative_contact_no');
-            $formArray['address'] = $this->input->post('address');
-            $formArray['city'] = $this->input->post('city');
-            $formArray['pin_code'] = $this->input->post('pin_code');
-            $formArray['state'] = $this->input->post('state');
-            $formArray['country'] = $this->input->post('country');
-            $formArray['gender'] = $this->input->post('gender');
+                        $formArray = array();
 
-            $this->Auth_model->addDetails($formArray);
-            $this->navigate_to_dashboards($this->session->userdata("role_id"));
-            
+                        $formArray['first_name'] = $this->input->post('first_name');
+                        $formArray['middle_name'] = $this->input->post('middle_name');
+                        $formArray['last_name'] = $this->input->post('last_name');
+                        $formArray['dob'] = $this->input->post('dob');
 
+                        $sevarth_id = $this->session->userdata('sevarth_id');
+
+                        $formArray['qualification'] = $qualification;
+                        $formArray['sevarth_id'] = $sevarth_id;
+                        $formArray['cast'] = $this->input->post('cast');
+                        $formArray['subcast'] = $this->input->post('subcast');
+
+                        $designation_id = $this->input->post('designation');
+                        $formArray['designation'] = $designation_id;
+                        $formArray['retirement_date'] = $this->input->post('retirement_date');
+                        $formArray['experience'] = $experience;
+                        $formArray['aadhar_no'] = $this->input->post('aadhar_no');
+                        $formArray['pan_no'] = $this->input->post('pan_no');
+                        $formArray['blood_grp'] = $this->input->post('blood_grp');
+                        $formArray['identification_mark'] = $this->input->post('identification_mark');
+                        $formArray['photo'] = $profile;
+
+                        $formArray['contact_no'] = $this->input->post('contact_no');
+                        $formArray['alternative_contact_no'] = $this->input->post('alternative_contact_no');
+                        $formArray['address'] = $this->input->post('address');
+                        $formArray['city'] = $this->input->post('city');
+                        $formArray['pin_code'] = $this->input->post('pin_code');
+                        $formArray['state'] = $this->input->post('state');
+                        $formArray['country'] = $this->input->post('country');
+                        $formArray['gender'] = $this->input->post('gender');
+
+                        $this->Auth_model->addDetails($formArray);
+                        $this->navigate_to_dashboards($this->session->userdata("role_id"));
+
+                        
+
+                    }
+
+
+                     
+                }
+
+
+                
+            }
         }
 
     }
@@ -164,8 +253,7 @@ class RegisterController extends CI_Controller
         if ($this->session->userdata('user_id') != null) {
             //check if user is not verified
             if ($this->Auth_model->is_verified_user($this->session->userdata('user_id')) == false) {
-                $this->load->view('templates/header.php');
-                $this->load->view("auth/wait_until_verify");
+                $this->load_wait_until_verify();
             } else {
                 $this->navigate_to_dashboards($this->session->userdata('role_id'));
             }
@@ -242,7 +330,8 @@ class RegisterController extends CI_Controller
                         $this->session->set_userdata('user_id', $sevarth_id);
                         $this->session->set_userdata('role_id', $role_id);
 
-                        $this->load->view("auth/wait_until_verify");
+                        $this->load_wait_until_verify();
+
                     }
                 } else {
 
@@ -255,7 +344,7 @@ class RegisterController extends CI_Controller
                     $this->session->set_userdata('user_id', $sevarth_id);
                     $this->session->set_userdata('role_id', $role_id);
 
-                    $this->load->view("auth/wait_until_verify");
+                    $this->load_wait_until_verify();
 
                 }
 
@@ -265,6 +354,13 @@ class RegisterController extends CI_Controller
 
     }
 
+    public function load_wait_until_verify()
+    {
+        $this->load->view('templates/header.php');
+        $this->load->view('auth/navbar.php');
+        $this->load->view("auth/wait_until_verify");
+    }
+
     public function login()
     {
         //if user is already login
@@ -272,7 +368,8 @@ class RegisterController extends CI_Controller
 
             //check if user is not verified
             if ($this->Auth_model->is_verified_user($this->session->userdata('user_id')) == false) {
-                $this->load->view("auth/wait_until_verify");
+                $this->load_wait_until_verify();
+
             } else {
                 $this->navigate_to_dashboards($this->session->userdata('role_id'));
             }
@@ -307,9 +404,7 @@ class RegisterController extends CI_Controller
                     // if user if not verified
                     // 0->not verified 1->verified
                     if ($user->is_verified == 0) {
-                        // $this->load->view("auth/wait_until_verify");
-                        $this->navigate_to_dashboards($user->role_id);
-
+                        $this->load_wait_until_verify();
                     } else {
                         $this->navigate_to_dashboards($user->role_id);
                     }
@@ -324,7 +419,7 @@ class RegisterController extends CI_Controller
     {
         $is_enable = $this->Auth_model->is_details_filled($this->session->userdata('user_id'));
         if ($role_id == 1) {
-            redirect('home/HomeController/employee',  $is_enable);
+            redirect('home/HomeController/employee', $is_enable);
         } else if ($role_id == 2) {
             redirect('home/HomeController/hod');
         } else if ($role_id == 3) {
@@ -333,6 +428,16 @@ class RegisterController extends CI_Controller
             redirect('home/HomeController/admin');
         } else if ($role_id == 4) {
             redirect('home/HomeController/registrar');
+        } else if ($role_id == 5) {
+            redirect('home/HomeController/joint_director');
+        } else if ($role_id == 6) {
+            redirect('home/HomeController/director');
+        } else if ($role_id == 7) {
+            redirect('home/HomeController/faculty');
+        } else if ($role_id == 8) {
+            redirect('home/HomeController/non_teaching_officials');
+        } else if ($role_id == 9) {
+            redirect('home/HomeController/non_teaching_faculty');
         }
 
     }
