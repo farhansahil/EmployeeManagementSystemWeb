@@ -3,7 +3,18 @@
 <section class="px-4 pt-5 mt-4 sec-main my-container">
 
     <div class="container py-4">
+        <?php
 
+if ($this->session->flashdata('msg')) {
+    echo '
+        <div class="container">
+            <div class="alert alert-danger">
+                ' . $this->session->flashdata("msg") . '
+            </div>
+        </div>
+        ';
+}
+?>
 
         <!-- Task Card -->
         <div class=" shadow-sm card-task p-3">

@@ -60,12 +60,14 @@ class HodController extends CI_Controller
 
     public function accept_employee_request($employee_id){
         $this->Hod_model->accept_employee_request($employee_id);
-
+        // set flash data   
+        $this->session->set_flashdata('msg', 'Employee Request Accepted');
         redirect("/Hod/HodController/show_verifications");
         
     }
     public function decline_employee_request($employee_id){
         $this->Hod_model->decline_employee_request($employee_id);
+$this->session->set_flashdata('msg', 'Employee Request Declined');
 
         redirect("/Hod/HodController/show_verifications");
         

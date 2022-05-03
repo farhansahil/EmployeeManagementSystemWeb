@@ -4,6 +4,19 @@
 
     <div class="container py-4">
 
+        <?php
+
+if ($this->session->flashdata('msg')) {
+    echo '
+        <div class="container">
+            <div class="alert alert-danger">
+                ' . $this->session->flashdata("msg") . '
+            </div>
+        </div>
+        ';
+}
+?>
+
         <!-- Welcome Card -->
         <div class="card my-3 mx-lg-5 px-lg-4 shadow py-2" style="">
             <div class="row g-0">

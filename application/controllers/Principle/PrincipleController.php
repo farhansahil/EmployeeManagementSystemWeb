@@ -32,6 +32,7 @@ class PrincipleController extends CI_Controller
     public function accept_hod_request($employee_id)
     {
         $this->Principle_model->accept_hod_request($employee_id);
+$this->session->set_flashdata('msg', 'HOD Request Accepted');
 
        redirect("/Principle/PrincipleController/show_verifications");
 
@@ -39,6 +40,7 @@ class PrincipleController extends CI_Controller
     public function decline_hod_request($employee_id)
     {
         $this->Principle_model->decline_hod_request($employee_id);
+$this->session->set_flashdata('msg', 'HOD Request Declined');
 
        redirect("/Principle/PrincipleController/show_verifications");
 
