@@ -25,8 +25,9 @@ class RegisterController extends CI_Controller
         }
 
         // $employee_details = $this->Auth_model->get_employee_details();
-        $employee_details = $this->Auth_model->get_employee_details($this->session->userdata('sevarth_id'));
+        $employee_details = $this->Auth_model->get_employee_details($this->session->userdata('user_id'));
 
+        
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('middle_name', 'Middle Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
@@ -34,7 +35,7 @@ class RegisterController extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header.php');
-            $this->load->view('auth/editDetails.php',  $employee_details);
+            $this->load->view('auth/editDetails.php',  array("employee" => $employee_details));
         } else {
 
             $formArray = array();
