@@ -144,7 +144,7 @@ echo form_open_multipart("Auth/RegisterController/details");
                             </div>
                             <div class="form-group">
                                 <label for="fname">Experience</label>
-                                <input type="text" name="experience" id="experience"
+                                <input type="file" name="experience" id="experience"
                                     value="<?php echo set_value('first_name');?>"
                                     class="form-input form-control <?php echo (form_error('experience') !=  "") ? 'is-invalid' : '' ?>"
                                     placeholder="Experience">
@@ -157,18 +157,19 @@ echo form_open_multipart("Auth/RegisterController/details");
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="aadhar_no">Aadhar Card Number</label>
-                                <input type="text" name="aadhar_no" id="aadhar_no" value=""
-                                    class="form-input form-control" placeholder="Aadhar Card Number">
+                                <label for="designation">Aadhar Card No</label>
+                                <input type="text" name="aadhar_no" id="aadhar_no"
+                                    value="<?php echo set_value('aadhar_no');?>"
+                                    class="form-input form-control <?php echo (form_error('aadhar_no') !=  "") ? 'is-invalid' : '' ?>"
+                                    placeholder="Aadhar No">
                                 <p class="invalid-feedback "><?php echo strip_tags(form_error('aadhar_no')); ?></p>
-
                             </div>
                             <div class="form-group">
-                                <label for="pan_no">Pan Card Number</label>
-                                <input type="text" name="pan_no" id="pan_no" value="" class="form-input form-control"
-                                    placeholder="Pan Card Number">
+                                <label for="designation">Pan Card No</label>
+                                <input type="text" name="pan_no" id="pan_no" value="<?php echo set_value('pan_no');?>"
+                                    class="form-input form-control <?php echo (form_error('pan_no') !=  "") ? 'is-invalid' : '' ?>"
+                                    placeholder="Pan No">
                                 <p class="invalid-feedback "><?php echo strip_tags(form_error('pan_no')); ?></p>
-
                             </div>
 
 
@@ -176,20 +177,22 @@ echo form_open_multipart("Auth/RegisterController/details");
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="blood_grp">Blood Group</label>
-                                <input type="text" name="blood_grp" id="blood_grp" value=""
-                                    class="form-input form-control" placeholder="Blood Group">
+                                <label for="designation">Blood Group</label>
+                                <input type="text" name="blood_grp" id="blood_grp"
+                                    value="<?php echo set_value('blood_grp');?>"
+                                    class="form-input form-control <?php echo (form_error('blood_grp') !=  "") ? 'is-invalid' : '' ?>"
+                                    placeholder="Blood Grp">
                                 <p class="invalid-feedback "><?php echo strip_tags(form_error('blood_grp')); ?></p>
-
                             </div>
-                            <div class="form-group">
-                                <label for="identification_mark">Identification Mark</label>
-                                <input type="text" name="identification_mark" id="identification_mark" value=""
-                                    class="form-input form-control" placeholder="Identification Mark">
-                                <p class="invalid-feedback ">
-                                    <?php echo strip_tags(form_error('identification_mark')); ?>
-                                </p>
 
+                            <div class="form-group">
+                                <label for="designation">Identification Mark</label>
+                                <input type="text" name="identification_mark" id="identification_mark"
+                                    value="<?php echo set_value('identification_mark');?>"
+                                    class="form-input form-control <?php echo (form_error('identification_mark') !=  "") ? 'is-invalid' : '' ?>"
+                                    placeholder="Blood Grp">
+                                <p class="invalid-feedback ">
+                                    <?php echo strip_tags(form_error('identification_mark')); ?></p>
                             </div>
 
 
@@ -201,52 +204,53 @@ echo form_open_multipart("Auth/RegisterController/details");
                                 <input type="file" name="profile" id="photo" value="" class="form-input form-control">
                             </div>
                             <div class="form-group">
-                                <label for="contact_no">Contact Number</label>
-                                <input type="text" name="contact_no" id="contact_no" value=""
-                                    class="form-input form-control" placeholder="Contact Number">
+                                <label for="designation">Contact No</label>
+                                <input type="text" name="contact_no" id="contact_no"
+                                    value="<?php echo set_value('contact_no');?>"
+                                    class="form-input form-control <?php echo (form_error('contact_no') !=  "") ? 'is-invalid' : '' ?>"
+                                    placeholder="Blood Grp">
                                 <p class="invalid-feedback "><?php echo strip_tags(form_error('contact_no')); ?></p>
-
                             </div>
-
 
                         </div>
 
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="alternate_contact_no">Alternate Contact Number</label>
-                                <input type="text" name="alternate_contact_no" id="alternate_contact_no" value=""
-                                    class="form-input form-control" placeholder="Alternate Contact Number">
-                                <p class="invalid-feedback ">
-                                    <?php echo strip_tags(form_error('alternate_contact_no')); ?>
+                                <label for="designation">Alternate Contact No</label>
+                                <input type="text" name="alternate_contact" id="alternate_contact"
+                                    value="<?php echo set_value('alternate_contact');?>"
+                                    class="form-input form-control <?php echo (form_error('alternate_contact') !=  "") ? 'is-invalid' : '' ?>"
+                                    placeholder="Alternate Contact No">
+                                <p class="invalid-feedback "><?php echo strip_tags(form_error('alternate_contact')); ?>
                                 </p>
-
                             </div>
                             <div class="form-group">
-                                <label for="address">Address</label>
-                                <textarea class="form-input form-control textarea" name="address" id="address"
-                                    placeholder="Address"></textarea>
+                                <label for="designation">Address</label>
+                                <input type="text" name="address" id="address"
+                                    value="<?php echo set_value('address');?>"
+                                    class="form-input form-control <?php echo (form_error('address') !=  "") ? 'is-invalid' : '' ?>"
+                                    placeholder="Blood Grp">
                                 <p class="invalid-feedback "><?php echo strip_tags(form_error('address')); ?></p>
-
                             </div>
-
 
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="city">City Name</label>
-                                <input type="text" name="city" id="city" value="" class="form-input form-control"
-                                    placeholder="City Name">
+                                <label for="designation">City</label>
+                                <input type="text" name="city" id="city" value="<?php echo set_value('city');?>"
+                                    class="form-input form-control <?php echo (form_error('city') !=  "") ? 'is-invalid' : '' ?>"
+                                    placeholder="Blood Grp">
                                 <p class="invalid-feedback "><?php echo strip_tags(form_error('city')); ?></p>
-
                             </div>
                             <div class="form-group">
-                                <label for="pin_code">Pin Code</label>
-                                <input type="text" name="pin_code" id="pin_code" value=""
-                                    class="form-input form-control" placeholder="Pin Code">
+                                <label for="designation">Pin Code</label>
+                                <input type="text" name="pin_code" id="pin_code"
+                                    value="<?php echo set_value('pin_code');?>"
+                                    class="form-input form-control <?php echo (form_error('pin_code') !=  "") ? 'is-invalid' : '' ?>"
+                                    placeholder="Pin Code">
                                 <p class="invalid-feedback "><?php echo strip_tags(form_error('pin_code')); ?></p>
-
                             </div>
 
 
@@ -254,18 +258,19 @@ echo form_open_multipart("Auth/RegisterController/details");
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="state">State</label>
-                                <input type="text" name="state" id="state" value="" class="form-input form-control"
+                                <label for="designation">State</label>
+                                <input type="text" name="state" id="state" value="<?php echo set_value('state');?>"
+                                    class="form-input form-control <?php echo (form_error('state') !=  "") ? 'is-invalid' : '' ?>"
                                     placeholder="State">
                                 <p class="invalid-feedback "><?php echo strip_tags(form_error('state')); ?></p>
-
                             </div>
                             <div class="form-group">
-                                <label for="country">Country</label>
-                                <input type="text" name="country" id="country" value="" class="form-input form-control"
-                                    placeholder="Country">
+                                <label for="designation">Contry</label>
+                                <input type="text" name="country" id="country"
+                                    value="<?php echo set_value('country');?>"
+                                    class="form-input form-control <?php echo (form_error('country') !=  "") ? 'is-invalid' : '' ?>"
+                                    placeholder="Blood Grp">
                                 <p class="invalid-feedback "><?php echo strip_tags(form_error('country')); ?></p>
-
                             </div>
 
 
