@@ -22,6 +22,10 @@
                 <span class="ms-1 d-none d-sm-inline">Employee Verifications</span></a>
         </li>
         <li class="nav-item py-2">
+            <a href="<?php echo base_url()."Hod/HodController/show_employees" ?>" class=" px-0 align-middle">
+                <span class="ms-1 d-none d-sm-inline">Show Employees</span></a>
+        </li>
+        <li class="nav-item py-2">
             <a href="#submenu2" data-bs-toggle="collapse" class=" px-0 align-middle ">
                 <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
             <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">

@@ -167,6 +167,10 @@ class Auth_model extends CI_Model
 
     }
 
+    public function get_employee_by_id($employee_id){
+        return $this->db->where("sevarth_id", $employee_id)->get("employees")->result_array()[0];
+    }
+
     public function login_user($email, $password)
     {
         //if email id not present in database
@@ -178,7 +182,7 @@ class Auth_model extends CI_Model
 
         }
 
-
+        
 
         //if user with email exists in database
         //get that use

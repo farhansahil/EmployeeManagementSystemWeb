@@ -15,7 +15,7 @@ class RegisterController extends CI_Controller
 
     public function editDetails()
     {
-        $sevarth_id = $this->session->userdata('sevarth_id');
+        $sevarth_id = $this->session->userdata('user_id');
         $is_details_fill = $this->Auth_model->is_details_filled($sevarth_id);
 
         //if data is are not already filled then redirect to dashboard
@@ -87,150 +87,157 @@ class RegisterController extends CI_Controller
     public function details()
     {
 
-        $sevarth_id = $this->session->userdata('sevarth_id');
+        $sevarth_id = $this->session->userdata('user_id');
         $is_details_fill = $this->Auth_model->is_details_filled($sevarth_id);
         //if data is already filled then redirect to dashboard
         if ($is_details_fill) {
             $this->session->set_flashdata('msg', 'You already filled your details');
             $this->navigate_to_dashboards($this->session->userdata('role_id'));
-        }
+        } 
+        
+        else {
+            $this->form_validation->set_rules('first_name', 'First Name', 'required');
+            $this->form_validation->set_rules('middle_name', 'Middle Name', 'required');
+            $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+            $this->form_validation->set_rules('dob', 'D.O.B', 'required');
+            $this->form_validation->set_rules('cast', 'Cast', 'required');
+            
+            // $this->form_validation->set_rules('qualification', 'Qualification', 'required');
+            $this->form_validation->set_rules('subcast', 'Sub_Cast', 'required');
+            $this->form_validation->set_rules('designation', 'Designation', 'required');
+            $this->form_validation->set_rules('retirement_date', 'Retirement Date', 'required');
+            // $this->form_validation->set_rules('experience', 'Experience', 'required');
+            $this->form_validation->set_rules('aadhar_no', 'Aadhar No', 'required|min_length[12]|max_length[12]');
+            $this->form_validation->set_rules('pan_no', 'Pan No', 'required');
+            $this->form_validation->set_rules('blood_grp', 'Blood Group', 'required');
+            $this->form_validation->set_rules('identification_mark', 'Identification Mark', 'required');
+            // $this->form_validation->set_rules('photo', 'Photo', 'required');
+            $this->form_validation->set_rules('contact_no', 'Contact No', 'required|min_length[10]|max_length[10]');
+            $this->form_validation->set_rules('alternate_contact_no', 'Alternate Contact No', 'required|min_length[10]|max_length[10]');
+            $this->form_validation->set_rules('address', 'Address', 'required');
+            $this->form_validation->set_rules('city', 'City', 'required');
+            $this->form_validation->set_rules('pin_code', 'Pin Code', 'required|min_length[6]|max_length[6]');
+            $this->form_validation->set_rules('state', 'State', 'required');
+            $this->form_validation->set_rules('country', 'Country', 'required');
 
-        $this->form_validation->set_rules('first_name', 'First Name', 'required');
-        $this->form_validation->set_rules('middle_name', 'Middle Name', 'required');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
-        $this->form_validation->set_rules('dob', 'D.O.B', 'required');
-        $this->form_validation->set_rules('cast', 'Cast', 'required');
-        $this->form_validation->set_rules('subcast', 'Sub_Cast', 'required');
-        $this->form_validation->set_rules('designation', 'Designation', 'required');
-        $this->form_validation->set_rules('retirement_date', 'Retirement Date', 'required');
-        $this->form_validation->set_rules('aadhar_no', 'Aadhar No', 'required|min_length[12]|max_length[12]');
-        $this->form_validation->set_rules('pan_no', 'Pan No', 'required');
-        $this->form_validation->set_rules('blood_grp', 'Blood Group', 'required');
-        $this->form_validation->set_rules('identification_mark', 'Identification Mark', 'required');
-        $this->form_validation->set_rules('contact_no', 'Contact No', 'required|min_length[10]|max_length[10]');
-        $this->form_validation->set_rules('alternative_contact_no', 'Alternate Contact No', 'required|min_length[10]|max_length[10]');
-        $this->form_validation->set_rules('address', 'Address', 'required');
-        $this->form_validation->set_rules('city', 'City', 'required');
-        $this->form_validation->set_rules('pin_code', 'Pin Code', 'required|min_length[6]|max_length[6]');
-        $this->form_validation->set_rules('state', 'State', 'required');
-        $this->form_validation->set_rules('country', 'Country', 'required');
+            if ($this->form_validation->run() == false) {
 
-        if ($this->form_validation->run() == false) {
-            echo "form validation";
-
-            $this->load->view('templates/header.php');
-            $this->load->view('auth/details.php');
-        } else {
-
-            $config = array(
-                'upload_path' => "uploads/experience", //path for upload
-                'allowed_types' => "*", //restrict extension
-                'max_size' => '300000',
-                'max_width' => '30000',
-                'max_height' => '30000',
-            );
-            $this->load->library('upload', $config);
-            //experience pdf upload
-            if (!$this->upload->do_upload('experience')) {
-                $error = $this->upload->display_errors();
-                $this->session->set_flashdata('msg', $error);
                 $this->load->view('templates/header.php');
                 $this->load->view('auth/details.php');
-              
             } else {
-                
-                $experience = $this->upload->data('file_name');
-                
+
                 $config = array(
-                    'upload_path' => "uploads/qualification", //path for upload
+                    'upload_path' => "uploads/experience", //path for upload
                     'allowed_types' => "*", //restrict extension
                     'max_size' => '300000',
                     'max_width' => '30000',
                     'max_height' => '30000',
                 );
                 $this->load->library('upload', $config);
-                if (!$this->upload->do_upload('qualification')) {
+                //experience pdf upload
+                if (!$this->upload->do_upload('experience')) {
                     $error = $this->upload->display_errors();
                     $this->session->set_flashdata('msg', $error);
                     $this->load->view('templates/header.php');
                     $this->load->view('auth/details.php');
 
-                    echo "quif error ". $error; 
-                    echo "quif error ". $error; 
-                    echo "quif error ". $error; 
-                    echo "quif error ". $error; 
-                }else{
-                     $qualification = $this->upload->data('file_name');
+                } else {
 
-                     $config = array(
-                        'upload_path' => "uploads/profile", //path for upload
+                    $experience = $this->upload->data('file_name');
+
+                    $config = array(
+                        'upload_path' => "uploads/qualification", //path for upload
                         'allowed_types' => "*", //restrict extension
                         'max_size' => '300000',
                         'max_width' => '30000',
                         'max_height' => '30000',
                     );
                     $this->load->library('upload', $config);
-                    if (!$this->upload->do_upload('profile')) {
+                    if (!$this->upload->do_upload('qualification')) {
                         $error = $this->upload->display_errors();
                         $this->session->set_flashdata('msg', $error);
                         $this->load->view('templates/header.php');
                         $this->load->view('auth/details.php');
-                        echo "profile error " . $error;
-                        echo "profile error " . $error;
-                        echo "profile error " . $error;
-                        echo "profile error " . $error;
-                        echo "profile error " . $error;
 
+                        echo "quif error " . $error;
+                        echo "quif error " . $error;
+                        echo "quif error " . $error;
+                        echo "quif error " . $error;
                     } else {
-                        $profile = $this->upload->data('file_name');
+                        $qualification = $this->upload->data('file_name');
 
-                        $formArray = array();
+                        $config = array(
+                            'upload_path' => "uploads/profile", //path for upload
+                            'allowed_types' => "*", //restrict extension
+                            'max_size' => '300000',
+                            'max_width' => '30000',
+                            'max_height' => '30000',
+                        );
+                        $this->load->library('upload', $config);
+                        if (!$this->upload->do_upload('photo')) {
+                            $error = $this->upload->display_errors();
+                            $this->session->set_flashdata('msg', $error);
+                            $this->load->view('templates/header.php');
+                            $this->load->view('auth/details.php');
+                            echo "profile error " . $error;
+                            echo "profile error " . $error;
+                            echo "profile error " . $error;
+                            echo "profile error " . $error;
+                            echo "profile error " . $error;
 
-                        $formArray['first_name'] = $this->input->post('first_name');
-                        $formArray['middle_name'] = $this->input->post('middle_name');
-                        $formArray['last_name'] = $this->input->post('last_name');
-                        $formArray['dob'] = $this->input->post('dob');
+                        } else {
+                            $profile = $this->upload->data('file_name');
 
-                        $sevarth_id = $this->session->userdata('sevarth_id');
-
-                        $formArray['qualification'] = $qualification;
-                        $formArray['sevarth_id'] = $sevarth_id;
-                        $formArray['cast'] = $this->input->post('cast');
-                        $formArray['subcast'] = $this->input->post('subcast');
-
-                        $designation_id = $this->input->post('designation');
-                        $formArray['designation'] = $designation_id;
-                        $formArray['retirement_date'] = $this->input->post('retirement_date');
-                        $formArray['experience'] = $experience;
-                        $formArray['aadhar_no'] = $this->input->post('aadhar_no');
-                        $formArray['pan_no'] = $this->input->post('pan_no');
-                        $formArray['blood_grp'] = $this->input->post('blood_grp');
-                        $formArray['identification_mark'] = $this->input->post('identification_mark');
-                        $formArray['photo'] = $profile;
-
-                        $formArray['contact_no'] = $this->input->post('contact_no');
-                        $formArray['alternative_contact_no'] = $this->input->post('alternative_contact_no');
-                        $formArray['address'] = $this->input->post('address');
-                        $formArray['city'] = $this->input->post('city');
-                        $formArray['pin_code'] = $this->input->post('pin_code');
-                        $formArray['state'] = $this->input->post('state');
-                        $formArray['country'] = $this->input->post('country');
-                        $formArray['gender'] = $this->input->post('gender');
-
-                        $this->Auth_model->addDetails($formArray);
-                        $this->navigate_to_dashboards($this->session->userdata("role_id"));
-
+                             
                         
+                            $formArray = array();
+
+                            $formArray['first_name'] = $this->input->post('first_name');
+                            $formArray['middle_name'] = $this->input->post('middle_name');
+                            $formArray['last_name'] = $this->input->post('last_name');
+                            $formArray['dob'] = $this->input->post('dob');
+
+                            $sevarth_id = $this->session->userdata('user_id');
+                            $employee = $this->Auth_model->get_employee_by_id($sevarth_id);
+                            
+                            $formArray['qualification'] = $qualification;
+                            $formArray['sevarth_id'] = $sevarth_id;
+                            $formArray['cast'] = $this->input->post('cast');
+                            $formArray['subcast'] = $this->input->post('subcast');
+                            $formArray['department_id'] = $employee['dept_id'];
+                            $formArray['org_id'] = $employee['org_id'];
+                            
+
+
+                            $designation_id = $this->input->post('designation');
+                            $formArray['designation'] = $designation_id;
+                            $formArray['retirement_date'] = $this->input->post('retirement_date');
+                            $formArray['experience'] = $experience;
+                            $formArray['aadhar_no'] = $this->input->post('aadhar_no');
+                            $formArray['pan_no'] = $this->input->post('pan_no');
+                            $formArray['blood_grp'] = $this->input->post('blood_grp');
+                            $formArray['identification_mark'] = $this->input->post('identification_mark');
+                            $formArray['photo'] = $profile;
+
+                            $formArray['contact_no'] = $this->input->post('contact_no');
+                            $formArray['alternative_contact_no'] = $this->input->post('alternate_contact_no');
+                            $formArray['address'] = $this->input->post('address');
+                            $formArray['city'] = $this->input->post('city');
+                            $formArray['pin_code'] = $this->input->post('pin_code');
+                            $formArray['state'] = $this->input->post('state');
+                            $formArray['country'] = $this->input->post('country');
+                            $formArray['gender'] = $this->input->post('gender');
+
+                            $this->Auth_model->addDetails($formArray);
+                            $this->navigate_to_dashboards($this->session->userdata("role_id"));
+
+                        }
 
                     }
 
-
-                     
                 }
-
-
-                
             }
+
         }
 
     }
@@ -415,9 +422,9 @@ class RegisterController extends CI_Controller
 
     public function navigate_to_dashboards($role_id)
     {
-        $is_enable = $this->Auth_model->is_details_filled($this->session->userdata('user_id'));
+       
         if ($role_id == 1) {
-            redirect('home/HomeController/employee', $is_enable);
+            redirect('home/HomeController/employee');
         } else if ($role_id == 2) {
             redirect('home/HomeController/hod');
         } else if ($role_id == 3) {
