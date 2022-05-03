@@ -248,6 +248,8 @@ class RegisterController extends CI_Controller
         $this->session->unset_userdata('user_id');
         $this->session->unset_userdata('role_id');
 
+        $this->session->set_flashdata('msg', 'You are logged out');
+
         redirect('/login');
 
     }
@@ -331,10 +333,10 @@ class RegisterController extends CI_Controller
                         $loginArray['principle_id'] = $principle_response['id'];
 
                         $this->Auth_model->create($loginArray);
-                        $this->session->set_flashdata('msg', 'You registered successfully');
 
                         $this->session->set_userdata('user_id', $sevarth_id);
                         $this->session->set_userdata('role_id', $role_id);
+                        $this->session->set_flashdata('msg', 'Account Created Successful');
 
                         $this->load_wait_until_verify();
 
@@ -349,6 +351,7 @@ class RegisterController extends CI_Controller
 
                     $this->session->set_userdata('user_id', $sevarth_id);
                     $this->session->set_userdata('role_id', $role_id);
+                    $this->session->set_flashdata('msg', 'Account Created Successfully');
 
                     $this->load_wait_until_verify();
 
@@ -406,7 +409,9 @@ class RegisterController extends CI_Controller
 
                     $this->session->set_userdata('user_id', $user->sevarth_id);
                     $this->session->set_userdata('role_id', $user->role_id);
-
+                    
+                    $this->session->set_flashdata('msg', 'Login in Successful'); 
+                    
                     // if user if not verified
                     // 0->not verified 1->verified
                     if ($user->is_verified == 0) {

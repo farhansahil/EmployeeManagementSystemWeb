@@ -3,14 +3,20 @@
 <section class="px-4 pt-5 mt-4 sec-main my-container">
 
     <div class="container py-4">
-        <div class="top-box py-3">
-            <h5>Home</h5>
-            <nav aria-label="breadcrumb" role="navigation">
-                <ol class="breadcrumb px-3">
-                    <li class="breadcrumb-item"><a href="index.php" style="color:#6c757d">Dashboard/</a></li>
-                </ol>
-            </nav>
+
+        <?php
+
+if ($this->session->flashdata('msg')) {
+    echo '
+        <div class="container">
+            <div class="alert alert-danger">
+                ' . $this->session->flashdata("msg") . '
+            </div>
         </div>
+        ';
+}
+?>
+
         <!-- Welcome Card -->
         <div class="card my-3 mx-lg-5 px-lg-4 shadow py-2" style="">
             <div class="row g-0">
