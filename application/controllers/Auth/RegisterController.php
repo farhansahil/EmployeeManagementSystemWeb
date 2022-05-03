@@ -70,7 +70,7 @@ class RegisterController extends CI_Controller
             $formArray['country'] = $this->input->post('country');
             $formArray['gender'] = $this->input->post('gender');
 
-            $this->Auth_model->editDetails($formArray, $sevarth_id);
+            $this->Auth_model->editDetails($formArray, $sevarth_id,$this->session->userdata("role_id"));
             $this->session->set_flashdata('msg', 'You registered successfully');
 
             // if($insert_id > 0){

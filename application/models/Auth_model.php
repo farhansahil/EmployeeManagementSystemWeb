@@ -130,13 +130,18 @@ class Auth_model extends CI_Model
        
     }
     
-    public function editDetails($formArray,$sevarth_id)
+    public function editDetails($formArray,$sevarth_id,$role_id)
     {
 
         $this->db->where("sevarth_id", $sevarth_id)->update('employees_details', $formArray);
         // if a user created account successfully
-        redirect('/login');
-        return $this->db->insert_id();
+        if ($role_id == 1) {
+            redirect('home/HomeController/employee');
+        } else if ($role_id == 2) {
+            redirect('home/HomeController/hod');
+        } else if ($role_id == 3) {
+            redirect('home/HomeController/principal');
+        }        return $this->db->insert_id();
     }
 
     public function verify_email_id($sevarth_id){

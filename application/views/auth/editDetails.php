@@ -27,7 +27,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="middle_name">Middle Name</label>
-                                <input type="text" name="middle_name" id="middle_name" value=""
+                                <input type="text" name="middle_name" id="middle_name" value="<?php echo $employee->middle_name ?>"
                                     class="form-input form-control <?php echo (form_error('middle_name') !=  "") ? 'is-invalid' : '' ?>"
                                     placeholder="Middle Name">
                                 <p class="invalid-feedback "><?php echo strip_tags(form_error('middle_name')); ?></p>
@@ -37,7 +37,7 @@
 
                             <div class="form-group">
                                 <label for="fname">Last Name</label>
-                                <input type="text" name="last_name" id="last_name" value=""
+                                <input type="text" name="last_name" id="last_name" value="<?php echo $employee->last_name ?>"
                                     class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>"
                                     placeholder="Last Name">
                                 <p class="invalid-feedback "><?php echo strip_tags(form_error('last_name')); ?></p>
@@ -45,7 +45,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="dob">D.O.B</label>
-                                <input type="date" name="dob" id="dob" value=""
+                                <input type="date" name="dob" id="dob" value="<?php echo $employee->dob ?>"
                                     class="form-input form-control <?php echo (form_error('dob') !=  "") ? 'is-invalid' : '' ?>"
                                     placeholder="dd/mm/yy">
                                 <p class="invalid-feedback "><?php echo strip_tags(form_error('dob')); ?></p>
@@ -59,10 +59,10 @@
                             <div class="form-radio">
                                 <label for="gender">Gender</label>
                                 <div class="form-flex">
-                                    <input type="radio" name="gender" value="male" id="male" checked="checked" />
+                                    <input type="radio" name="gender" value="<?php echo $employee->gender ?>male" id="male" checked="checked" />
                                     <label for="male">Male</label>
 
-                                    <input type="radio" name="gender" value="female" id="female" />
+                                    <input type="radio" name="gender" value="<?php echo $employee->gender ?>female" id="female" />
                                     <label for="female">Female</label>
                                 </div>
                             </div>
@@ -79,12 +79,12 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="sevarth_id">Sevarth ID</label>
-                                <input type="text" name="sevarth_id" id="sevarth_id" value=""
+                                <input type="text" name="sevarth_id" id="sevarth_id" value="<?php echo $employee->sevarth_id ?>"
                                     class="form-input form-control" placeholder="Sevarth ID">
                             </div>
                             <div class="form-group">
                                 <label for="cast">Cast</label>
-                                <input type="text" name="cast" id="cast" value="" class="form-input form-control"
+                                <input type="text" name="cast" id="cast" value="<?php echo $employee->cast ?>" class="form-input form-control"
                                     placeholder="Cast">
                             </div>
 
@@ -95,14 +95,14 @@
 
                             <div class="form-group">
                                 <label for="subcast">Sub Cast</label>
-                                <input type="text" name="subcast" id="subcast" value="" class="form-input form-control"
+                                <input type="text" name="subcast" id="subcast" value="<?php echo $employee->subcast ?>" class="form-input form-control"
                                     placeholder="Sub Cast">
                             </div>
 
 
                             <div class="form-group">
                                 <label for="designation">Designation</label>
-                                <input type="text" name="designation" id="designation" value=""
+                                <input type="text" name="designation" id="designation" value="<?php echo $employee->designation ?>"
                                     class="form-input form-control" placeholder="Designation">
 
                             </div>
@@ -115,7 +115,7 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="retirement_date">Retirement Date</label>
-                                <input type="text" name="retirement_date" id="retirement_date" value=""
+                                <input type="text" name="retirement_date" id="retirement_date" value="<?php echo $employee->retirement_date ?>"
                                     class="form-input form-control" placeholder="Retirement Date">
                             </div>
                             <div class="form-group">
@@ -130,12 +130,12 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="aadhar_no">Aadhar Card Number</label>
-                                <input type="text" name="aadhar_no" id="aadhar_no" value=""
+                                <input type="text" name="aadhar_no" id="aadhar_no" value="<?php echo $employee->aadhar_no ?>"
                                     class="form-input form-control" placeholder="Aadhar Card Number">
                             </div>
                             <div class="form-group">
                                 <label for="pan_no">Pan Card Number</label>
-                                <input type="text" name="pan_no" id="pan_no" value="" class="form-input form-control"
+                                <input type="text" name="pan_no" id="pan_no" value="<?php echo $employee->pan_no ?>" class="form-input form-control"
                                     placeholder="Pan Card Number">
                             </div>
 
@@ -145,12 +145,12 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="blood_grp">Blood Group</label>
-                                <input type="text" name="blood_grp" id="blood_grp" value=""
+                                <input type="text" name="blood_grp" id="blood_grp" value="<?php echo $employee->blood_grp ?>"
                                     class="form-input form-control" placeholder="Blood Group">
                             </div>
                             <div class="form-group">
                                 <label for="identification_mark">Identification Mark</label>
-                                <input type="text" name="identification_mark" id="identification_mark" value=""
+                                <input type="text" name="identification_mark" id="identification_mark" value="<?php echo $employee->identification_mark ?>"
                                     class="form-input form-control" placeholder="Identification Mark">
                             </div>
 
@@ -158,13 +158,16 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group">
+                            <div class="form-group ">
                                 <label for="photo">Photo</label>
+                                <div class="text-center">
+                                <img src="<?php echo base_url().'uploads/experience/'.$employee->photo ?>" class="img-responsive ">
+                                </div>
                                 <input type="file" name="photo" id="photo" value="" class="form-input form-control">
                             </div>
                             <div class="form-group">
                                 <label for="contact_no">Contact Number</label>
-                                <input type="text" name="contact_no" id="contact_no" value=""
+                                <input type="text" name="contact_no" id="contact_no" value="<?php echo $employee->contact_no ?>"
                                     class="form-input form-control" placeholder="Contact Number">
                             </div>
 
@@ -175,12 +178,12 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="alternate_contact_no">Alternate Contact Number</label>
-                                <input type="text" name="alternate_contact_no" id="alternate_contact_no" value=""
+                                <input type="text" name="alternate_contact_no" id="alternate_contact_no" value="<?php echo $employee->alternative_contact_no ?>"
                                     class="form-input form-control" placeholder="Alternate Contact Number">
                             </div>
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <textarea class="form-input form-control textarea" name="address" id="address"
+                                <textarea class="form-input form-control textarea" value="<?php echo $employee->address ?>" name="address" id="address"
                                     placeholder="Address"></textarea>
                             </div>
 
@@ -190,12 +193,12 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="city">City Name</label>
-                                <input type="text" name="city" id="city" value="" class="form-input form-control"
+                                <input type="text" name="city" id="city" value="<?php echo $employee->city ?>" class="form-input form-control"
                                     placeholder="City Name">
                             </div>
                             <div class="form-group">
                                 <label for="pin_code">Pin Code</label>
-                                <input type="text" name="pin_code" id="pin_code" value=""
+                                <input type="text" name="pin_code" id="pin_code" value="<?php echo $employee->pin_code ?>"
                                     class="form-input form-control" placeholder="Pin Code">
                             </div>
 
@@ -205,12 +208,12 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="state">State</label>
-                                <input type="text" name="state" id="state" value="" class="form-input form-control"
+                                <input type="text" name="state" id="state" value="<?php echo $employee->state ?>" class="form-input form-control"
                                     placeholder="State">
                             </div>
                             <div class="form-group">
                                 <label for="country">Country</label>
-                                <input type="text" name="country" id="country" value="" class="form-input form-control"
+                                <input type="text" name="country" id="country" value="<?php echo $employee->country ?>" class="form-input form-control"
                                     placeholder="Country">
                             </div>
 
