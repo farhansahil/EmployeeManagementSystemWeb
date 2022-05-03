@@ -66,8 +66,10 @@
                             <div class="form-group">
                                 <label for="qualification">Qualification</label>
                                 <input type="file" name="qualification" id="qualification" value=""
-                                    class="form-input form-control" placeholder="Qualification">
-                            </div>
+                                    class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>" placeholder="Qualification">
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('qualification')); ?></p>
+
+                                </div>
 
 
                         </div>
@@ -76,9 +78,12 @@
 
                             <div class="form-group">
                                 <label for="cast">Cast</label>
-                                <input type="text" name="cast" id="cast" value="" class="form-input form-control"
+                                <input type="text" name="cast" id="cast" value="" 
+                                class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>"
                                     placeholder="Cast">
-                            </div>
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('cast')); ?></p>
+
+                                </div>
 
 
                         </div>
@@ -95,7 +100,8 @@
                             <div class="form-group">
                                 <label for="designation">Designation</label>
                                 <input type="text" name="designation" id="designation" value=""
-                                    class="form-input form-control" placeholder="Designation">
+                                    class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>" placeholder="Designation">
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('desifnation')); ?></p>
 
                             </div>
                         </div>
@@ -108,13 +114,18 @@
                             <div class="form-group">
                                 <label for="retirement_date">Retirement Date</label>
                                 <input type="text" name="retirement_date" id="retirement_date" value=""
-                                    class="form-input form-control" placeholder="Retirement Date">
-                            </div>
+                                    class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>" placeholder="Retirement Date">
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('retirement_date')); ?></p>
+
+                                </div>
                             <div class="form-group">
                                 <label for="experience">Experience</label>
-                                <input type="file" name="experience" id="experience" value="" class="form-control"
+                                <input type="file" name="experience" id="experience" value="" 
+                                class="form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>"
                                     placeholder="Experience">
-                            </div>
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('experience')); ?></p>
+
+                                </div>
 
 
                         </div>
@@ -123,13 +134,18 @@
                             <div class="form-group">
                                 <label for="aadhar_no">Aadhar Card Number</label>
                                 <input type="text" name="aadhar_no" id="aadhar_no" value=""
-                                    class="form-input form-control" placeholder="Aadhar Card Number">
-                            </div>
+                                    class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>" placeholder="Aadhar Card Number">
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('aadhar_no')); ?></p>
+
+                                </div>
                             <div class="form-group">
                                 <label for="pan_no">Pan Card Number</label>
-                                <input type="text" name="pan_no" id="pan_no" value="" class="form-input form-control"
+                                <input type="text" name="pan_no" id="pan_no" value=""
+                                 class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>"
                                     placeholder="Pan Card Number">
-                            </div>
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('pan_no')); ?></p>
+
+                                </div>
 
 
                         </div>
@@ -138,13 +154,17 @@
                             <div class="form-group">
                                 <label for="blood_grp">Blood Group</label>
                                 <input type="text" name="blood_grp" id="blood_grp" value=""
-                                    class="form-input form-control" placeholder="Blood Group">
-                            </div>
+                                    class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>" placeholder="Blood Group">
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('blood_grp')); ?></p>
+
+                                </div>
                             <div class="form-group">
                                 <label for="identification_mark">Identification Mark</label>
                                 <input type="text" name="identification_mark" id="identification_mark" value=""
-                                    class="form-input form-control" placeholder="Identification Mark">
-                            </div>
+                                    class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>" placeholder="Identification Mark">
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('identification_mark')); ?></p>
+
+                                </div>
 
 
                         </div>
@@ -152,13 +172,18 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="photo">Photo</label>
-                                <input type="file" name="photo" id="photo" value="" class="form-input form-control">
+                                <input type="file" name="photo" id="photo" value="" 
+                                class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>">
+                                <p class="invalid-feedback "><?php echo strip_tags(form_error('photo')); ?></p>
+
                             </div>
                             <div class="form-group">
                                 <label for="contact_no">Contact Number</label>
                                 <input type="text" name="contact_no" id="contact_no" value=""
-                                    class="form-input form-control" placeholder="Contact Number">
-                            </div>
+                                    class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>" placeholder="Contact Number">
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('contact_no')); ?></p>
+
+                                </div>
 
 
                         </div>
@@ -168,13 +193,18 @@
                             <div class="form-group">
                                 <label for="alternate_contact_no">Alternate Contact Number</label>
                                 <input type="text" name="alternate_contact_no" id="alternate_contact_no" value=""
-                                    class="form-input form-control" placeholder="Alternate Contact Number">
-                            </div>
+                                    class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>" placeholder="Alternate Contact Number">
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('alternate_contact_no')); ?></p>
+
+                                </div>
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <textarea class="form-input form-control textarea" name="address" id="address"
+                                <textarea 
+                                class="form-input form-control textarea <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>" name="address" id="address"
                                     placeholder="Address"></textarea>
-                            </div>
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('address')); ?></p>
+
+                                </div>
 
 
                         </div>
@@ -182,14 +212,19 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="city">City Name</label>
-                                <input type="text" name="city" id="city" value="" class="form-input form-control"
+                                <input type="text" name="city" id="city" value="" 
+                                class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>"
                                     placeholder="City Name">
-                            </div>
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('city')); ?></p>
+
+                                </div>
                             <div class="form-group">
                                 <label for="pin_code">Pin Code</label>
                                 <input type="text" name="pin_code" id="pin_code" value=""
-                                    class="form-input form-control" placeholder="Pin Code">
-                            </div>
+                                    class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>" placeholder="Pin Code">
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('pin_code')); ?></p>
+
+                                </div>
 
 
                         </div>
@@ -197,14 +232,20 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="state">State</label>
-                                <input type="text" name="state" id="state" value="" class="form-input form-control"
+                                <input type="text" name="state" id="state" value="" 
+                                class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>"
                                     placeholder="State">
-                            </div>
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('state')); ?></p>
+
+                                </div>
                             <div class="form-group">
                                 <label for="country">Country</label>
-                                <input type="text" name="country" id="country" value="" class="form-input form-control"
+                                <input type="text" name="country" id="country" value="" 
+                                class="form-input form-control <?php echo (form_error('lname') !=  "") ? 'is-invalid' : '' ?>"
                                     placeholder="Country">
-                            </div>
+                                    <p class="invalid-feedback "><?php echo strip_tags(form_error('country')); ?></p>
+
+                                </div>
 
 
                         </div>
