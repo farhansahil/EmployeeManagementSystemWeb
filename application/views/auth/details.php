@@ -5,19 +5,6 @@
 
     <div class="main">
 
-        <?php
-
-if ($this->session->flashdata('msg')) {
-    echo '
-        <div class="container">
-            <div class="alert alert-danger">
-                ' . $this->session->flashdata("msg") . '
-            </div>
-        </div>
-        ';
-}
-?>
-
 
         <section class="signup mt-5">
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
