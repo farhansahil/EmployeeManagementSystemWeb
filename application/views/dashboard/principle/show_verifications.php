@@ -22,7 +22,7 @@
                 <tbody>
                     <tr>
                         <?php if (!empty($hod_for_verification_from_principle)) {foreach ($hod_for_verification_from_principle as $employees) {?>
-
+                    <tr>
                         <th scope="row"><?php echo $employees['sevarth_id'] ?></th>
                         <td><?php echo $employees['name'] ?></td>
                         <td>
@@ -34,8 +34,8 @@
                             <a href="<?php echo base_url() . 'Principle/PrincipleController/decline_hod_request/' . $employees['sevarth_id'] ?>"
                                 style="font-size: 12px;  border-radius: 5px"" class=" btn btn-danger">Decline</a>
                         </td>
-
-                        <?php }} ?>
+                    </tr>
+                    <?php }} ?>
 
                     </tr>
 

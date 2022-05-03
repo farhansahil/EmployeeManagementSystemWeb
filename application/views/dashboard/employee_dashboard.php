@@ -2,6 +2,29 @@
 
 <section class="px-4 pt-5 mt-4 sec-main my-container">
 
+    <div class="row">
+
+        <div>
+            <!-- success alert -->
+
+            <?php
+
+                    $success = $this->session->userdata('msg');
+                    if ($success != "") {?>
+
+            <div class="alert alert-success"><?php echo $success ?></div>
+
+            <?php }?>
+
+
+
+
+
+        </div>
+    </div>
+
+
+
     <div class="container py-4">
         <div class="top-box py-3">
             <h5>Employee Dashboard</h5>

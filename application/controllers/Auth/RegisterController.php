@@ -15,6 +15,16 @@ class RegisterController extends CI_Controller
 
     public function editDetails()
     {
+        $sevarth_id = $this->session->userdata('sevarth_id');
+        $is_details_fill = $this->Auth_model->is_details_filled($sevarth_id);
+
+        //if data is are not already filled then redirect to dashboard
+        if (!$is_details_fill) {
+            $this->session->set_flashdata('msg', 'You Need to Add your Details First');
+            redirect('Home/HomeController/employee');
+        }
+
+        
         $employee_details = $this->Auth_model->get_employee_details($this->session->userdata('sevarth_id'));
 
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
@@ -76,6 +86,16 @@ class RegisterController extends CI_Controller
 
     public function details()
     {
+        
+        $sevarth_id = $this->session->userdata('sevarth_id');
+        $is_details_fill = $this->Auth_model->is_details_filled($sevarth_id);
+        //if data is already filled then redirect to dashboard
+        if ($is_details_fill) {
+            $this->session->set_flashdata('msg', 'You already filled your details');
+            redirect('Home/HomeController/employee');
+        }
+
+        
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('middle_name', 'Middle Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');

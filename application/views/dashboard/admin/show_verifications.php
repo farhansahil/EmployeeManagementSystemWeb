@@ -25,7 +25,7 @@
                     <tr>
 
                         <?php if (!empty($principle_for_verification_from_admin)) {foreach ($principle_for_verification_from_admin as $employees) {?>
-
+                    <tr>
                         <th scope="row"><?php echo $employees['sevarth_id'] ?></th>
                         <td><?php echo $employees['name'] ?></td>
                         <td>
@@ -37,8 +37,8 @@
                             <a href="<?php echo base_url() . 'Admin/AdminController/accept_principle_request/' . $employees['sevarth_id'] ?>"
                                 style="font-size: 12px;  border-radius: 5px"" class=" btn btn-danger">Decline</a>
                         </td>
-
-                        <?php }} ?>
+                    </tr>
+                    <?php }} ?>
 
                     </tr>
 

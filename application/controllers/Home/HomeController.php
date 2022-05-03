@@ -10,13 +10,11 @@ class HomeController extends CI_Controller
     }
     public function employee()
     {
-        $sevarth_id = $this->session->userdata('sevarth_id');
-        $is_details_fill = $this->Auth_model->is_details_filled($sevarth_id);
-
+      
         $this->load->view('templates/header.php');
         $this->load->view('templates/navbar.php');
         $this->load->view('templates/sidebar.php');
-        $this->load->view('dashboard/employee_dashboard.php', array('is_details_fill' => $is_details_fill));
+        $this->load->view('dashboard/employee_dashboard.php');
         $this->load->view('templates/footer.php');
     }
 
