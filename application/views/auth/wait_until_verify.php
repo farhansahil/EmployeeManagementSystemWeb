@@ -1,14 +1,27 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<link rel="stylesheet" href="<?php echo base_url(); ?>css/dashboard.css">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<div class="form-gap"></div>
-<div class="container" style="margin-top: 70px">
-    <h1>Please wait until you get verified</h1>
+<section class="px-4 pt-5 mt-4 sec-main my-container">
 
-    <a href="<?php echo base_url(); ?>auth/RegisterController/logout">">Logout</a>
-</div>
-</div>
+    <div class="container py-4">
 
+        <!-- Welcome Card -->
+        <div class="card my-3 mx-lg-5 px-lg-4 shadow py-2" style="">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="<?php echo base_url(); ?>/public/banner-img.png" class="img-fluid rounded-start"
+                        alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h2 class="card-title">Welcome</h2>
+                        <p class="card-text">Please Wait, Admin will verify you</p>
+                        <p class="card-text"><small class="text-muted">Admin will Accept your request within 30
+                                minutes</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

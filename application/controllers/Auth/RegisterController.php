@@ -21,7 +21,7 @@ class RegisterController extends CI_Controller
         //if data is are not already filled then redirect to dashboard
         if (!$is_details_fill) {
             $this->session->set_flashdata('msg', 'You Need to Add your Details First');
-            redirect('Home/HomeController/employee');
+            $this->navigate_to_dashboards($this->session->userdata('role_id'));
         }
 
         
@@ -92,7 +92,7 @@ class RegisterController extends CI_Controller
         //if data is already filled then redirect to dashboard
         if ($is_details_fill) {
             $this->session->set_flashdata('msg', 'You already filled your details');
-            redirect('Home/HomeController/employee');
+            $this->navigate_to_dashboards($this->session->userdata('role_id'));
         }
 
         
@@ -164,8 +164,7 @@ class RegisterController extends CI_Controller
         if ($this->session->userdata('user_id') != null) {
             //check if user is not verified
             if ($this->Auth_model->is_verified_user($this->session->userdata('user_id')) == false) {
-                $this->load->view('templates/header.php');
-                $this->load->view("auth/wait_until_verify");
+                $this->load_wait_until_verify();
             } else {
                 $this->navigate_to_dashboards($this->session->userdata('role_id'));
             }
@@ -242,7 +241,8 @@ class RegisterController extends CI_Controller
                         $this->session->set_userdata('user_id', $sevarth_id);
                         $this->session->set_userdata('role_id', $role_id);
 
-                        $this->load->view("auth/wait_until_verify");
+                        $this->load_wait_until_verify();
+
                     }
                 } else {
 
@@ -255,7 +255,7 @@ class RegisterController extends CI_Controller
                     $this->session->set_userdata('user_id', $sevarth_id);
                     $this->session->set_userdata('role_id', $role_id);
 
-                    $this->load->view("auth/wait_until_verify");
+                    $this->load_wait_until_verify();
 
                 }
 
@@ -265,6 +265,13 @@ class RegisterController extends CI_Controller
 
     }
 
+    public function load_wait_until_verify()
+    {
+        $this->load->view('templates/header.php');
+        $this->load->view('auth/navbar.php');
+        $this->load->view("auth/wait_until_verify");
+    }
+
     public function login()
     {
         //if user is already login
@@ -272,7 +279,8 @@ class RegisterController extends CI_Controller
 
             //check if user is not verified
             if ($this->Auth_model->is_verified_user($this->session->userdata('user_id')) == false) {
-                $this->load->view("auth/wait_until_verify");
+               $this->load_wait_until_verify();
+
             } else {
                 $this->navigate_to_dashboards($this->session->userdata('role_id'));
             }
@@ -307,9 +315,7 @@ class RegisterController extends CI_Controller
                     // if user if not verified
                     // 0->not verified 1->verified
                     if ($user->is_verified == 0) {
-                        // $this->load->view("auth/wait_until_verify");
-                        $this->navigate_to_dashboards($user->role_id);
-
+                        $this->load_wait_until_verify();
                     } else {
                         $this->navigate_to_dashboards($user->role_id);
                     }
@@ -331,8 +337,24 @@ class RegisterController extends CI_Controller
             redirect('home/HomeController/principal');
         } else if ($role_id == -1) {
             redirect('home/HomeController/admin');
-        } else if ($role_id == 4) {
+        } 
+        else if ($role_id == 4) {
             redirect('home/HomeController/registrar');
+        }
+        else if ($role_id == 5) {
+            redirect('home/HomeController/joint_director');
+        }
+        else if ($role_id == 6) {
+            redirect('home/HomeController/director');
+        }
+        else if ($role_id == 7) {
+            redirect('home/HomeController/faculty');
+        }
+        else if ($role_id == 8) {
+            redirect('home/HomeController/non_teaching_officials');
+        }
+        else if ($role_id == 9) {
+            redirect('home/HomeController/non_teaching_faculty');
         }
 
     }

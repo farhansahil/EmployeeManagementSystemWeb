@@ -221,11 +221,10 @@ class Auth_model extends CI_Model
         $condition = array(
             "password" => $password,
         );
-        $get_query = array(
-            "email" => $emial,
-            "password" => $password
-        );
+       
         $this->db->where("email", $email)->update('employees', $condition);
+        
+        $this->session->set_flashdata('msg', 'Password Changed Successfully');
         redirect('/login');
         
     }
