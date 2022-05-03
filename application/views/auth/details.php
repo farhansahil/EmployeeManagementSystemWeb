@@ -6,6 +6,7 @@
     <div class="main">
 
 
+
         <section class="signup mt-5">
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container container_new">
@@ -23,11 +24,12 @@ if ($this->session->flashdata('msg')) {
 ?>
 
                 <div class="signup-content">
+                <?php
+                    $attributes = array('role' => 'form');
+                    echo form_open_multipart("Auth/RegisterController/details");
+                ?>
                     <h2 class="text-center">Add Your Details!!</h2>
-                    <?php
-$attributes = array('role' => 'form');
-echo form_open_multipart("Auth/RegisterController/details");
-                    ?>
+                
                     <form action="" name="registerForm" id="registerForm signupform" class="signupform" method="post">
                         <div class="form-row">
                             <div class="form-group">
@@ -78,9 +80,11 @@ echo form_open_multipart("Auth/RegisterController/details");
                                     <label for="female">Female</label>
                                 </div>
                             </div>
-
+                        <!--File Uploading -->
                             <div class="form-group">
                                 <label for="qualification">Qualification</label>
+                                <?php echo form_open_multipart('Auth/RegisterController/details'); ?>
+
                                 <input type="file" name="qualification" id="qualification" value="<?php echo set_value('qualification'); ?>"
                                     class="form-input form-control <?php echo (form_error('qualification') !=  "") ? 'is-invalid' : '' ?>" placeholder="Qualification">
                                     <p class="invalid-feedback "><?php echo strip_tags(form_error('qualification')); ?></p>
@@ -136,6 +140,8 @@ echo form_open_multipart("Auth/RegisterController/details");
                                 </div>
                             <div class="form-group">
                                 <label for="experience">Experience</label>
+                                <?php echo form_open_multipart('Auth/RegisterController/details'); ?>
+
                                 <input type="file" name="experience" id="experience" value="<?php echo set_value('experience'); ?>" 
                                 class="form-control <?php echo (form_error('experience') !=  "") ? 'is-invalid' : '' ?>"
                                     placeholder="Experience">
@@ -188,6 +194,8 @@ echo form_open_multipart("Auth/RegisterController/details");
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="photo">Photo</label>
+                                <?php echo form_open_multipart('Auth/RegisterController/details'); ?>
+
                                 <input type="file" name="photo" id="photo" value="<?php echo set_value('photo'); ?>" 
                                 class="form-input form-control <?php echo (form_error('photo') !=  "") ? 'is-invalid' : '' ?>">
                                 <p class="invalid-feedback "><?php echo strip_tags(form_error('photo')); ?></p>

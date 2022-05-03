@@ -102,21 +102,20 @@ class RegisterController extends CI_Controller
         $this->form_validation->set_rules('subcast', 'Sub_Cast', 'required');
         $this->form_validation->set_rules('designation', 'Designation', 'required');
         $this->form_validation->set_rules('retirement_date', 'Retirement Date', 'required');
-        $this->form_validation->set_rules('experience', 'Experience', 'required');
         $this->form_validation->set_rules('aadhar_no', 'Aadhar No', 'required|min_length[12]|max_length[12]');
         $this->form_validation->set_rules('pan_no', 'Pan No', 'required');
         $this->form_validation->set_rules('blood_grp', 'Blood Group', 'required');
         $this->form_validation->set_rules('identification_mark', 'Identification Mark', 'required');
         $this->form_validation->set_rules('contact_no', 'Contact No', 'required|min_length[10]|max_length[10]');
         $this->form_validation->set_rules('alternative_contact_no', 'Alternate Contact No', 'required|min_length[10]|max_length[10]');
-        $this->form_validation->set_rules('address', 'D.O.B', 'required');
-        $this->form_validation->set_rules('city', 'D.O.B', 'required');
-        $this->form_validation->set_rules('pin_code', 'D.O.B', 'required|min_length[6]|max_length[6]');
-        $this->form_validation->set_rules('state', 'D.O.B', 'required');
-        $this->form_validation->set_rules('country', 'D.O.B', 'required');
+        $this->form_validation->set_rules('address', 'Address', 'required');
+        $this->form_validation->set_rules('city', 'City', 'required');
+        $this->form_validation->set_rules('pin_code', 'Pin Code', 'required|min_length[6]|max_length[6]');
+        $this->form_validation->set_rules('state', 'State', 'required');
+        $this->form_validation->set_rules('country', 'Country', 'required');
 
         if ($this->form_validation->run() == false) {
-            echo "form validation";
+            echo "farhan";
             $this->load->view('templates/header.php');
             $this->load->view('auth/details.php');
         } else {
