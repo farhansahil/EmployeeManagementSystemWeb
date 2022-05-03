@@ -24,6 +24,7 @@ class RegisterController extends CI_Controller
             $this->navigate_to_dashboards($this->session->userdata('role_id'));
         }
 
+        // $employee_details = $this->Auth_model->get_employee_details();
         $employee_details = $this->Auth_model->get_employee_details($this->session->userdata('sevarth_id'));
 
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
@@ -33,7 +34,7 @@ class RegisterController extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header.php');
-            $this->load->view('auth/editDetails.php', array('employee_details' => $employee_details));
+            $this->load->view('auth/editDetails.php',  $employee_details);
         } else {
 
             $formArray = array();
