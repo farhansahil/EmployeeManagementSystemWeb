@@ -228,7 +228,7 @@ class RegisterController extends CI_Controller
                             $formArray['country'] = $this->input->post('country');
                             $formArray['gender'] = $this->input->post('gender');
 
-                            $this->Auth_model->addDetails($formArray);
+                            $this->Auth_model->addDetails($formArray, $this->session->userdata("role_id"));
                             $this->navigate_to_dashboards($this->session->userdata("role_id"));
 
                         }

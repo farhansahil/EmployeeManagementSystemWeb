@@ -102,9 +102,15 @@ class Auth_model extends CI_Model
     public function addDetails($formArray)
     {
         
-        $this->db->insert('employees_details', $formArray);
-
-        redirect('/login');
+        $this->db->insert('employees_details', $formArray, $role_id);
+        
+        if ($role_id == 1) {
+            redirect('home/HomeController/employee');
+        } else if ($role_id == 2) {
+            redirect('home/HomeController/hod');
+        } else if ($role_id == 3) {
+            redirect('home/HomeController/principal');
+        }
 
         // if a user created account successfully
         return $this->db->insert_id();
