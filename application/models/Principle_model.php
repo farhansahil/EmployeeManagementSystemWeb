@@ -27,5 +27,20 @@ class Principle_model extends CI_Model
         $condition = array('is_verified' => "-1");
         $this->db->where("sevarth_id", $hod_id)->update('employees', $condition);
     }
+
+    public function get_employees($principle_id)
+    {
+        $role_id= array('1', '2');
+
+        $this->db->where('principle_id', $principle_id);
+        $this->db->where_in('role_id', $role_id);
+
+        return $this->db->get('employees')->result_array();
+    }
+
+    public function delete_employee($emp_id)
+    {
+        $this->db->where('sevarth_id', $emp_id)->delete('employees');
+    }
     
 }

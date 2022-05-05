@@ -26,8 +26,8 @@ if ($this->session->flashdata('msg')) {
 
                         <th scope="col">Sevarth ID</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Accept</th>
-                        <th scope="col">Decline</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Delete</th>
                     </tr>
 
                 </thead>
@@ -35,25 +35,27 @@ if ($this->session->flashdata('msg')) {
                 <tbody>
                     <tr>
 
-                        <?php if (!empty($employee_for_verification_from_hod)) {foreach ($employee_for_verification_from_hod as $employees) {?>
+                        <?php if (!empty($employees)) {foreach ($employees as $employee) {?>
                     <tr>
+                        <th scope=" row">
+                            <a href="<?php echo base_url() . 'Hod/HodController/employee_details/' . $employee['sevarth_id'] ?>
+" style="font-size: 15px; border-radius: 5px" class="text-dark"><?php echo $employee['sevarth_id'] ?>
+                            </a>
+                        </th>
 
-                        <td scope="row"><?php echo $employees['sevarth_id'] ?></td>
-                        <td><?php echo $employees['name'] ?></td>
+
+                        <td><?php echo $employee['name'] ?></td>
+                        <td><?php echo $employee['email'] ?></td>
                         <td>
-                            <a href="<?php echo base_url() . 'Director/DirectorController/accept_employee_request/' . $employees['sevarth_id'] ?>"
-                                style="font-size: 12px; border-radius: 5px" class="btn btn-primary"> Accept
+                            <a href="<?php echo base_url() . 'Director/DirectorController/delete_employee/' . $employee['sevarth_id'] ?>"
+                                style="font-size: 12px; border-radius: 5px" class="btn btn-primary"> Delete
                             </a>
                         </td>
-                        <td>
-                            <a href="<?php echo base_url() . 'Director/DirectorController/decline_employee_request/' . $employees['sevarth_id'] ?>"
-                                style="font-size: 12px;  border-radius: 5px"" class=" btn btn-danger">Decline</a>
-                        </td>
+
                     </tr>
                     <?php }} ?>
 
                     </tr>
-
                 </tbody>
             </table>
         </div>

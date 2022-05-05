@@ -23,39 +23,12 @@
                 <span class="ms-1 d-none d-sm-inline">Employee Verifications</span></a>
         </li>
 
+
+
         <li class="nav-item py-2">
-            <a href="#submenu2" data-bs-toggle="collapse" class=" px-0 align-middle ">
-                <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
-            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                <li class="w-100">
-                    <a href="#" class=" px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
-                </li>
-                <li>
-                    <a href="#" class=" px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
-                </li>
-            </ul>
-        </li>
-        <li class="nav-item ps-4 py-2">
-            <a href="#submenu3" data-bs-toggle="collapse" class=" px-0 align-middle">
-                <span class="ms-1 d-none d-sm-inline">Products</span> </a>
-            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                <li class="w-100">
-                    <a href="#" class="pt-2 px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
-                </li>
-                <li>
-                    <a href="#" class="pt-2 px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
-                </li>
-                <li>
-                    <a href="#" class="pt-2 px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
-                </li>
-                <li>
-                    <a href="#" class="pt-2 px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
-                </li>
-            </ul>
-        </li>
-        <li class="nav-item py-2">
-            <a href="#" class=" px-0 align-middle">
-                <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+            <a href="<?php echo base_url() . "Director/DirectorController/show_employees" ?>"
+                class=" px-0 align-middle">
+                <span class="ms-1 d-none d-sm-inline">Show Employees</span> </a>
         </li>
     </ul>
 

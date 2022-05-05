@@ -53,15 +53,13 @@ class HodController extends CI_Controller
 
     public function delete_employee($employee_id){
         $this->Hod_model->delete($employee_id);
-        redirect('Hod/HodController/show_verifications');
+        redirect('Hod/HodController/show_employees');
     }
      
     public function show_employees(){
         $sevarth_id = $this->session->userdata('user_id');
         $employees = $this->Hod_model->get_employees($sevarth_id);
 
-       
-        
         $this->load->view('templates/header.php');
         $this->load->view('templates/navbar.php');
         $this->load->view('dashboard/hod/hod_sidebar.php');

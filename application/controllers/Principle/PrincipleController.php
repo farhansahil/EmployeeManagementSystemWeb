@@ -40,10 +40,25 @@ class PrincipleController extends CI_Controller
     public function decline_hod_request($employee_id)
     {
         $this->Principle_model->decline_hod_request($employee_id);
-$this->session->set_flashdata('msg', 'HOD Request Declined');
+        $this->session->set_flashdata('msg', 'HOD Request Declined');
 
-       redirect("/Principle/PrincipleController/show_verifications");
+        redirect("/Principle/PrincipleController/show_verifications");
 
 
+    }
+
+    public function delete_employee($employee_id){
+        $this->Hod_model->delete($employee_id);
+        redirect('Principe/PrincipleController/show_employees');
+    }
+     
+    public function show_employees(){
+        $sevarth_id = $this->session->userdata('user_id');
+        $employees = $this->Principle_model->get_employees($sevarth_id);
+
+        $this->load->view('templates/header.php');
+        $this->load->view('templates/navbar.php');
+        $this->load->view('dashboard/principle/principle_sidebar.php');
+        $this->load->view("dashboard/principle/show_employees.php", array('employees' => $employees));
     }
 }

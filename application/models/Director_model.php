@@ -11,21 +11,12 @@ class Director_model extends CI_Model
         $role_id = array('1', '2', '3');
         $condition = array(
             'is_verified' => 0,
-            'principle_id' => $this->session->userdata('user_id'),
+            'director_id' => $this->session->userdata('user_id'),
         );
 
         $this->db->where($condition);
         $this->db->where_in('role_id', $role_id);
         return $this->db->get('employees')->result_array();
-    }
-
-    public function get_employees($hod_id){
-        $condition = array(
-            'hod_id' => $hod_id,
-            'role_id' => 1 //role id for employee
-        );
-
-        return $this->db->where($condition)->get('employees')->result_array();
     }
 
 
@@ -39,4 +30,18 @@ class Director_model extends CI_Model
         $this->db->where("sevarth_id", $employee_id)->update('employees', $condition);
     }
     
+     public function get_employees($director_id)
+    {
+        $role_id= array('1', '2', '3');
+
+        $this->db->where('director_id', $director_id);
+        $this->db->where_in('role_id', $role_id);
+
+        return $this->db->get('employees')->result_array();
+    }
+
+    public function delete_employee($emp_id)
+    {
+        $this->db->where('sevarth_id', $emp_id)->delete('employees');
+    }
 }
