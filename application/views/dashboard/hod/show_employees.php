@@ -38,10 +38,11 @@ if ($this->session->flashdata('msg')) {
                         <?php if (!empty($employees)) {foreach ($employees as $employee) {?>
                     <tr>
                         <th scope=" row">
-                            <a href="#" style="font-size: 15px; border-radius: 5px" class="text-dark"><?php echo $employee['sevarth_id'] ?>
-                        </a>
-                    </th> 
-                        
+                            <a href="<?php echo base_url() . 'Hod/HodController/employee_details/' . $employee['sevarth_id'] ?>
+" style="font-size: 15px; border-radius: 5px" class="text-dark"><?php echo $employee['sevarth_id'] ?>
+                            </a>
+                        </th>
+
 
                         <td><?php echo $employee['name'] ?></td>
                         <td><?php echo $employee['email'] ?></td>

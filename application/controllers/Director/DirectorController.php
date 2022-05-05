@@ -28,7 +28,7 @@ class DirectorController extends CI_Controller
         $this->load->view('templates/header.php');
         $this->load->view('templates/navbar.php');
         $this->load->view('dashboard/director/director_sidebar.php');
-        $this->load->view("dashboard/director/director_verifications.php", array('employee_for_verification_from_hod' => $employee_for_verification_from_hod));
+        $this->load->view("dashboard/director/show_verifications.php", array('employee_for_verification_from_hod' => $employee_for_verification_from_hod));
 
        
     }

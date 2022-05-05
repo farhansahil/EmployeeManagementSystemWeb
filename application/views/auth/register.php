@@ -29,7 +29,7 @@
 
 
                 <div class="signup-content">
-                    <h2 class="text-center">Registraion Form</h2>
+                    <h2 class="text-center">Registration Form</h2>
                     <form action="<?php echo base_url().'index.php/Auth/RegisterController/register'?>" name="mainForm"
                         id="mainForm signupform" class="signupform" method="post">
                         <div class="form-row">
@@ -159,7 +159,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="hint_answer">Answer (enter the answer which you can remember)</label>
+                        <label for="hint_answer">Answer (which you can remember)</label>
                         <input type="text" name="hint_answer" id="hint_answer"
                             value="<?php echo set_value('hint_answer'); ?>"
                             class="form-input form-control text-uppercase <?php echo (form_error('hint_answer') !=  "") ? 'is-invalid' : '' ?>"

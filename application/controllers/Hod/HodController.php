@@ -20,12 +20,22 @@ class HodController extends CI_Controller
     }
 
     public function employee_details($employee){
-        $employee = $this->Hod_model->get_employee_details($employee);
+        $employee_response = $this->Hod_model->get_employee_details($employee);
 
-        $this->load->view('templates/header.php');
-        $this->load->view('templates/navbar.php');
-        $this->load->view('templates/sidebar.php');
-        $this->load->view('dashboard/hod/employee_details.php', ['employee' => $employee]);
+        if($employee_response['result'] == true){
+            $this->load->view('templates/header.php');
+            $this->load->view('templates/navbar.php');
+            $this->load->view('templates/sidebar.php');
+            $this->load->view("dashboard/hod/employee_details.php", array('employee' => $employee_response['data']));
+        }
+        else{
+            // set flash data
+            $this->session->set_flashdata('msg', $employee_response['error']);
+            redirect('/Hod/HodController/show_employees');
+        }
+
+        
+       
     }
 
     public function show_verifications(){

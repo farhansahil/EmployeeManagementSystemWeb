@@ -166,15 +166,23 @@ if ($this->session->flashdata('msg')) {
                         </div>
 
                         <div class="form-row">
+
+                            <!--  -->
                             <div class="form-group">
                                 <label for="blood_grp">Blood Group</label>
-                                <input type="text" name="blood_grp" id="blood_grp"
-                                    value="<?php echo $employee->blood_grp ?>"
-                                    class="form-input form-control <?php echo (form_error('blood_grp') != "") ? 'is-invalid' : '' ?>"
-                                    placeholder="Blood Group">
-                                <p class="invalid-feedback "><?php echo strip_tags(form_error('blood_grp')); ?></p>
-
+                                <select class="form-select" name="blood_grp" id="blood_grp">
+                                    <option<?php echo ($employee->blood_grp == "A+") ? ' selected="selected"' : ""; ?>
+                                        value="A+">A+</option>
+                                        <option<?php echo ($employee->blood_grp == "B+") ? ' selected="selected"' : ""; ?>
+                                            value="B+">B+</option>
+                                            <option<?php echo ($employee->blood_grp == "AB+") ? ' selected="selected"' : ""; ?>
+                                                value="AB+">AB+</option>
+                                                <option<?php echo ($employee->blood_grp == "O+") ? ' selected="selected"' : ""; ?>
+                                                    value="O+">O+</option>
+                                </select>
                             </div>
+
+
                             <div class="form-group">
                                 <label for="identification_mark">Identification Mark</label>
                                 <input type="text" name="identification_mark" id="identification_mark"

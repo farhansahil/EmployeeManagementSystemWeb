@@ -256,9 +256,20 @@ class RegisterController extends CI_Controller
                             $formArray['country'] = $this->input->post('country');
                             $formArray['gender'] = $this->input->post('gender');
 
-                            $this->Auth_model->addDetails($formArray, $this->session->userdata("role_id"));
-                            $this->navigate_to_dashboards($this->session->userdata("role_id"));
+                            $insert_id = $this->Auth_model->addDetails($formArray, $this->session->userdata("role_id"));
 
+                            if ($insert_id> 0){
+                                //set flash data
+                                $this->session->set_flashdata('msg', 'Data Added Successfully');
+                                $this->navigate_to_dashboards($this->session->userdata("role_id"));
+
+                            }
+                        
+                            else{
+                                $this->session->set_flashdata('msg', 'Some Error Occurred While Adding Data');
+                                $this->navigate_to_dashboards($this->session->userdata("role_id"));
+                            }
+                          
                         }
 
                     }

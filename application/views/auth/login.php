@@ -115,8 +115,10 @@
                         </div>
                         <button type="submit" class="btn login-btn p-2 w-100">Submit</button>
                         <div class="mt-3 text-center form-check">
-                            <span>Don't have account? <a href="register" class="link-fp text-danger">Create
-                                    One</a></span>
+                            <span>
+                                Don't have account? <a href="register" class="link-fp text-danger">Create
+                                    One</a>
+                            </span>
                         </div>
                     </form>
                 </div>
