@@ -32,12 +32,6 @@ class Auth_model extends CI_Model
             'role_id' => 2, // role_id 2 is id for hod
         );
 
-        $cond_principle = array(
-            'org_id' => $org_id,
-            'is_verified' => 1,
-            'role_id' => 3, // role_id 2 is id for principle
-        );
-
         //if hod is exists and verified
         if ($this->db->where($cond_hod)->get('employees')->num_rows() > 0) {
             $hod = $this->db->where($cond_hod)->get('employees')->result()[0];
@@ -45,17 +39,11 @@ class Auth_model extends CI_Model
                 'result' => true,
                 'id' => $hod->sevarth_id,
             );
-        } else if ($this->db->where($cond_principle)->get('employees')->num_rows() > 0) {
-            $principle = $this->db->where($cond_principle)->get('employees')->result()[0];
-            return array(
-                'result' => true,
-                'id' => $principle->sevarth_id,
-            );
         } else {
             //if hod and principle are not register then show error msg
             return array(
                 'result' => false,
-                'error' => "Contact your Hod or Principle to Register",
+                'error' => "Contact your Hod to register",
             );
         }
 
@@ -78,8 +66,32 @@ class Auth_model extends CI_Model
         } else {
             //if hod and principle are not register then show error msg
             return array(
-                'result' => false,
-                'error' => "Contact your Hod or Principle to Register",
+                'result' => true,
+                'id' => "-1",
+            );
+        }
+
+    }
+    public function get_director($org_id)
+    {
+        $cond_director = array(
+            'org_id' => $org_id,
+            'is_verified' => 1,
+            'role_id' => 6, // role_id 6 is id for director
+        );
+
+        if ($this->db->where($cond_director)->get('employees')->num_rows() > 0) {
+            $director = $this->db->where($cond_director)->get('employees')->result()[0];
+            return array(
+                'result' => true,
+                'id' => $director->sevarth_id,
+            );
+        }
+         else {
+            //if hod and director are not register then show error msg
+            return array(
+                'result' => true,
+                'id' => "-1",
             );
         }
 
@@ -99,7 +111,7 @@ class Auth_model extends CI_Model
         return $role;
     }
 
-    public function addDetails($formArray)
+    public function addDetails($formArray, $role_id)
     {
         
         $this->db->insert('employees_details', $formArray, $role_id);
@@ -130,18 +142,11 @@ class Auth_model extends CI_Model
        
     }
     
-    public function editDetails($formArray,$sevarth_id,$role_id)
+    public function editDetails($formArray, $sevarth_id)
     {
 
         $this->db->where("sevarth_id", $sevarth_id)->update('employees_details', $formArray);
-        // if a user created account successfully
-        if ($role_id == 1) {
-            redirect('home/HomeController/employee');
-        } else if ($role_id == 2) {
-            redirect('home/HomeController/hod');
-        } else if ($role_id == 3) {
-            redirect('home/HomeController/principal');
-        }        return $this->db->insert_id();
+        return $this->db->affected_rows();
     }
 
     public function verify_email_id($sevarth_id){

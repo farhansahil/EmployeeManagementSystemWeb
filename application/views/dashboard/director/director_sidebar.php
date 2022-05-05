@@ -17,6 +17,11 @@
                 </li>
             </ul>
         </li>
+        <li class="nav-item py-2">
+            <a href="<?php echo base_url()."Director/DirectorController/show_verifications" ?>"
+                class=" px-0 align-middle">
+                <span class="ms-1 d-none d-sm-inline">Employee Verifications</span></a>
+        </li>
 
         <li class="nav-item py-2">
             <a href="#submenu2" data-bs-toggle="collapse" class=" px-0 align-middle ">

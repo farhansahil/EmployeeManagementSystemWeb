@@ -38,17 +38,17 @@ if ($this->session->flashdata('msg')) {
                         <?php if (!empty($employee_for_verification_from_hod)) {foreach ($employee_for_verification_from_hod as $employees) {?>
                     <tr>
 
-                        <d scope="row"><?php echo $employees['sevarth_id'] ?></td>
-                            <td><?php echo $employees['name'] ?></td>
-                            <td>
-                                <a href="<?php echo base_url() . 'Hod/HodController/accept_employee_request/' . $employees['sevarth_id'] ?>"
-                                    style="font-size: 12px; border-radius: 5px" class="btn btn-primary"> Accept
-                                </a>
-                            </td>
-                            <td>
-                                <a href="<?php echo base_url() . 'Hod/HodController/decline_employee_request/' . $employees['sevarth_id'] ?>"
-                                    style="font-size: 12px;  border-radius: 5px"" class=" btn btn-danger">Decline</a>
-                            </td>
+                        <td scope="row"><?php echo $employees['sevarth_id'] ?></td>
+                        <td><?php echo $employees['name'] ?></td>
+                        <td>
+                            <a href="<?php echo base_url() . 'Hod/HodController/accept_employee_request/' . $employees['sevarth_id'] ?>"
+                                style="font-size: 12px; border-radius: 5px" class="btn btn-primary"> Accept
+                            </a>
+                        </td>
+                        <td>
+                            <a href="<?php echo base_url() . 'Hod/HodController/decline_employee_request/' . $employees['sevarth_id'] ?>"
+                                style="font-size: 12px;  border-radius: 5px"" class=" btn btn-danger">Decline</a>
+                        </td>
                     </tr>
                     <?php }} ?>
 

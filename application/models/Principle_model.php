@@ -5,15 +5,17 @@ class Principle_model extends CI_Model
     {
         parent::__construct();
     }
-
+    // Principal can only verify employees and hod under his department
     public function get_hods_for_verification(){
+        $role_id = array('1', '2');
         $condition = array(
             'is_verified' => 0,
             'principle_id' => $this->session->userdata('user_id'),
-            'role_id' => 2 //role id for employee
         );
 
-        return $this->db->where($condition)->get('employees')->result_array();
+        $this->db->where($condition);
+        $this->db->where_in('role_id', $role_id);
+        return $this->db->get('employees')->result_array();
     }
 
     public function accept_hod_request($hod_id){

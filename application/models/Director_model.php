@@ -1,23 +1,25 @@
 <?php
-class Hod_model extends CI_Model
+class Director_model extends CI_Model
 {
     public function __construct()
     {
         parent::__construct();
     }
 
+    // Director can only verify employees and hod and Principle under his department
     public function get_employees_for_verification(){
+        $role_id = array('1', '2', '3');
         $condition = array(
             'is_verified' => 0,
-            'hod_id' => $this->session->userdata('user_id'),
-            'role_id' => 1 //role id for employee
+            'principle_id' => $this->session->userdata('user_id'),
         );
 
-        return $this->db->where($condition)->get('employees')->result_array();
+        $this->db->where($condition);
+        $this->db->where_in('role_id', $role_id);
+        return $this->db->get('employees')->result_array();
     }
 
     public function get_employees($hod_id){
-        // Hod show can only verify employees under his department
         $condition = array(
             'hod_id' => $hod_id,
             'role_id' => 1 //role id for employee
@@ -26,17 +28,6 @@ class Hod_model extends CI_Model
         return $this->db->where($condition)->get('employees')->result_array();
     }
 
-    public function delete_employee($emp_id){
-        $this->db->where('sevarth_id', $emp_id)->delete('employees');
-    }
-
-    public function get_employee_details($employee_id){
-        $condition = array(
-            'sevarth_id' => $employee_id
-        );
-
-        return $this->db->where($condition)->get('employees')->row_array();
-    }
 
     public function accept_employee_request($employee_id){
         $condition = array('is_verified' => "1");

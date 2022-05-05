@@ -32,6 +32,26 @@ class RegisterController extends CI_Controller
         $this->form_validation->set_rules('middle_name', 'Middle Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
         $this->form_validation->set_rules('dob', 'D.O.B', 'required');
+        $this->form_validation->set_rules('cast', 'Cast', 'required');
+
+        // $this->form_validation->set_rules('qualification', 'Qualification', 'required');
+        $this->form_validation->set_rules('subcast', 'Sub_Cast', 'required');
+        $this->form_validation->set_rules('designation', 'Designation', 'required');
+        $this->form_validation->set_rules('retirement_date', 'Retirement Date', 'required');
+        // $this->form_validation->set_rules('experience', 'Experience', 'required');
+        $this->form_validation->set_rules('aadhar_no', 'Aadhar No', 'required|min_length[12]|max_length[12]');
+        $this->form_validation->set_rules('pan_no', 'Pan No', 'required');
+        $this->form_validation->set_rules('blood_grp', 'Blood Group', 'required');
+        $this->form_validation->set_rules('identification_mark', 'Identification Mark', 'required');
+        // $this->form_validation->set_rules('photo', 'Photo', 'required');
+        $this->form_validation->set_rules('contact_no', 'Contact No', 'required|min_length[10]|max_length[10]');
+        $this->form_validation->set_rules('alternate_contact_no', 'Alternate Contact No', 'required|min_length[10]|max_length[10]');
+        $this->form_validation->set_rules('address', 'Address', 'required');
+        $this->form_validation->set_rules('city', 'City', 'required');
+        $this->form_validation->set_rules('pin_code', 'Pin Code', 'required|min_length[6]|max_length[6]');
+        $this->form_validation->set_rules('state', 'State', 'required');
+        $this->form_validation->set_rules('country', 'Country', 'required');
+
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header.php');
@@ -44,8 +64,9 @@ class RegisterController extends CI_Controller
             $formArray['middle_name'] = $this->input->post('middle_name');
             $formArray['last_name'] = $this->input->post('last_name');
             $formArray['dob'] = $this->input->post('dob');
-
-            $sevarth_id = $this->input->post('sevarth_id');
+            //get id from session
+            
+            $sevarth_id = $this->session->userdata('user_id');
             $formArray['sevarth_id'] = $sevarth_id;
             $formArray['qualification'] = $this->input->post('qualification');
             $formArray['cast'] = $this->input->post('cast');
@@ -62,7 +83,7 @@ class RegisterController extends CI_Controller
             $formArray['photo'] = $this->input->post('photo');
 
             $formArray['contact_no'] = $this->input->post('contact_no');
-            $formArray['alternative_contact_no'] = $this->input->post('alternative_contact_no');
+            $formArray['alternative_contact_no'] = $this->input->post('alternate_contact_no');
             $formArray['address'] = $this->input->post('address');
             $formArray['city'] = $this->input->post('city');
             $formArray['pin_code'] = $this->input->post('pin_code');
@@ -70,17 +91,23 @@ class RegisterController extends CI_Controller
             $formArray['country'] = $this->input->post('country');
             $formArray['gender'] = $this->input->post('gender');
 
-            $this->Auth_model->editDetails($formArray, $sevarth_id,$this->session->userdata("role_id"));
-            $this->session->set_flashdata('msg', 'You registered successfully');
-
-            // if($insert_id > 0){
-            //     $this->session->set_flashdata('msg', 'You registered successfully');
-            //     // $this->session->set_userdata('sevarth_id', $designation_id);
-            //     $this->session->set_userdata('user_id', $insert_id);
-
-            //        }else{
-            //     echo "User cannot be created";
-            // // }
+            
+            
+            $insert_id =  $this->Auth_model->editDetails($formArray, $sevarth_id);
+            // if data of employees is edited
+            if($insert_id > 0){
+                // set flash message
+                $this->session->set_flashdata('msg', 'Your Details are Updated Successfully');
+                // redirect to dashboard
+                $this->navigate_to_dashboards($this->session->userdata('role_id'));
+            }else{
+                // set flash message
+                $this->session->set_flashdata('msg', 'Something went wrong');
+                // redirect to dashboard
+                $this->navigate_to_dashboards($this->session->userdata('role_id'));
+            }
+            
+           
 
         }
     }
@@ -295,6 +322,7 @@ class RegisterController extends CI_Controller
                 $hint_answer = $this->input->post('hint_answer');
                 $hod_response = $this->Auth_model->get_hod($org_id, $dept_id);
                 $principle_response = $this->Auth_model->get_principle($org_id);
+                $director_response = $this->Auth_model->get_director($org_id);
 
                 $loginArray = array(
                     'email' => $email,
@@ -323,6 +351,13 @@ class RegisterController extends CI_Controller
                         $this->load->view('templates/header.php');
                         $this->load->view("auth/register.php", array('events' => $events, 'dept' => $dept, 'role' => $role));
 
+                    } 
+                    else if ($director_response['result'] == false) {
+                        $this->session->set_flashdata('msg', $director_response['error']);
+
+                        $this->load->view('templates/header.php');
+                        $this->load->view("auth/register.php", array('events' => $events, 'dept' => $dept, 'role' => $role));
+
                     } else {
                         $loginArray['hod_id'] = $hod_response['id'];
 
@@ -331,6 +366,7 @@ class RegisterController extends CI_Controller
                         }
 
                         $loginArray['principle_id'] = $principle_response['id'];
+                        $loginArray['director_id'] = $director_response['id'];
 
                         $this->Auth_model->create($loginArray);
 

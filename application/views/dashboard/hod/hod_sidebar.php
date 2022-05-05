@@ -19,7 +19,7 @@
         </li>
         <li class="nav-item py-2">
             <a href="<?php echo base_url()."Hod/HodController/show_verifications" ?>" class=" px-0 align-middle">
-                <span class="ms-1 d-none d-sm-inline">Employee Verifications</span></a>
+                <span class="ms-1 d-none d-sm-inline">Verifications</span></a>
         </li>
         <li class="nav-item py-2">
             <a href="<?php echo base_url()."Hod/HodController/show_employees" ?>" class=" px-0 align-middle">

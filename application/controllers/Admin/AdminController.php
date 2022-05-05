@@ -14,13 +14,13 @@ class AdminController extends CI_Controller
         $this->load->view('templates/header.php');
         $this->load->view('templates/navbar.php');
         $this->load->view('templates/sidebar.php');
-        $this->load->view('dashboard/amdin_dashboard.php');
+        $this->load->view('dashboard/admin.php');
         $this->load->view('templates/footer.php');
     }
 
     public function show_verifications()
     {
-        $principle_for_verification_from_admin = $this->Admin_model->get_principle_for_verification();
+        $principle_for_verification_from_admin = $this->Admin_model->get_roles_for_verification();
 
         $this->load->view('templates/header.php');
         $this->load->view('templates/navbar.php');
@@ -31,14 +31,14 @@ class AdminController extends CI_Controller
 
     public function accept_principle_request($employee_id)
     {
-        $this->Principle_model->accept_principle_request($employee_id);
+        $this->Admin_model->accept_role_request($employee_id);
 
        redirect("/Admin/AdminController/show_verifications");
 
     }
-    public function decline_princile_request($employee_id)
+    public function decline_principle_request($employee_id)
     {
-        $this->Principle_model->decline_principle_request($employee_id);
+        $this->Admin_model->decline_role_request($employee_id);
 
        redirect("/Admin/AdminController/show_verifications");
 
