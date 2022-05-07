@@ -34,7 +34,7 @@ class DirectorController extends CI_Controller
     }
 
     public function delete_employee($employee_id){
-        $this->Hod_model->delete($employee_id);
+        $this->Hod_model->delete_employee($employee_id);
         redirect('Director/DirectorController/show_employees');
     }
      

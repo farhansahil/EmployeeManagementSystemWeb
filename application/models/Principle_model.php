@@ -45,6 +45,9 @@ class Principle_model extends CI_Model
     public function delete_employee($emp_id)
     {
         $this->db->where('sevarth_id', $emp_id)->delete('employees');
+        $this->db->where('sevarth_id', $emp_id)->delete('training');
+        $this->db->where('sevarth_id', $emp_id)->delete('applications');
+
     }
 
     public function get_training_by_id($training_id){
