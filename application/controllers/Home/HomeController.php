@@ -13,8 +13,8 @@ class HomeController extends CI_Controller
       
         $this->load->view('templates/header.php');
         $this->load->view('templates/navbar.php');
-        $this->load->view('templates/sidebar.php');
-        $this->load->view('dashboard/employee_dashboard.php');
+        $this->load->view('dashboard/employee/employee_sidebar.php');
+        $this->load->view('dashboard/employee/employee_dashboard.php');
         $this->load->view('templates/footer.php');
     }
 

@@ -18,22 +18,27 @@
             </ul>
         </li>
         <li class="nav-item py-2">
-            <a href="<?php echo base_url()."Principle/PrincipleController/show_verifications" ?>"
+            <a href="<?php echo base_url() . "Employee/EmployeeController/apply_training"?>" class=" px-0 align-middle">
+                <span class="ms-1 d-none d-sm-inline">Apply Trainings</span></a>
+        </li>
+        <li class="nav-item py-2">
+            <a href="<?php echo base_url() . "Employee/EmployeeController/add_completed_training"?>"
                 class=" px-0 align-middle">
-                <span class="ms-1 d-none d-sm-inline">Verifications</span></a>
+                <span class="ms-1 d-none d-sm-inline">Add Completed Trainings</span></a>
+        </li>
+        <li class="nav-item py-2">
+            <a href="<?php echo base_url() . "Employee/EmployeeController/show_applied_trainings"?>"
+                class=" px-0 align-middle">
+                <span class="ms-1 d-none d-sm-inline">Show Applied Trainings</span></a>
+        </li>
+        <li class="nav-item py-2">
+            <a href="<?php echo base_url() . "Employee/EmployeeController/complete_training"?>"
+                class=" px-0 align-middle">
+                <span class="ms-1 d-none d-sm-inline">Complete Trainings</span></a>
         </li>
 
 
-        <li class="nav-item py-2">
-            <a href="<?php echo base_url()."Principle/PrincipleController/show_employees" ?>"
-                class=" px-0 align-middle">
-                <span class="ms-1 d-none d-sm-inline">Show Employees</span> </a>
-        </li>
-        <li class="nav-item py-2">
-            <a href="<?php echo base_url()."Principle/PrincipleController/show_applied_trainings" ?>"
-                class=" px-0 align-middle">
-                <span class="ms-1 d-none d-sm-inline">Training Applications</span> </a>
-        </li>
+
     </ul>
 
 </nav>

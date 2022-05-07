@@ -66,4 +66,32 @@ class Hod_model extends CI_Model
         $this->db->where("sevarth_id", $employee_id)->update('employees', $condition);
     }
 
+    public function get_applied_trainings($sevarth_id, $status){
+        if($status == "-1"){
+            return $this->db->where('hod_id', $sevarth_id)->get('training')->result_array();
+        }else{
+            $condition = array(
+                'hod_id' => $sevarth_id,
+                'training_status_id' => $status
+            );
+
+            return $this->db->where($condition)->get('training')->result_array();
+        }
+    }
+
+    public function get_training_status(){
+        return $this->db->get('training_status')->result_array();
+    }
+
+    public function get_training_by_id($training_id){
+        return $this->db->where('id', $training_id)->get("training")->row_array();
+    }
+
+     public function accept_training_application($training_id){
+        $this->db->where('id', $training_id)->update('training', ['training_status_id' => '3']);
+    }   
+
+    public function decline_training_application($training_id){
+        $this->db->where('id', $training_id)->update('training', ['training_status_id' => '4']);
+    }
 }

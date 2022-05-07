@@ -56,8 +56,8 @@
             </ul>
         </li>
         <li class="nav-item py-2">
-            <a href="#" class=" px-0 align-middle">
-                <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+            <a href="<?php echo base_url()."Hod/HodController/show_applied_trainings" ?>" class=" px-0 align-middle">
+                <span class="ms-1 d-none d-sm-inline">Applied Trainings</span> </a>
         </li>
     </ul>
 
