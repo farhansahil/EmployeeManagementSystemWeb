@@ -81,6 +81,11 @@ class EmployeeController extends CI_Controller
                 //get current user
                 $sevarth_id = $this->session->userdata('user_id');
                 $user = $this->Auth_model->get_employee_by_id($sevarth_id);
+                
+                $array_start_date = explode('-', $start_date);
+                $array_end_date = explode('-', $end_date);
+
+                 
 
                 $data = array(
                     'sevarth_id' => $sevarth_id,
@@ -88,8 +93,8 @@ class EmployeeController extends CI_Controller
                     'org_name' => $organization_name,
                     'organized_by' => $organization_by,
                     'duration' => $duration,
-                    'start_date' => $start_date,
-                    'end_date' => $end_date,
+                    'start_date' => $array_start_date[2]."-".$array_start_date[1]."-".$array_start_date[0],
+                    'end_date' => $array_end_date[2]."-".$array_end_date[1]."-".$array_end_date[0],
                     'training_type' => $training_type,
                     'apply_letter' => $pdf,
                     'hod_id' => $user['hod_id'],
@@ -164,6 +169,10 @@ class EmployeeController extends CI_Controller
                 $apply_to = $this->input->post('apply_to');
                 $pdf = $this->upload->data('file_name');
 
+                $array_start_date = explode('-', $start_date);
+                $array_end_date = explode('-', $end_date);
+
+
                 //get current user
                 $sevarth_id = $this->session->userdata('user_id');
                 $user = $this->Auth_model->get_employee_by_id($sevarth_id);
@@ -174,8 +183,8 @@ class EmployeeController extends CI_Controller
                     'org_name' => $organization_name,
                     'organized_by' => $organization_by,
                     'duration' => $duration,
-                    'start_date' => $start_date,
-                    'end_date' => $end_date,
+                    'start_date' => $start_date[2]."-".$start_date[1]."-".$start_date[0],
+                    'end_date' => $end_date[2]."-".$end_date[1]."-".$end_date[0],
                     'training_type' => $training_type,
                     'comp_certificate' => $pdf,
                     'hod_id' => $user['hod_id'],

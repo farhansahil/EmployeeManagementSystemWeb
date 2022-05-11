@@ -5,6 +5,10 @@
 
     <div class="main">
 
+        <div class="top-box py-3">
+
+        </div>
+
         <section class="signup mt-5">
 
 
@@ -22,10 +26,12 @@
             }
             ?>
 
-              
+
 
 
                 <div class="signup-content">
+
+
 
                     <h2 class="text-center">Apply For Training</h2>
                     <?php
@@ -105,16 +111,19 @@
 
                         <div class="form-row">
 
+
                             <div class="form-radio">
                                 <label for="apply_to">Apply To</label>
                                 <div class="form-flex">
                                     <input type="radio" name="apply_to" value="1" id="1" checked="checked" />
-                                    <label for="male">HOD</label>
+                                    <label for="1">HOD</label>
 
                                     <input type="radio" name="apply_to" value="2" id="2" />
-                                    <label for="female">Principal</label>
+                                    <label for="2">Principal</label>
                                 </div>
                             </div>
+
+
 
                             <div class="form-group">
                                 <label for="training_type">Training Type</label>
@@ -153,7 +162,7 @@
 
                 </div>
                 <div class="form-row">
-                    <div class="form-group">
+                    <div class=" form-group">
                         <input type="submit" name="submit" id="submit" class="form-submit" value="Submit" />
                     </div>
 
