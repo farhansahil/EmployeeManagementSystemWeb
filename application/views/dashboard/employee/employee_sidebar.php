@@ -34,7 +34,7 @@
         <li class="nav-item py-2">
             <a href="<?php echo base_url() . "Employee/EmployeeController/complete_training"?>"
                 class=" px-0 align-middle">
-                <span class="ms-1 d-none d-sm-inline">Add Training Certificate</span></a>
+                <span class="ms-1 d-none d-sm-inline">Add Completion Certificate</span></a>
         </li>
 
 
