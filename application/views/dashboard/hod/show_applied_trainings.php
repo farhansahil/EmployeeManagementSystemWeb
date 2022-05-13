@@ -177,8 +177,8 @@ if ($this->session->flashdata('msg')) {
                         </th>
                         <th scope="row">
                             <a href="<?php echo base_url() . "Hod/HodController/generate_single_pdf/" . $training['id'] ?>"
-                                style="
-                                font-size: 12px; border-radius: 5px" class="btn btn-danger"> Generate
+                                target="_blank" style=" font-size: 12px; border-radius: 5px" class="btn btn-danger">
+                                Generate
                             </a>
                         </th>
 
